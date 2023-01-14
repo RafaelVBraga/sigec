@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/home.css">
+
+<title>Sistema de Gestão de Clientes - Página Inicial</title>
+
+</head>
+<body>
+	<div class="page">
+		<div class="header">
+			<p>Usuario logado
+			<p />
+		</div>
+		<div class="center_container">
+			<div class="sidebar">
+				<ul>
+					<li><a th:href="@{dashboard}">Dashboard</a></li>
+					<li><a th:href="clientes">Clientes</a></li>
+					<li><a th:href="@{processos}">Processos</a></li>
+					<li><a th:href="@{pagamentos}">Pagamentos</a></li>
+				</ul>
+			</div>
+
+			<div class="desktop">
+				<h2>desktop</h2>
+			</div>
+		</div>
+		<div class="footer">@rvbraga soluções em T.I</div>
+	</div>
+</body>
+</html>
