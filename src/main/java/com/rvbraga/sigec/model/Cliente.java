@@ -1,6 +1,7 @@
 package com.rvbraga.sigec.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,10 @@ public class Cliente implements Serializable{
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 	private String nome;
-	@OneToOne
+	private LocalDate dataNascimento;
+	private String genero;
+	private String raca;
+	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Documento> documentos;

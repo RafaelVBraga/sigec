@@ -30,5 +30,7 @@ public class Processo implements Serializable{/**
 	private String descricao;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cliente cliente;
+	@ManyToOne
+	private Pagamento pagamento;
 
 }
