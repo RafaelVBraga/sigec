@@ -26,5 +26,18 @@ public class ClienteService {
 		
 		return clienteRepository.save(cliente);
 	}
+	
+	public Boolean deleteCliente(Cliente cliente) {
+		try {
+			clienteRepository.delete(cliente);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+	
+	public Cliente findByCpf(String Cpf) {
+		return clienteRepository.findByCpf(Cpf);
+	}
 
 }

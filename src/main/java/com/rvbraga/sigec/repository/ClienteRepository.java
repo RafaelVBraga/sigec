@@ -11,5 +11,6 @@ import com.rvbraga.sigec.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, UUID>{
 	
 	public Optional<Cliente> findByNome(String nome);
+	public Cliente findByCpf(String cpf);
 
 }

@@ -29,6 +29,8 @@ public class Cliente implements Serializable{
 	private LocalDate dataNascimento;
 	private String genero;
 	private String raca;
+	private String cpf;
+	private String rg;
 	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
