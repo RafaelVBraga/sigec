@@ -1,43 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap')
+	;
 
-*{
+* {
 	margin: 0;
-	padding:0;
+	padding: 0;
 	box-sizing: border-box;
-	
 	font-family: 'Montserrat', sans-serif;
 }
-.header{
+
+.header {
 	display: flex;
-	background-color: #125385;	
+	background-color: #125385;
 	justify-content: right;
 	color: white;
-	width:auto;
-	padding:10px 15px;
+	width: auto;
+	padding: 10px 15px;
 }
-.center_container{
-	display:  flex;
-	flex-direction: row;	
+
+.center_container {
+	display: flex;
+	flex-direction: row;
 	width: auto;
 	height: 90vh;
 }
-.sidebar{
-	display:flex;
+
+.sidebar {
+	display: flex;
 	flex-direction: column;
 	width: 15%;
 	border-right: 5px solid #125385;
 	background-color: #f0f7f7;
-	
+	justify-content: center;
 }
-.desktop{
-	display:flex;
+
+.sidebar ul {
+	font-size:large;
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+	justify-content: center;
+}
+
+.sidebar ul li {
+	margin-left: 4vw;
+	margin-bottom	: 10vh;
+	text-decoration: none;
+}
+@media screen and (max-width:1240px){
+	
+	.sidebar{
+	width:50%}
+	.desktop{
+	width: 50%;
+	}
+}
+
+.sidebar ul li a {
+	
+	border-radius:15px;
+	padding: 10px;
+	text-decoration: none;	
+	width: 75%;
+}
+.sidebar ul li a:hover{
+	border:none;
+	border-radius:15px;
+	background-color:#125385;
+	color:white;	
+	text-decoration: none;	
+	transition:0.5s;
+}
+
+.desktop {
+	display: flex;
 	width: 85%;
 	justify-content: center;
 	margin: auto;
 }
-.footer{
-	display:flex;
-	background-color: #125385;	
+
+.footer {
+	position:relative;
+	display: flex;
+	background-color: #125385;
 	justify-content: center;
 	color: white;
 	padding: 10px;
