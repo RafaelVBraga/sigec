@@ -1,17 +1,32 @@
-<html 
-	xmlns:th="www.thymeleaf.org"
-	th:replace="~{template :: layout (~{:: main})}"> 
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{template :: layout (~{:: main})}">
 <body>
-  <main>
-  <div>
-  	<form th:object="${pesquisa}" th:action="@{/cliente}" method="POST">
-  		<label>Nome:<input th:fielde=${pesquisaNome} /></label>
-  		<label>CPF:<input th:fielde=${pesquisaCPF} /></label>
-  	</form>
-  </div>
-    <ul th:if="${lista_clientes.isEmpty()}">
-      <li th:each="cliente : ${lista_clientes}" th:text="${cliente}"></li>
-    </ul>
-  </main>
+	<main>
+		<div>
+			<h3>Clientes</h3>
+			<hr>
+			<form th:object="${pesquisa}" th:action="@{/cliente/pesquisa}"
+				method="POST">
+				<label>Nome:<input th:fielde=${pesquisaNome} /></label> <label>CPF:<input
+					th:fielde=${pesquisaCPF} /></label><input type="submit" value="Pesquisar">
+			</form>
+		</div>
+		<table th:if="${lista_clientes.isEmpty()}">
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>RG</th>
+				<th>Ações</th>
+			</tr>
+			<tr th:each="cliente : ${lista_clientes}">
+				<td th:text="*{id}"></td>
+				<td th:text="*{nome}"></td>
+				<td th:text="*{cpf}"></td>
+				<td th:text="*{rg}"></td>
+				<td><a>Editar</a><a>Apagar</a></td>
+			<tr>
+		</table>
+	</main>
 </body>
 </html>

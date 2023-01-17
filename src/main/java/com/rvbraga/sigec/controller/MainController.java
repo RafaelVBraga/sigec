@@ -1,5 +1,7 @@
 package com.rvbraga.sigec.controller;
 
+import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +34,15 @@ public class MainController {
 		return "cliente.html";
 	}
 	
-	@PostMapping("/cliente")
+	@PostMapping("/cliente/pesquisa")
 	public String pesquisaCliente(Model model,@RequestBody PesquisaDto pesquisa) {
-		List<Cliente> listaClientes;
+		List<Cliente> listaClientes = new ArrayList<Cliente>();
 		if(!pesquisa.getPesquisaNome().isEmpty())
-			 listaClientes= clienteService.findByNome(pesquisa.getPesquisaNome());		
+			 listaClientes= clienteService.findByNome(pesquisa.getPesquisaNome());
+		else
+			if(!pesquisa.getPesquisaCpf().isEmpty()) {
+				listaClientes.add(clienteService.findByCpf(pesquisa.getPesquisaCpf()));
+			}
 		model.addAttribute("pesquisa", pesquisa);
 		model.addAttribute("lista_clientes",listaClientes);
 		return "cliente.html";
