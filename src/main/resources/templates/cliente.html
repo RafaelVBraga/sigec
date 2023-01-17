@@ -5,28 +5,44 @@
 		<div>
 			<h3>Clientes</h3>
 			<hr>
-			<form th:object="${pesquisa}" th:action="@{/cliente/pesquisa}"
-				method="POST">
-				<label>Nome:<input th:fielde=${pesquisaNome} /></label> <label>CPF:<input
-					th:fielde=${pesquisaCPF} /></label><input type="submit" value="Pesquisar">
+			<form class="formulario" th:object="${pesquisa}"
+				th:action="@{/sigec/clientes/pesquisa}" method="GET">
+				<label>Nome:<input type="text" th:field=*{pesquisaNome} /></label>
+				<label>CPF:<input type="text" th:field=*{pesquisaCpf} /></label><input
+					type="submit" value="Pesquisar">
 			</form>
 		</div>
-		<table th:if="${lista_clientes.isEmpty()}">
-			<tr>
-				<th>Id</th>
-				<th>Nome</th>
-				<th>CPF</th>
-				<th>RG</th>
-				<th>Ações</th>
-			</tr>
-			<tr th:each="cliente : ${lista_clientes}">
-				<td th:text="*{id}"></td>
-				<td th:text="*{nome}"></td>
-				<td th:text="*{cpf}"></td>
-				<td th:text="*{rg}"></td>
-				<td><a>Editar</a><a>Apagar</a></td>
-			<tr>
-		</table>
+		<div th:if="${lista_clientes.size() > 0}">
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>CPF</th>
+						<th>RG</th>
+						<th>Ações</th>
+					</tr>
+				<thead>
+				<tbody>
+					<tr th:each="cliente, iStat : ${lista_clientes}"
+						th:style="${iStat.odd}? 'font-weight:bold;'">
+						<td th:text="*{id}"></td>
+						<td th:text="*{nome}"></td>
+						<td th:text="*{cpf}"></td>
+						<td th:text="*{rg}"></td>
+						<td><a th:href="@{/cliente/{id}(id =*{id})}">Editar</a><a th:href="@{/cliente//{id}(id =*{id})/delete}">Apagar</a></td>
+					<tr>
+				</tbody>
+			</table>
+			<div class="navegacao">
+				<a th:style="${currentPage==1}?enabled:disabled"> < </a>
+				<span th:value="${currentPage}">page</span>
+				<a th:style="${currentPage==totalPages}?disabled:enabled">></a>
+			</div>
+		</div>
+		<div>
+			<a th:href="@{/cliente/adicionar}" >Adicionar cliente</a>
+		</div>
 	</main>
 </body>
 </html>

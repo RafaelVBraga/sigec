@@ -18,14 +18,14 @@
 		<div class="center_container">
 			<div class="sidebar">
 				<ul>
-					<li><a th:href="@{dashboard}">Dashboard</a></li>
-					<li><a th:href="@{cliente}">Clientes</a></li>
-					<li><a th:href="@{processo}">Processos</a></li>
-					<li><a th:href="@{pagamento}">Pagamentos</a></li>
+					<li><a th:href="@{/sigec/dashboard}">Dashboard</a></li>
+					<li><a th:href="@{/sigec/clientes}">Clientes</a></li>
+					<li><a th:href="@{/sigec/processos}">Processos</a></li>
+					<li><a th:href="@{/sigec/pagamentos}">Pagamentos</a></li>
 				</ul>
 			</div>
 
-			<div class="desktop" th:include="${conteudo}">
+			<div class="desktop" th:insert="${conteudo}">
 				<h2>desktop</h2>
 			</div>
 		</div>

@@ -1,9 +1,10 @@
 package com.rvbraga.sigec.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rvbraga.sigec.model.Cliente;
@@ -13,13 +14,17 @@ import com.rvbraga.sigec.repository.ClienteRepository;
 public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
-
+	
 	public List<Cliente> findAll() {
 		return clienteRepository.findAll();
 	}
 	
-	public List<Cliente> findByNome(String nome){
-		return clienteRepository.findByNomeLike(nome);
+	public Page<Cliente> findByNome(String nome, Pageable paging){
+		return clienteRepository.findByNomeContainingIgnoreCase(nome,paging);
+	}
+	
+	public Page<Cliente> findAll(Pageable paging){
+		return clienteRepository.findAll(paging);
 	}
 	
 	public Cliente saveCliente(Cliente cliente) {
@@ -39,5 +44,8 @@ public class ClienteService {
 	public Cliente findByCpf(String Cpf) {
 		return clienteRepository.findByCpf(Cpf);
 	}
+	
+	 
+	
 
 }
