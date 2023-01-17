@@ -1,0 +1,17 @@
+<html 
+	xmlns:th="www.thymeleaf.org"
+	th:replace="~{template :: layout (~{:: main})}"> 
+<body>
+  <main>
+  <div>
+  	<form th:object="${pesquisa}" th:action="@{/cliente}" method="POST">
+  		<label>Nome:<input th:fielde=${pesquisaNome} /></label>
+  		<label>CPF:<input th:fielde=${pesquisaCPF} /></label>
+  	</form>
+  </div>
+    <ul th:if="${lista_clientes.isEmpty()}">
+      <li th:each="cliente : ${lista_clientes}" th:text="${cliente}"></li>
+    </ul>
+  </main>
+</body>
+</html>

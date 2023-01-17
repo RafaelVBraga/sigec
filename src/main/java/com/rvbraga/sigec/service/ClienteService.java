@@ -18,8 +18,8 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 	
-	public Optional<Cliente> findByNome(String nome){
-		return clienteRepository.findByNome(nome);
+	public List<Cliente> findByNome(String nome){
+		return clienteRepository.findByNomeLike(nome);
 	}
 	
 	public Cliente saveCliente(Cliente cliente) {
