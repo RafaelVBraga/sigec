@@ -13,7 +13,7 @@
 	<name>SistemaDeGestaoDeClientes</name>
 	<description>Sistema para gestão de clientes</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>19</java.version>		
 	</properties>
 	<dependencies>
 		<dependency>

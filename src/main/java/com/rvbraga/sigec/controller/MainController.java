@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -72,7 +71,7 @@ public class MainController {
 			Page<Cliente> pageClientes;			
 			pageClientes = clienteService.findAll(paging);
 			
-			clientes = pageClientes.getContent();
+			clientes = pageClientes.getContent(); 
 			
 			model.addAttribute("lista_clientes", clientes);
 			model.addAttribute("currentPage", pageClientes.getNumber()+1);
@@ -84,8 +83,13 @@ public class MainController {
 		}catch(Exception e) {
 			 model.addAttribute("mensagem_tabela", e.getMessage());
 		}
-		return "cliente.html";
-		
-		
+		return "cliente.html";	
+	}
+	
+	@GetMapping("/cliente/adicionar")
+	public String adicionarCliente(Model model) {
+		Cliente cliente = new Cliente();
+		model.addAttribute("cliente", cliente);
+		return "cliente_add_edit.html";
 	}
 }

@@ -31,6 +31,7 @@ public class Cliente implements Serializable{
 	private String raca;
 	private String cpf;
 	private String rg;
+	private String email;
 	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")

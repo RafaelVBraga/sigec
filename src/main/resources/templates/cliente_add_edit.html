@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{template :: layout (~{:: main})}" >
+<head>
+
+</head>
+<body>
+	<main>
+		<form th:object="${cliente}" th:action="@{/sigec/cliente/salvar}" method="POST">
+		
+			<label class="input_label">Id: <input type="text" class="input_style" th:value = "*{id}" readonly="readonly"></label>
+			<label class="input_label">Nome: <input type="text" class="input_style" th:value = "*{nome}"></label>
+			<label class="input_label">CPF: <input type="text" class="input_style" th:value = "*{cpf}"></label>
+			<label class="input_label">RG: <input type="text" class="input_style" th:value = "*{rg}"></label>
+			<label class="input_label">Raça: <select class="input_style" th:value = "*{raca}">
+												 <option>Não Informado</option>												 
+												 <option>Preto</option>
+												 <option>Branco</option>
+												 <option>Pardo</option>
+												 <option>Amarelo</option>
+												 <option>Indígena</option>
+											</select></label>
+		</form>
+	
+	</main>
+</body>
+</html>
