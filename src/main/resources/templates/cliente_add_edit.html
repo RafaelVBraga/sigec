@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{template :: layout (~{:: main})}" >
 <head>
@@ -12,14 +12,11 @@
 			<label class="input_label">Nome: <input type="text" class="input_style" th:value = "*{nome}"></label>
 			<label class="input_label">CPF: <input type="text" class="input_style" th:value = "*{cpf}"></label>
 			<label class="input_label">RG: <input type="text" class="input_style" th:value = "*{rg}"></label>
-			<label class="input_label">Raça: <select class="input_style" th:value = "*{raca}">
-												 <option>Não Informado</option>												 
-												 <option>Preto</option>
-												 <option>Branco</option>
-												 <option>Pardo</option>
-												 <option>Amarelo</option>
-												 <option>Indígena</option>
-											</select></label>
+			<label for="selecao" class="input_label" th:text="${campo_raca}"></label>
+											<select id="selecao" class="input_style" th:value = "*{raca}">
+												 <option th:each="raca : ${racas}" th:text="${raca}">Não Informado</option>							 
+											</select>
+			
 		</form>
 	
 	</main>

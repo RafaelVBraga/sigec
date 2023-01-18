@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.rvbraga.sigec.dto.PesquisaDto;
 import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.service.ClienteService;
+import com.rvbraga.sigec.utils.Utilidades;
  
 @Controller
 @RequestMapping("/sigec")
 public class MainController {
 	@Autowired
 	private ClienteService clienteService; 
+	@Autowired
+	private Utilidades utilidades;
 	
 	@GetMapping("/home")
 	public String home() {
@@ -89,6 +92,8 @@ public class MainController {
 	@GetMapping("/cliente/adicionar")
 	public String adicionarCliente(Model model) {
 		Cliente cliente = new Cliente();
+		model.addAttribute("campo_raca", "Raça:");
+		model.addAttribute("racas",utilidades.getRacas());
 		model.addAttribute("cliente", cliente);
 		return "cliente_add_edit.html";
 	}
