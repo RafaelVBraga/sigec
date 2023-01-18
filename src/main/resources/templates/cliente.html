@@ -6,7 +6,7 @@
 			<h3>Clientes</h3>
 			<hr>
 			<form class="formulario" th:object="${pesquisa}"
-				th:action="@{/sigec/clientes/pesquisa}" method="GET">
+				th:action="@{/sigec/clientes/pesquisa}" method="POST">
 				<label>Nome:<input type="text" th:field=*{pesquisaNome} /></label>
 				<label>CPF:<input type="text" th:field=*{pesquisaCpf} /></label><input
 					type="submit" value="Pesquisar">
@@ -39,6 +39,9 @@
 				<span th:value="${currentPage}">page</span>
 				<a th:style="${currentPage==totalPages}?disabled:enabled">></a>
 			</div>
+		</div>
+		<div th:else="${lista_clientes.size() > 0}">
+		<h2>Sem retorno para sua pesquisa!</h2>
 		</div>
 		<div>
 			<a th:href="@{/cliente/adicionar}" >Adicionar cliente</a>
