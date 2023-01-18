@@ -11,6 +11,9 @@ main {
 	margin: 20px;
 	padding: 10px;
 }
+.teste{
+	display:inline;
+}
 
 .formulario {
 	margin-top: 20px;;
@@ -55,14 +58,15 @@ main {
 }
 
 .add_button {
-	display: flex; position : absolute;
-	bottom: 100px;
+	display: flex; 
+	position : absolute;
+	top: 125px;
 	z-index: 50;
 	right: 100px;
 	border-radius: 25px;
 	background-color: rgb(0, 150, 0);
 	justify-content: center;
-	position: absolute; bottom : 100px; z-index : 50; right : 100px;
+	z-index : 50; left : 55%;
 	border-radius : 25px; background-color : rgb( 0, 150, 0);
 	justify-content : center;
 	width: 50px;

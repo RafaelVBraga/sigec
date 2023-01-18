@@ -25,8 +25,8 @@ import com.rvbraga.sigec.utils.Utilidades;
 public class MainController {
 	@Autowired
 	private ClienteService clienteService; 
-	@Autowired
-	private Utilidades utilidades;
+	
+	private Utilidades utilidades = new Utilidades();
 	
 	@GetMapping("/home")
 	public String home() {

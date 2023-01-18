@@ -6,15 +6,23 @@
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
-			<form class="formulario" th:object="${pesquisa}"
-				th:action="@{/sigec/clientes/pesquisa}" method="POST">
-				<label class="input_label">Nome:<input class="input_style" type="text" th:field=*{pesquisaNome} /></label>
-				<label class="input_label">CPF:<input class="input_style" th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} /></label>
-				<input class="btn" type="submit" value="Pesquisar">				
-			</form>
+			<div class="teste">
+				<form class="formulario" th:object="${pesquisa}"
+					th:action="@{/sigec/clientes/pesquisa}" method="POST">
+					<label class="input_label">Nome:<input class="input_style"
+						type="text" th:field=*{pesquisaNome} /></label> <label
+						class="input_label">CPF:<input class="input_style"
+						th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} /></label>
+					<input class="btn" type="submit" value="Pesquisar">
+				</form>
+				<div class="tooltip add_button ">
+					<span class="tooltiptext">Adicionar Cliente</span> <a
+						th:href="@{/sigec/cliente/adicionar}">+</a>
+				</div>
+			</div>
 		</div>
 		<hr>
-		<div class="tabela"th:if="${lista_clientes.size() > 0}">
+		<div class="tabela" th:if="${lista_clientes.size() > 0}">
 			<table>
 				<thead>
 					<tr>
@@ -32,23 +40,21 @@
 						<td th:text="*{nome}"></td>
 						<td th:text="*{cpf}"></td>
 						<td th:text="*{rg}"></td>
-						<td><a th:href="@{/cliente/{id}(id =*{id})}">Editar</a><a th:href="@{/cliente//{id}(id =*{id})/delete}">Apagar</a></td>
+						<td><a th:href="@{/cliente/{id}(id =*{id})}">Editar</a><a
+							th:href="@{/cliente//{id}(id =*{id})/delete}">Apagar</a></td>
 					<tr>
 				</tbody>
 			</table>
 			<div class="navegacao">
-				<a th:style="${currentPage==1}?enabled:disabled"> < </a>
-				<span th:value="${currentPage}">page</span>
-				<a th:style="${currentPage==totalPages}?disabled:enabled">></a>
+				<a th:style="${currentPage==1}?enabled:disabled"> < </a> <span
+					th:value="${currentPage}">page</span> <a
+					th:style="${currentPage==totalPages}?disabled:enabled">></a>
 			</div>
 		</div>
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">
 			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
 		</div>
-		<div class="tooltip add_button ">
-			<span class="tooltiptext">Adicionar Cliente</span>
-			<a th:href="@{/sigec/cliente/adicionar}"  >+</a>
-		</div>
+
 	</main>
 </body>
 </html>

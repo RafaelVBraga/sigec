@@ -10,13 +10,13 @@
 		
 			<label class="input_label">Id: <input type="text" class="input_style" th:value = "*{id}" readonly="readonly"></label>
 			<label class="input_label">Nome: <input type="text" class="input_style" th:value = "*{nome}"></label>
-			<label class="input_label">CPF: <input type="text" class="input_style" th:value = "*{cpf}"></label>
-			<label class="input_label">RG: <input type="text" class="input_style" th:value = "*{rg}"></label>
+			<label class="input_label">CPF: <input type="text" th:oninput="mascara(this)" class="input_style" th:value = "*{cpf}"></label>
+			<label class="input_label">RG: <input type="text" class="input_style" maxlength="15" th:value = "*{rg}"></label>
 			<label for="selecao" class="input_label" th:text="${campo_raca}"></label>
 											<select id="selecao" class="input_style" th:value = "*{raca}">
 												 <option th:each="raca : ${racas}" th:text="${raca}">Não Informado</option>							 
 											</select>
-			
+			<input class="btn" type="submit" value="Salvar">
 		</form>
 	
 	</main>
