@@ -60,14 +60,17 @@
 
 .sidebar ul li a {
 	
-	border-radius:15px;
+	border-radius:7px;
+	border: 2px solid #125385;
+	box-shadow:5px 5px lightgray;
 	padding: 10px;
 	text-decoration: none;	
 	width: 75%;
+	color:#125385;
 }
 .sidebar ul li a:hover{
 	border:none;
-	border-radius:15px;
+	/*border-radius:15px;*/
 	background-color:#125385;
 	color:white;	
 	text-decoration: none;	

@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/home.css">
+<link rel="stylesheet" th:href="@{/home.css}">
+<link rel="stylesheet" th:href="@{/clientes.css}">
+<script type="text/javascript" th:src="@{/maskinput.js}" defer="defer"></script>
 
 <title>Sistema de Gestão de Clientes - Página Inicial</title>
 
@@ -25,11 +27,12 @@
 				</ul>
 			</div>
 
-			<div class="desktop" th:insert="${conteudo}">
+			<div class="desktop" th:replace="${conteudo}">
 				<h2>desktop</h2>
 			</div>
 		</div>
 		<div class="footer">@rvbraga soluções em T.I</div>
 	</div>
+	
 </body>
 </html>

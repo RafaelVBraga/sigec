@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.rvbraga.sigec.dto.PesquisaDto;
 import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.service.ClienteService;
-
+ 
 @Controller
 @RequestMapping("/sigec")
 public class MainController {
@@ -35,6 +35,7 @@ public class MainController {
 		
 		PesquisaDto pesquisa = new PesquisaDto();
 		model.addAttribute("pesquisa",pesquisa );
+		
 		try {
 			List<Cliente> clientes = new ArrayList<Cliente>();
 			Pageable paging = PageRequest.of(page - 1, size);
@@ -44,14 +45,17 @@ public class MainController {
 			
 			clientes = pageClientes.getContent();		
 			
+			
 			model.addAttribute("lista_clientes", clientes);
 			model.addAttribute("currentPage", pageClientes.getNumber()+1);
 			model.addAttribute("totalItems", pageClientes.getTotalElements());
 			model.addAttribute("totalPages", pageClientes.getTotalPages());
 			model.addAttribute("pageSize", size);
+			model.addAttribute("mensagem_tabela", clientes.isEmpty()?"Dados indisponíveis":"Tabela carregada!");
 			
 		}catch(Exception e) {
-			 model.addAttribute("message", e.getMessage());
+			 model.addAttribute("mensagem_tabela", e.getMessage());
+			 
 		}
 		return "cliente.html";
 	}
@@ -75,9 +79,10 @@ public class MainController {
 			model.addAttribute("totalItems", pageClientes.getTotalElements());
 			model.addAttribute("totalPages", pageClientes.getTotalPages());
 			model.addAttribute("pageSize", size);
+			model.addAttribute("mensagem_tabela", clientes.isEmpty()?"Dados indisponíveis":"Tabela carregada!");
 			
 		}catch(Exception e) {
-			 model.addAttribute("message", e.getMessage());
+			 model.addAttribute("mensagem_tabela", e.getMessage());
 		}
 		return "cliente.html";
 		
