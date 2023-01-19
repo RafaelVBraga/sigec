@@ -6,7 +6,7 @@
 </head>
 <body>
 	<main>
-		<form th:object="${cliente}" th:action="@{/sigec/cliente/salvar}" method="POST">
+		<form class="add_edit_form"th:object="${cliente}" th:action="@{/sigec/cliente/salvar}" method="POST">
 		
 			<label class="input_label">Id: <input type="text" class="input_style" th:value = "*{id}" readonly="readonly"></label>
 			<label class="input_label">Nome: <input type="text" class="input_style" th:value = "*{nome}"></label>
