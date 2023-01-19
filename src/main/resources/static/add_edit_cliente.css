@@ -5,4 +5,34 @@
 	display:flex;
 	justify-content: center;
 	flex-direction: column;
+	
+}
+.add_edit_label{
+	width: 25%;
+	height:30px;
+	
+}
+.add_edit_input{
+	width: 35%;
+	height: 30px;
+	border-radius: 5px;
+}
+.add_edit_btn{
+	margin:15px;
+	width: 25%;	
+	font-size: 15px;
+	padding: 1px 15px;
+	border-radius: 5px;
+	background-color: white;
+	color: #125385;
+	transition:0.5s;
+	height: 35px;
+}
+.add_edit_btn:hover {
+	margin: 15px;
+	font-size: 15px;
+	padding: 1px 15px;
+	border-radius: 5px;
+	background-color: #125385;
+	color: white;
 }

@@ -8,15 +8,19 @@
 	<main>
 		<form class="add_edit_form"th:object="${cliente}" th:action="@{/sigec/cliente/salvar}" method="POST">
 		
-			<label class="input_label">Id: <input type="text" class="input_style" th:value = "*{id}" readonly="readonly"></label>
-			<label class="input_label">Nome: <input type="text" class="input_style" th:value = "*{nome}"></label>
-			<label class="input_label">CPF: <input type="text" th:oninput="mascara(this)" class="input_style" th:value = "*{cpf}"></label>
-			<label class="input_label">RG: <input type="text" class="input_style" maxlength="15" th:value = "*{rg}"></label>
-			<label for="selecao" class="input_label" th:text="${campo_raca}"></label>
-											<select id="selecao" class="input_style" th:value = "*{raca}">
+			<label class="add_edit_label">Id: </label>
+			<input type="text" class="add_edit_input" th:value = "*{id}" readonly="readonly">
+			<label class="add_edit_label">Nome: </label>
+			<input type="text" class="add_edit_input" th:value = "*{nome}">
+			<label class="add_edit_label">CPF: </label>
+			<input type="text" th:oninput="mascara(this)" class="add_edit_input" th:value = "*{cpf}">
+			<label class="add_edit_label">RG: </label>
+			<input type="text" class="add_edit_input" maxlength="15" th:value = "*{rg}">
+			<label for="selecao" class="add_edit_label" th:text="${campo_raca}"></label>
+											<select id="selecao" class="add_edit_input" th:value = "*{raca}">
 												 <option th:each="raca : ${racas}" th:text="${raca}">Não Informado</option>							 
 											</select>
-			<input class="btn" type="submit" value="Salvar">
+			<input class="add_edit_btn" type="submit" value="Salvar">	
 		</form>
 	
 	</main>

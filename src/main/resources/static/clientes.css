@@ -41,6 +41,7 @@ main {
 	background-color: white;
 	color: #125385;
 	transition:0.5s;
+	height: 35px;
 }
 .btn:hover {
 	margin: 5px;
