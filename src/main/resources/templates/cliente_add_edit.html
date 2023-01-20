@@ -1,28 +1,33 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{template :: layout (~{:: main})}" >
+	th:replace="~{template :: layout (~{:: main})}">
 <head>
 
 </head>
 <body>
 	<main>
-		<form class="add_edit_form"th:object="${cliente}" th:action="@{/sigec/cliente/salvar}" method="POST">
-		
-			<label class="add_edit_label">Id: </label>
-			<input type="text" class="add_edit_input" th:value = "*{id}" readonly="readonly">
-			<label class="add_edit_label">Nome: </label>
-			<input type="text" class="add_edit_input" th:value = "*{nome}">
-			<label class="add_edit_label">CPF: </label>
-			<input type="text" th:oninput="mascara(this)" class="add_edit_input" th:value = "*{cpf}">
-			<label class="add_edit_label">RG: </label>
-			<input type="text" class="add_edit_input" maxlength="15" th:value = "*{rg}">
-			<label for="selecao" class="add_edit_label" th:text="${campo_raca}"></label>
-											<select id="selecao" class="add_edit_input" th:value = "*{raca}">
-												 <option th:each="raca : ${racas}" th:text="${raca}">Não Informado</option>							 
-											</select>
-			<input class="add_edit_btn" type="submit" value="Salvar">	
+		<form class="add_edit_form" th:object="${cliente}"
+			th:action="@{/sigec/cliente/salvar}" method="POST">
+
+			<label class="add_edit_label">Id: </label> <input type="text"
+				class="add_edit_input_id" th:value="*{id}" readonly="readonly">
+			<label class="add_edit_label">Nome: </label> <input type="text"
+				class="add_edit_input" th:value="*{nome}"> <label
+				class="add_edit_label">CPF: </label> <input type="text"
+				th:oninput="mascara(this)" class="add_edit_input" th:value="*{cpf}">
+			<label class="add_edit_label">RG: </label> <input type="text"
+				class="add_edit_input" maxlength="15" th:value="*{rg}"> <label
+				for="selecao" class="add_edit_label" th:text="${campo_raca}"></label>
+			<select id="selecao" class="add_edit_input" th:value="*{raca}">
+				<option th:each="raca : ${racas}" th:text="${raca}">Não
+					Informado</option>
+			</select>
+			<div class="container_botoes">
+				<input class="add_edit_btn" type="submit" value="Salvar"> 
+				<a class="add_edit_btn" th:href="@{/sigec/clientes}">Voltar</a>
+			</div>
 		</form>
-	
+
 	</main>
 </body>
 </html>

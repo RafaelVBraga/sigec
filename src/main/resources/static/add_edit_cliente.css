@@ -2,23 +2,44 @@
 
 .add_edit_form{
 	
-	display:flex;
+	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	
+	margin: 50px auto;
+	width: 80%;
+	box-shadow: 10px 10px lightgrey;	 
+	background-color: AliceBlue;	
 }
-.add_edit_label{
+.container_botoes{
+	display: flex;
+	justify-content: space-between;
+}
+.container_botoes a{
+	text-decoration: none;
+	text-align: center;
+	justify-content: center;
+	line-height: 30px;
+}
+.add_edit_label:nth-child(n){
+	margin: 5px 20px;
 	width: 25%;
 	height:30px;
-	
-}
-.add_edit_input{
+	}
+
+.add_edit_input:nth-child(n){
+	margin:10px 20px;
 	width: 35%;
+	height: 40px;
+	border-radius: 15px;
+}
+.add_edit_input_id{
+	margin:10px 20px;
+	width: 100px;
 	height: 30px;
 	border-radius: 5px;
 }
 .add_edit_btn{
-	margin:15px;
+	margin:15px auto;
 	width: 25%;	
 	font-size: 15px;
 	padding: 1px 15px;
@@ -28,11 +49,10 @@
 	transition:0.5s;
 	height: 35px;
 }
-.add_edit_btn:hover {
-	margin: 15px;
-	font-size: 15px;
-	padding: 1px 15px;
-	border-radius: 5px;
+.add_edit_btn a{
+	text-decoration: none;
+}
+.add_edit_btn:hover {	
 	background-color: #125385;
 	color: white;
 }

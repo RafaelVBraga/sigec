@@ -36,13 +36,13 @@ public class MainController {
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue ="3")int size) {
 		
 		PesquisaDto pesquisa = new PesquisaDto();
-		model.addAttribute("pesquisa",pesquisa );
+		model.addAttribute("pesquisa",pesquisa );		
 		
 		try {
 			List<Cliente> clientes = new ArrayList<Cliente>();
 			Pageable paging = PageRequest.of(page - 1, size);
 			
-			Page<Cliente> pageClientes;			
+			Page<Cliente> pageClientes;			 
 			pageClientes = clienteService.findAll(paging);
 			
 			clientes = pageClientes.getContent();		
@@ -57,6 +57,7 @@ public class MainController {
 			
 		}catch(Exception e) {
 			 model.addAttribute("mensagem_tabela", e.getMessage());
+			 model.addAttribute("mensagem_erro", e.getMessage());
 			 
 		}
 		return "cliente.html";
@@ -85,16 +86,27 @@ public class MainController {
 			
 		}catch(Exception e) {
 			 model.addAttribute("mensagem_tabela", e.getMessage());
+			 model.addAttribute("mensagem_erro", e);
 		}
 		return "cliente.html";	
-	}
+	} 
 	
-	@GetMapping("/cliente/adicionar")
+	@GetMapping("/cliente/adicionar") 
 	public String adicionarCliente(Model model) {
 		Cliente cliente = new Cliente();
 		model.addAttribute("campo_raca", "Raça:");
 		model.addAttribute("racas",utilidades.getRacas());
 		model.addAttribute("cliente", cliente);
 		return "cliente_add_edit.html";
+	}
+	@PostMapping("/")
+	public String salvarCliente(Model model, @ModelAttribute("cliente") Cliente cliente) {
+		try {
+		Cliente cliente_salvo =  clienteService.saveCliente(cliente);
+		model.addAttribute("mensagem_sucesso","Cliente "+cliente_salvo.getId()+" salvo!");
+		}catch(Exception e) {
+			model.addAttribute("mensagem_erro","Erro ao salvar cliente: "+e);
+		}
+		return "redirect:/clientes";
 	}
 }

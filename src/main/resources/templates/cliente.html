@@ -3,6 +3,10 @@
 
 <body>
 	<main>
+		<p class=" mensagem mensagem_erro" th:else="${#strings.isEmpty(mensagem_erro)}"	
+			th:value="${mensagem_erro}">Mensagem de erro</p>
+			<p class=" mensagem mensagem_sucesso" th:else="${#strings.isEmpty(mensagem_sucesso)}"	
+			th:value="${mensagem_sucesso}">Mensagem de sucesso!</p>
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
