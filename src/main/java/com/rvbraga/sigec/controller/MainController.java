@@ -1,5 +1,6 @@
 package com.rvbraga.sigec.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +34,17 @@ public class MainController {
 
 	@GetMapping("/home")
 	public String home() {
-		return "home.html";
+		return "home.html";  
 	}
-
+ 
 	@GetMapping("/clientes")
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "3") int size) {
-
+			@RequestParam(defaultValue = "3") int size) { 
+		
+		System.out.println("page/size:" + page +"/"+size );
 		PesquisaDto pesquisa = new PesquisaDto();
-		model.addAttribute("pesquisa", pesquisa);
-
+		model.addAttribute("pesquisa", pesquisa); 
+ 
 		try {
 			List<Cliente> clientes = new ArrayList<Cliente>();
 			Pageable paging = PageRequest.of(page - 1, size);
@@ -50,10 +52,10 @@ public class MainController {
 			Page<Cliente> pageClientes;
 			pageClientes = clienteService.findAll(paging);
 
-			clientes = pageClientes.getContent();
+			clientes = pageClientes.getContent(); 		
 
 			model.addAttribute("lista_clientes", clientes);
-			model.addAttribute("currentPage", pageClientes.getNumber() + 1);
+			model.addAttribute("currentPage", pageClientes.getNumber()+1);
 			model.addAttribute("totalItems", pageClientes.getTotalElements());
 			model.addAttribute("totalPages", pageClientes.getTotalPages());
 			model.addAttribute("pageSize", size);
@@ -62,6 +64,7 @@ public class MainController {
 		} catch (Exception e) {
 			model.addAttribute("mensagem_tabela", e.getMessage());
 			model.addAttribute("mensagem_erro", e.getMessage());
+			return "home.html";
 
 		}
 		return "cliente.html";
@@ -106,17 +109,17 @@ public class MainController {
 		model.addAttribute("campo_raca", "Raça:");
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("cliente", cliente);
-		return "cliente_add_edit.html";
-	}
+		return "cliente_add_edit.html";  
+	} 
 
 	@PostMapping("/cliente/salvar")
 	public String salvarCliente(Model model, @Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
 		System.out.println(cliente.toString()); 
-		
-		if (errors.hasErrors()) {
-			model.addAttribute("cliente", cliente);
+		cliente.setDataCadastro(LocalDate.now());
+		if (errors.hasErrors()) { 
+			model.addAttribute("cliente", cliente); 
 			model.addAttribute("erros", errors);
-	        return "cliente_add_edit.html";
+	        return "cliente_add_edit.html"; 
 	    }
 		try {
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
@@ -124,8 +127,8 @@ public class MainController {
 		} catch (Exception e) {
 			model.addAttribute("cliente", cliente);
 			model.addAttribute("mensagem_erro", "Erro ao salvar cliente: " + e);
-			return "";
+			return "cliente_add_edit.html";
 		}
-		return "redirect:/cliente_add_edit";
+		return cliente(model,1,3);
 	}
 }

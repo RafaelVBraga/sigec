@@ -8,10 +8,10 @@
 	<main>
 		<form class="add_edit_form" th:object="${cliente}"
 			th:action="@{/sigec/cliente/salvar}" method="POST">
-			<ul th:if="${#fields.hasErrors('*')}">
-				<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input
-					is incorrect</li>
-			</ul>
+<!-- 			<ul th:if="${#fields.hasErrors('*')}"> -->
+<!-- 				<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input -->
+<!-- 					is incorrect</li> -->
+<!-- 			</ul> -->
 			<label class="add_edit_label">Id: </label>			
 			<input type="text"	class="add_edit_input_id" th:field="*{id}" readonly="readonly">
 			
@@ -26,6 +26,12 @@
 			<div class="form_field">
 				<input type="text"	th:oninput="mascara(this)" class="add_edit_input" th:field="*{cpf}">
 				<p th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></p>			
+			</div>
+			
+			<label class="add_edit_label">Data de Nascimento: </label> 
+			<div class="form_field">
+				<input type="date"	class="add_edit_input" th:field="*{dataNascimento}">
+				<p th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></p>			
 			</div>
 			
 			<label class="add_edit_label">RG: </label> 
@@ -43,8 +49,7 @@
 			
 			<label for="selecao" class="add_edit_label" th:text="${campo_raca}"></label>
 			<select id="selecao" class="add_edit_input" th:field="*{raca}">
-				<option th:each="raca : ${racas}" th:text="${raca}">Não
-					Informado</option>
+				<option th:each="race : ${racas}" th:value="${race}" th:text="${race}"></option>
 			</select>
 			<div class="container_botoes">
 				<input class="add_edit_btn" type="submit" value="Salvar"> <a

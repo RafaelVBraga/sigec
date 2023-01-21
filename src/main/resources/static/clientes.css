@@ -124,9 +124,18 @@ main {
 }
 .navegacao{
 	display:flex;
-	justify-content: center;
+	justify-content: space-between;
 	flex-direction: row;
 }
 .navegacao a:nth-child{
 	margin: 5px 15px;
 }
+table thead th{
+	border: 1px solid black;
+	margin:0;
+	padding: 0;
+}
+table tr:nth-child(even){
+	background-color: #f2f2f2;
+	
+	}
