@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +15,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -23,14 +28,18 @@ public class Cliente implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id@GeneratedValue(strategy = GenerationType.AUTO)	
 	private UUID id;
+	@NotBlank
 	private String nome;
 	private LocalDate dataNascimento;
 	private String genero;
 	private String raca;
+	@CPF@NotBlank
 	private String cpf;
+	@Size(min=11)@NotBlank
 	private String rg;
+	@Email@NotBlank
 	private String email;
 	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;

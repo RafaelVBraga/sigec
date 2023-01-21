@@ -56,3 +56,10 @@
 	background-color: #125385;
 	color: white;
 }
+.form_field{
+	display:flex;
+	flex-direction: row;	
+}
+.form_field p:nth-child(n){
+	margin:0 auto;
+}

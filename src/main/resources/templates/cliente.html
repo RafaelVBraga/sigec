@@ -3,10 +3,8 @@
 
 <body>
 	<main>
-		<p class=" mensagem mensagem_erro" th:else="${#strings.isEmpty(mensagem_erro)}"	
-			th:value="${mensagem_erro}">Mensagem de erro</p>
-			<p class=" mensagem mensagem_sucesso" th:else="${#strings.isEmpty(mensagem_sucesso)}"	
-			th:value="${mensagem_sucesso}">Mensagem de sucesso!</p>
+		<p class=" mensagem mensagem_erro" th:if="${#strings.isEmpty(mensagem_erro)}" th:text="${mensagem_erro}">Mensagem de erro</p>
+			<p class=" mensagem mensagem_sucesso" th:if="${#strings.isEmpty(mensagem_sucesso)}"	th:text="${mensagem_sucesso}">Mensagem de sucesso!</p>
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
@@ -34,25 +32,26 @@
 						<th>Nome</th>
 						<th>CPF</th>
 						<th>RG</th>
-						<th>Ações</th>
+						<th>----</th>
 					</tr>
-				<thead>
+				</thead>
 				<tbody>
 					<tr th:each="cliente, iStat : ${lista_clientes}"
 						th:style="${iStat.odd}? 'font-weight:bold;'">
-						<td th:text="*{id}"></td>
-						<td th:text="*{nome}"></td>
-						<td th:text="*{cpf}"></td>
-						<td th:text="*{rg}"></td>
+						<td th:text="*{id}">id</td>
+						<td th:text="*{nome}">nome</td>
+						<td th:text="*{cpf}">cpf</td>
+						<td th:text="*{rg}">rg</td>
+						<td th:text="*{email}">email</td>
 						<td><a th:href="@{/cliente/{id}(id =*{id})}">Editar</a><a
-							th:href="@{/cliente//{id}(id =*{id})/delete}">Apagar</a></td>
+							th:href="@{/cliente/{id}(id =*{id})/delete}">Apagar</a></td>
 					<tr>
 				</tbody>
 			</table>
-			<div class="navegacao">
-				<a th:style="${currentPage==1}?enabled:disabled"> < </a> <span
-					th:value="${currentPage}">page</span> <a
-					th:style="${currentPage==totalPages}?disabled:enabled">></a>
+			<div class="navegacao" th:if="${lista_clientes.size() > 3}">
+				<a th:style="${currentPage==1}?enabled:disabled"> < </a> 
+				<span th:value="${currentPage}">page</span> 
+				<a	th:style="${currentPage==totalPages}?disabled:enabled">></a>
 			</div>
 		</div>
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">

@@ -64,6 +64,7 @@ main {
 	margin: 20px;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 }
 
 .add_button {
@@ -120,4 +121,12 @@ main {
   visibility: visible;
   transition:0.5s;
  
+}
+.navegacao{
+	display:flex;
+	justify-content: center;
+	flex-direction: row;
+}
+.navegacao a:nth-child{
+	margin: 5px 15px;
 }
