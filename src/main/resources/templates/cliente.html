@@ -49,21 +49,32 @@
 						<td th:text="${cliente.cpf}">cpf</td>
 						<td th:text="${cliente.rg}">rg</td>
 						<td th:text="${cliente.email}">email</td>
-						<td><a th:href="@{/cliente/{id}(id =*{id})}"><i class="fa-regular fa-pen-to-square"> </i></a><a
-							th:href="@{/cliente/{id}(id =*{id})/delete}">Apagar</a></td>
+						<td>
+							<div class="tabela_acoes">
+								<a th:href="@{/cliente/{id}(id =*{id})}"><i class="fa-regular fa-pen-to-square"> </i></a>
+								<a th:href="@{/cliente/{id}(id =*{id})/delete}"><i class="fa-solid fa-trash"></i></a>
+							</div>
+						</td>
 					<tr>
 				</tbody>
 			</table>
 			<div class="navegacao" th:if="${totalPages > 1}">
-				<a class="btn" th:unless="${currentPage==1}"
+				
+				<a class="setas" th:unless="${currentPage==1}"
 					th:style="${currentPage==1}?disabled:enabled"
 					th:href="@{/sigec/clientes(page=${currentPage-1},size=${pageSize})}">
-					Anterior </a> <span
-					th:text="${#strings.concat('pagina ', currentPage)}"> page </span>
-				<a class="btn" th:unless="${currentPage==totalPages}"
+					<i class="fa-solid fa-chevron-left"></i>
+				</a> 
+				
+				Corrigir esse elemento
+				<span th:text="${#strings.concat('pagina ', currentPage)}"> page </span>
+				
+				
+				<a class="setas" th:unless="${currentPage==totalPages}"
 					th:style="${currentPage==totalPages}?disabled:enabled"
 					th:href="@{/sigec/clientes(page=${currentPage+1},size=${pageSize})}">
-					Proxima </a>
+					<i class="fa-solid fa-chevron-right"></i>
+				</a>
 			</div>
 		</div>
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">

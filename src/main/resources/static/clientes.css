@@ -136,3 +136,16 @@ table tbody tr:nth-child(even){
 	table tr:nth-child(odd){	
 	color: #0000cc;
 	}
+.tabela_acoes{
+	display:flex;
+	flex-direction: row;	
+}
+.tabela_acoes a:nth-child(n){
+	margin:15px;	
+}
+.setas{
+	background-color:#125385;
+	margin: 10px;
+	padding: 10px;
+	color:white;	
+}
