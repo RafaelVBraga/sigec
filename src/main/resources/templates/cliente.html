@@ -3,8 +3,12 @@
 
 <body>
 	<main>
-		<p class=" mensagem mensagem_erro" th:if="${#strings.isEmpty(mensagem_erro)}" th:text="${mensagem_erro}">Mensagem de erro</p>
-			<p class=" mensagem mensagem_sucesso" th:if="${#strings.isEmpty(mensagem_sucesso)}"	th:text="${mensagem_sucesso}">Mensagem de sucesso!</p>
+		<p class=" mensagem mensagem_erro"
+			th:if="${#strings.isEmpty(mensagem_erro)}" th:text="${mensagem_erro}">Mensagem
+			de erro</p>
+		<p class=" mensagem mensagem_sucesso"
+			th:if="${#strings.isEmpty(mensagem_sucesso)}"
+			th:text="${mensagem_sucesso}">Mensagem de sucesso!</p>
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
@@ -16,11 +20,12 @@
 						class="input_label">CPF:<input class="input_style"
 						th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} /></label>
 					<input class="btn" type="submit" value="Pesquisar">
+					<a class="btn" th:href="@{/sigec/cliente/adicionar}">Adicionar</a>
 				</form>
-				<div class="tooltip add_button ">
-					<span class="tooltiptext">Adicionar Cliente</span> <a
-						th:href="@{/sigec/cliente/adicionar}">+</a>
-				</div>
+<!-- 				<div class="tooltip add_button "> -->
+<!-- 					<span class="tooltiptext">Adicionar Cliente</span> <a -->
+<!-- 						class="tooltip add_button " th:href="@{/sigec/cliente/adicionar}">Adicionar</a> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 		<hr>
@@ -50,9 +55,15 @@
 				</tbody>
 			</table>
 			<div class="navegacao" th:if="${totalPages > 1}">
-				<a class="btn" th:unless="${currentPage==1}" th:style="${currentPage==1}?disabled:enabled" th:href="@{/sigec/clientes(page=${currentPage-1},size=${pageSize})}"> Anterior </a> 
-				<span th:text="${#strings.concat('pagina ', currentPage)}"> page </span> 
-				<a class="btn"th:unless="${currentPage==totalPages}" th:style="${currentPage==totalPages}?disabled:enabled" th:href="@{/sigec/clientes(page=${currentPage+1},size=${pageSize})}"> Proxima </a>
+				<a class="btn" th:unless="${currentPage==1}"
+					th:style="${currentPage==1}?disabled:enabled"
+					th:href="@{/sigec/clientes(page=${currentPage-1},size=${pageSize})}">
+					Anterior </a> <span
+					th:text="${#strings.concat('pagina ', currentPage)}"> page </span>
+				<a class="btn" th:unless="${currentPage==totalPages}"
+					th:style="${currentPage==totalPages}?disabled:enabled"
+					th:href="@{/sigec/clientes(page=${currentPage+1},size=${pageSize})}">
+					Proxima </a>
 			</div>
 		</div>
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">

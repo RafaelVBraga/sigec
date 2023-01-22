@@ -39,7 +39,7 @@ public class MainController {
  
 	@GetMapping("/clientes")
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "3") int size) { 
+			@RequestParam(defaultValue = "2") int size) { 
 		
 		System.out.println("page/size:" + page +"/"+size );
 		PesquisaDto pesquisa = new PesquisaDto();
@@ -96,10 +96,17 @@ public class MainController {
 			}
 		
 		if (!pesquisa.getPesquisaCpf().isBlank()) {
-			clientes.add(clienteService.findByCpf(pesquisa.getPesquisaCpf()));
-			model.addAttribute("lista_clientes", clientes);
+			try {
+				clientes.add(clienteService.findByCpf(pesquisa.getPesquisaCpf()));
+				model.addAttribute("lista_clientes", clientes);
+			}catch(Exception e) {
+				model.addAttribute("mensagem_erro", e);
+			}
 		}
-
+		if(pesquisa.getPesquisaCpf().isBlank()&&pesquisa.getPesquisaNome().isBlank()) {
+			
+		}
+		
 		return "cliente.html";
 	}
 
