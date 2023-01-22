@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -37,7 +38,7 @@ public class Cliente implements Serializable{
 	private String raca;
 	@CPF@NotBlank
 	private String cpf;
-	@Size(min=11)@NotBlank
+	@Size(min=11, message="Tamanho deve ser no mínimo 11")@NotBlank
 	private String rg;
 	@Email@NotBlank
 	private String email;

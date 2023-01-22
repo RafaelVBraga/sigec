@@ -80,14 +80,16 @@
 }
 
 .desktop {
+	
 	display: flex;
 	width: 85%;
 	justify-content: center;
 	margin: auto;
+	box-sizing: border-box;
 }
 
 .footer {
-	position:relative;
+	
 	display: flex;
 	background-color: #125385;
 	justify-content: center;

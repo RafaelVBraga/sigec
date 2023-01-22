@@ -1,14 +1,20 @@
 @charset "UTF-8";
 
+main{
+	overflow-x: hidden;
+	overflow-y:auto;
+	height: 80vh;
+	padding:25px;
+}
 .add_edit_form{
 	
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	margin: 50px auto;
+	margin: 20px auto;
 	width: 80%;
 	box-shadow: 10px 10px lightgrey;	 
-	background-color: AliceBlue;	
+	background-color: AliceBlue;		
 }
 .container_botoes{
 	display: flex;
@@ -49,10 +55,26 @@
 	transition:0.5s;
 	height: 35px;
 }
-.add_edit_btn a{
-	text-decoration: none;
-}
 .add_edit_btn:hover {	
+	background-color: #125385;
+	color: white;
+}
+.add_edit_btn_voltar {
+	margin:15px auto;
+	width: 25%;	
+	border: 1px solid #125385;
+	font-size: 15px;
+	padding: 1px 15px;
+	border-radius: 5px;
+	background-color: white;
+	color: #125385;
+	transition:0.5s;
+	height: 35px;	
+}
+.add_edit_btn_voltar a{
+	text-decoration: none;	
+}
+.add_edit_btn_voltar:hover {	
 	background-color: #125385;
 	color: white;
 }
@@ -62,4 +84,10 @@
 }
 .form_field p:nth-child(n){
 	margin:0 auto;
+}
+p.error{
+	color: red;
+}
+.input_error{
+	border: 1px solid red;
 }

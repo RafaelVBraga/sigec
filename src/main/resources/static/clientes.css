@@ -127,8 +127,12 @@ table thead th{
 	border-bottom: 1px solid black;
 	margin:0;
 	padding: 0;
+	color: black;
 }
-table tr:nth-child(even){
+table tbody tr:nth-child(even){
 	background-color: #f2f2f2;
-	
+	color: #0000cc;
+	}
+	table tr:nth-child(odd){	
+	color: #0000cc;
 	}

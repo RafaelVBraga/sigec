@@ -117,13 +117,15 @@ public class MainController {
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("cliente", cliente);
 		return "cliente_add_edit.html";  
-	} 
+	}  
 
-	@PostMapping("/cliente/salvar")
+	@PostMapping("/cliente/salvar") 
 	public String salvarCliente(Model model, @Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
 		System.out.println(cliente.toString()); 
 		cliente.setDataCadastro(LocalDate.now());
 		if (errors.hasErrors()) { 
+			model.addAttribute("campo_raca", "Raça:");
+			model.addAttribute("racas", utilidades.getRacas());
 			model.addAttribute("cliente", cliente); 
 			model.addAttribute("erros", errors);
 	        return "cliente_add_edit.html"; 
