@@ -20,7 +20,10 @@
 						class="input_label">CPF:<input class="input_style"
 						th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} /></label>
 					<input class="btn" type="submit" value="Pesquisar">
-					<a class="btn" th:href="@{/sigec/cliente/adicionar}">Adicionar</a>
+					<div class="add_button">
+					<a  th:href="@{/sigec/cliente/adicionar}">Adicionar</a>
+					</div>
+					<label class="input_label">Clientes por tela: <input class="input_style"  type="text" th:field="*{paginas}"></label>
 				</form>
 <!-- 				<div class="tooltip add_button "> -->
 <!-- 					<span class="tooltiptext">Adicionar Cliente</span> <a -->
@@ -33,7 +36,7 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Id</th>
+<!-- 						<th>Id</th> -->
 						<th>Nome</th>
 						<th>CPF</th>
 						<th>RG</th>
@@ -44,7 +47,7 @@
 				<tbody>
 					<tr th:each="cliente, iStat : ${lista_clientes}"
 						th:style="${iStat.odd}? 'font-weight:bold;'">
-						<td th:text="${cliente.id}">id</td>
+<!-- 						<td th:text="${cliente.id}">id</td> -->
 						<td th:text="${cliente.nome}">nome</td>
 						<td th:text="${cliente.cpf}">cpf</td>
 						<td th:text="${cliente.rg}">rg</td>
@@ -52,7 +55,7 @@
 						<td>
 							<div class="tabela_acoes">
 								<a th:href="@{/cliente/{id}(id =*{id})}"><i class="fa-regular fa-pen-to-square"> </i></a>
-								<a th:href="@{/cliente/{id}(id =*{id})/delete}"><i class="fa-solid fa-trash"></i></a>
+								<a th:href="@{/cliente/delete/{id}(id =*{id})}"><i class="fa-solid fa-trash"></i></a>
 							</div>
 						</td>
 					<tr>
@@ -60,19 +63,19 @@
 			</table>
 			<div class="navegacao" th:if="${totalPages > 1}">
 				
-				<a class="setas" th:unless="${currentPage==1}"
+				<a class="setas" th:classappend="${currentPage==1}?hidden:visible"
 					th:style="${currentPage==1}?disabled:enabled"
-					th:href="@{/sigec/clientes(page=${currentPage-1},size=${pageSize})}">
+					th:href="@{/sigec/clientes(page=${currentPage-1},size=${pesquisa.paginas})}">
 					<i class="fa-solid fa-chevron-left"></i>
 				</a> 
 				
-				Corrigir esse elemento
-				<span th:text="${#strings.concat('pagina ', currentPage)}"> page </span>
+				
+				<p class="page_counter" th:text="${#strings.concat(texto_pagina, currentPage)}"> page </p>
 				
 				
-				<a class="setas" th:unless="${currentPage==totalPages}"
+				<a class="setas" th:classappend="${currentPage==totalPages}?hidden:visible"
 					th:style="${currentPage==totalPages}?disabled:enabled"
-					th:href="@{/sigec/clientes(page=${currentPage+1},size=${pageSize})}">
+					th:href="@{/sigec/clientes(page=${currentPage+1},size=${pesquisa.paginas})}">
 					<i class="fa-solid fa-chevron-right"></i>
 				</a>
 			</div>

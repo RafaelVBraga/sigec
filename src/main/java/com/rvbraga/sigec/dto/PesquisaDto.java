@@ -15,5 +15,6 @@ public class PesquisaDto implements Serializable{
 	private String pesquisaNome;
 	@Size(min=11, max=11)
 	private String pesquisaCpf;
+	private Integer paginas;
 
 }

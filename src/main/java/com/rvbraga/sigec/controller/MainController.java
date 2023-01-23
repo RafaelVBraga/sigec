@@ -39,11 +39,13 @@ public class MainController {
  
 	@GetMapping("/clientes")
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "2") int size) { 
-		
+			@RequestParam(defaultValue = "3") int size) { 
+		 
 		System.out.println("page/size:" + page +"/"+size );
 		PesquisaDto pesquisa = new PesquisaDto();
+		pesquisa.setPaginas(size);
 		model.addAttribute("pesquisa", pesquisa); 
+		model.addAttribute("texto_pagina", "Página ");
  
 		try {
 			List<Cliente> clientes = new ArrayList<Cliente>();
@@ -74,10 +76,11 @@ public class MainController {
 	public String pesquisaCliente(Model model, @ModelAttribute("pesquisa") PesquisaDto pesquisa,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
 		List<Cliente> clientes = new ArrayList<Cliente>();
+		model.addAttribute("texto_pagina", "Página ");
 		if (!pesquisa.getPesquisaNome().isBlank())
 			try {
 
-				Pageable paging = PageRequest.of(page - 1, size);
+				Pageable paging = PageRequest.of(page - 1, pesquisa.getPaginas());
 
 				Page<Cliente> pageClientes;
 
@@ -104,6 +107,19 @@ public class MainController {
 			}
 		}
 		if(pesquisa.getPesquisaCpf().isBlank()&&pesquisa.getPesquisaNome().isBlank()) {
+			Pageable paging = PageRequest.of(page - 1, pesquisa.getPaginas());
+
+			Page<Cliente> pageClientes;
+			pageClientes = clienteService.findAll(paging);
+
+			clientes = pageClientes.getContent(); 		
+
+			model.addAttribute("lista_clientes", clientes);
+			model.addAttribute("currentPage", pageClientes.getNumber()+1);
+			model.addAttribute("totalItems", pageClientes.getTotalElements());
+			model.addAttribute("totalPages", pageClientes.getTotalPages());
+			model.addAttribute("pageSize", size);
+			model.addAttribute("mensagem_tabela", clientes.isEmpty() ? "Dados indisponíveis" : "");
 			
 		}
 		
