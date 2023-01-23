@@ -8,10 +8,7 @@
 	<main>
 		<form class="add_edit_form" th:object="${cliente}"
 			th:action="@{/sigec/cliente/salvar}" method="POST">
-<!-- 			<ul th:if="${#fields.hasErrors('*')}"> -->
-<!-- 				<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input -->
-<!-- 					is incorrect</li> -->
-<!-- 			</ul> -->
+
 			<label class="add_edit_label">Id: </label>			
 			<input type="text"	class="add_edit_input_id" th:field="*{id}" readonly="readonly">
 			

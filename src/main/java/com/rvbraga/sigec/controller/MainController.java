@@ -71,11 +71,16 @@ public class MainController {
 		}
 		return "cliente.html";
 	}
-
+ 
 	@PostMapping("/clientes/pesquisa")
-	public String pesquisaCliente(Model model, @ModelAttribute("pesquisa") PesquisaDto pesquisa,
+	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisa") PesquisaDto pesquisa,  Errors errors,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
 		List<Cliente> clientes = new ArrayList<Cliente>();
+		if (errors.hasErrors()) { 
+			model.addAttribute("texto_pagina", "Página ");
+			model.addAttribute("lista_clientes", clientes);
+	        return "cliente_add_edit.html"; 
+	    }
 		model.addAttribute("texto_pagina", "Página ");
 		if (!pesquisa.getPesquisaNome().isBlank())
 			try {

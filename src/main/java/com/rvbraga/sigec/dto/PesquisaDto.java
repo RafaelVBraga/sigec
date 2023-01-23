@@ -2,7 +2,7 @@ package com.rvbraga.sigec.dto;
 
 import java.io.Serializable;
 
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 @Data
@@ -12,9 +12,9 @@ public class PesquisaDto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String pesquisaNome;
-	@Size(min=11, max=11)
+	private String pesquisaNome;	
 	private String pesquisaCpf;
+	@Min(value = 1)
 	private Integer paginas;
 
 }
