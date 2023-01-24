@@ -39,7 +39,7 @@ public class MainController {
  
 	@GetMapping("/clientes")
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "3") int size) { 
+			@RequestParam(defaultValue = "5") int size) { 
 		 
 		System.out.println("page/size:" + page +"/"+size );
 		PesquisaDto pesquisa = new PesquisaDto();
@@ -74,7 +74,7 @@ public class MainController {
  
 	@PostMapping("/clientes/pesquisa")
 	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisa") PesquisaDto pesquisa,  Errors errors,
-			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
+			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		if (errors.hasErrors()) { 
 			model.addAttribute("texto_pagina", "Página ");

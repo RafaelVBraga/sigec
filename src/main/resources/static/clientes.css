@@ -28,10 +28,14 @@ main {
 }
 .input_paginas{
 	
-	margin:10px 20px;
+	margin:5px 5px;
 	width: 50px;
 	height: 40px;
 	border-radius: 15px;
+}
+.label_paginas{
+	margin: 5px;
+	margin-top:2px;
 }
 
 .formulario {
@@ -62,6 +66,7 @@ main {
 	color: #125385;
 	transition:0.5s;
 	height: 35px;
+	width:120px;
 }
 .btn:hover {	
 	background-color: #125385;

@@ -19,7 +19,7 @@
 						type="text" th:field=*{pesquisaNome} /></label> <label
 						class="input_label">CPF:<input class="input_style"
 						th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} /></label>
-					<label class="input_label">Clientes por tela:<select th:classappend="${#fields.hasErrors('paginas')}?input_error:nda"
+					<label class="label_paginas">Clientes por tela:<select th:classappend="${#fields.hasErrors('paginas')}?input_error:nda"
 						id="paginas" class="input_paginas" th:field="*{paginas}">
 							<option value=5>5</option>
 							<option value=10>10</option>

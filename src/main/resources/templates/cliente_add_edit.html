@@ -1,4 +1,5 @@
 
+
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{template :: layout (~{:: main})}">
 <head>
@@ -6,48 +7,70 @@
 </head>
 <body>
 	<main>
+		<h1 th:if="${cliente.id == null}">Cadastro de Clientes</h1>
+		<h1 th:unless="${cliente.id == null}">Edição de Clientes</h1>
+		<hr>
 		<form class="add_edit_form" th:object="${cliente}"
 			th:action="@{/sigec/cliente/salvar}" method="POST">
 
-			<label class="add_edit_label">Id: </label>			
-			<input type="text"	class="add_edit_input_id" th:field="*{id}" readonly="readonly">
-			
-			
-			<label class="add_edit_label">Nome: </label> 			
-			<div class="form_field">
-				<input type="text" class="add_edit_input" th:classappend="${#fields.hasErrors('nome')}?input_error:nda" th:field="*{nome}"> 
-				<p class="error"th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>			
+			<div class="addcliente_form_itens">
+				<label>Id: </label> <input class="input_id" type="text"
+					th:field="*{id}" readonly="readonly">
+			</div>
+
+
+			<div class="addcliente_form_itens">
+				<label>Nome: </label> <input type="text"
+					th:classappend="${#fields.hasErrors('nome')}?input_error:nda"
+					th:field="*{nome}">
+								<p class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}"></p>
+			</div>
+			<div class="container_2_items">
+				<div class="addcliente_form_itens">
+					<label>CPF: </label> <input type="text" th:oninput="mascara(this)"
+						th:classappend="${#fields.hasErrors('cpf')}?input_error:nda"
+						th:field="*{cpf}">
+											<p class="error" th:if="${#fields.hasErrors('cpf')}"
+												th:errors="*{cpf}"></p>
+
+				</div>
+				<div class="addcliente_form_itens">
+					<label>RG: </label> <input type="text"
+						th:classappend="${#fields.hasErrors('rg')}?input_error:nda"
+						maxlength="15" th:field="*{rg}">
+										<p class="error" th:if="${#fields.hasErrors('rg')}"
+											th:errors="*{rg}"></p>
+
+				</div>
+			</div>
+			<div class="container_2_items">
+				<div class="addcliente_form_itens">
+								<label>Data de Nascimento: </label> <input type="date"
+									th:field="*{dataNascimento}">
+								<p class="error" th:if="${#fields.hasErrors('dataNascimento')}"
+									th:errors="*{dataNascimento}"></p>
+				
+							</div>
+							<div class="addcliente_form_itens">
+								<label for="selecao" class="add_edit_label" th:text="${campo_raca}"></label>
+								<select id="selecao" class="add_edit_input" th:field="*{raca}">
+									<option th:each="race : ${racas}" th:value="${race}"
+										th:text="${race}"></option>
+								</select>
+							</div>
+			</div>
+
+
+			<div class="addcliente_form_itens">
+				<label>E-mail: </label> <input type="text"
+					th:classappend="${#fields.hasErrors('email')}?input_error:nda"
+					th:field="*{email}">
+				<p class="error" th:if="${#fields.hasErrors('email')}"
+					th:errors="*{email}"></p>
 			</div>
 			
-			<label class="add_edit_label">CPF: </label> 
-			<div class="form_field">
-				<input type="text"	th:oninput="mascara(this)" class="add_edit_input" th:classappend="${#fields.hasErrors('cpf')}?input_error:nda" th:field="*{cpf}">
-				<p class="error"th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></p>			
-			</div>
 			
-			<label class="add_edit_label">Data de Nascimento: </label> 
-			<div class="form_field">
-				<input type="date"	class="add_edit_input" th:field="*{dataNascimento}">
-				<p class="error" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></p>			
-			</div>
-			
-			<label class="add_edit_label">RG: </label> 
-			<div class="form_field">
-				<input type="text"	class="add_edit_input" th:classappend="${#fields.hasErrors('rg')}?input_error:nda" maxlength="15" th:field="*{rg}"> 
-				<p class="error" th:if="${#fields.hasErrors('rg')}" th:errors="*{rg}"></p>			
-			</div>
-			
-			
-			<label class="add_edit_label">E-mail: </label> 
-			<div class="form_field">
-				<input type="text"	class="add_edit_input" th:classappend="${#fields.hasErrors('email')}?input_error:nda" th:field="*{email}">  
-				<p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>			
-			</div>
-			
-			<label for="selecao" class="add_edit_label" th:text="${campo_raca}"></label>
-			<select id="selecao" class="add_edit_input" th:field="*{raca}">
-				<option th:each="race : ${racas}" th:value="${race}" th:text="${race}"></option>
-			</select>
 			<div class="container_botoes">
 				<input class="add_edit_btn" type="submit" value="Salvar"> <a
 					class="add_edit_btn_voltar" th:href="@{/sigec/clientes}">Voltar</a>
