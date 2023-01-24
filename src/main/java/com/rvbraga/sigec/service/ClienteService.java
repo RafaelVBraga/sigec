@@ -1,6 +1,7 @@
 package com.rvbraga.sigec.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,6 +44,10 @@ public class ClienteService {
 	
 	public Cliente findByCpf(String Cpf) {
 		return clienteRepository.findByCpf(Cpf);
+	}
+
+	public Cliente findById(UUID id) {		
+		return clienteRepository.findById(id).get();
 	}
 	
 	 

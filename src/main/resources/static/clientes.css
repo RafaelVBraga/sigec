@@ -44,6 +44,25 @@ main {
 	width: 100%;
 }
 
+.cliente_form_itens {
+	width:95%;
+	margin: 0 auto;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+}
+.cliente_form_itens .input_id {
+	width:50%;
+	
+}
+
+.cliente_form_itens label, input, select {
+	margin-right: 5px;
+	width: 100%;
+	height: 40px;
+	border-radius: 5px;
+}
+
 .input_label {
 	margin: 5px;
 	font-size: 15px;
@@ -81,14 +100,12 @@ main {
 }
 
 .add_button {
+	display: flex;
 	margin:5px;
 	border: 1px solid #125385;
-	border-radius : 25px; 	
-	height:35px;
-	width:100px;
-	color: white;
-	text-decoration: none;	
-	text-align: center;	
+	border-radius : 5px; 	
+	height:35px;	
+	width:120px;		
 	transition:0.3s;	
 }
 .add_button a {
@@ -97,6 +114,8 @@ main {
 	text-align: center;
 	line-height:35px;	
 	height:50px;	
+	margin: 0 auto;
+	
 }
 .add_button:hover{
 	background-color: rgb(0,150,9);
@@ -146,25 +165,33 @@ table thead th{
 	padding: 0;
 	color: white;
 }
-table tbody tr:nth-child(even){
-	background-color: #f2f2f2;
+table tbody tr:nth-child(even){	
 	color: #0000cc;
 	}
-	table tr:nth-child(odd){	
+	table tr:nth-child(odd){
+	background-color: #f2f2f2;	
 	color: #0000cc;
 	}
 .tabela_acoes{
 	display:flex;
 	flex-direction: row;	
 }
+
 .tabela_acoes a:nth-child(n){
 	margin:15px;	
 }
+	
 .setas{
 	background-color:#125385;
 	margin: 10px;
 	padding: 10px;
 	color:white;	
+}
+.acao_vermelha{
+	color: red;
+}
+.acao_amarela{
+	color: green;
 }
 .visible{
 	visibility: visible;

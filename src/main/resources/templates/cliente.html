@@ -1,3 +1,4 @@
+
 <html xmlns:th="www.thymeleaf.org"
 	th:replace="~{template :: layout (~{:: main})}">
 
@@ -15,20 +16,31 @@
 			<div class="teste">
 				<form class="formulario" th:object="${pesquisa}"
 					th:action="@{/sigec/clientes/pesquisa}" method="POST">
-					<label class="input_label">Nome:<input class="input_style"
-						type="text" th:field=*{pesquisaNome} /></label> <label
-						class="input_label">CPF:<input class="input_style"
-						th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} /></label>
-					<label class="label_paginas">Clientes por tela:<select th:classappend="${#fields.hasErrors('paginas')}?input_error:nda"
-						id="paginas" class="input_paginas" th:field="*{paginas}">
+					<div class="addcliente_form_itens">
+						<label>Nome: </label> <input type="text" th:field=*{pesquisaNome} />
+					</div>
+					<div class="cliente_form_itens">
+						<label>CPF:</label><input th:oninput="mascara(this)" type="text"
+							th:field=*{pesquisaCpf} />
+					</div>
+					<div class="cliente_form_itens">
+						<label>Clientes por tela:</label><select
+							th:classappend="${#fields.hasErrors('paginas')}?input_error:nda"
+							id="paginas" th:field="*{paginas}">
 							<option value=5>5</option>
 							<option value=10>10</option>
 							<option value=20>20</option>
-					</select> </label> 
-					 <input class="btn" type="submit" value="Pesquisar">
-					<div class="add_button">
+						</select>
+					</div>
+					<div class="cliente_form_itens">
+						<label></label> <input class="btn" type="submit" value="Pesquisar">
+					</div>
+					<div class="cliente_form_itens">
+					<label></label><div class="add_button">
 						<a th:href="@{/sigec/cliente/adicionar}">Adicionar</a>
 					</div>
+					</div>
+
 
 				</form>
 				<!-- 				<div class="tooltip add_button "> -->
@@ -60,10 +72,10 @@
 						<td th:text="${cliente.email}">email</td>
 						<td>
 							<div class="tabela_acoes">
-								<a th:href="@{/cliente/{id}(id =*{id})}"><i
-									class="fa-regular fa-pen-to-square"> </i></a> <a
+								<a th:href="@{/sigec/cliente/{id}(id =*{id})}"><i
+									class="fa-regular fa-pen-to-square acao_amarela"> </i></a> <a
 									th:href="@{/cliente/delete/{id}(id =*{id})}"><i
-									class="fa-solid fa-trash"></i></a>
+									class="fa-solid fa-trash acao_vermelha"></i></a>
 							</div>
 						</td>
 					<tr>
