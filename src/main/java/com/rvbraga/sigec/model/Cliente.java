@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -32,6 +33,7 @@ public class Cliente implements Serializable{
 	private UUID id;
 	@NotBlank
 	private String nome;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 	private String genero;
 	private String raca;
@@ -41,6 +43,7 @@ public class Cliente implements Serializable{
 	private String rg;
 	@Email@NotBlank
 	private String email;
+	
 	private LocalDate dataCadastro;
 	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.rvbraga.sigec.model.Cliente;
 
@@ -23,6 +24,7 @@ public class ClienteDto implements Serializable{
 	private UUID id;
 	@NotBlank
 	private String nome;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
 	private String genero;
 	private String raca;
@@ -33,11 +35,15 @@ public class ClienteDto implements Serializable{
 	@Email@NotBlank
 	private String email;
 	
+	public ClienteDto() {
+		
+	}
+	
 	public ClienteDto(Cliente cliente){
 		this.id = cliente.getId();
 		this.nome = cliente.getNome();
 		this.cpf = cliente.getCpf();
-		this.dataNascimento = cliente.getDataCadastro();
+		this.dataNascimento = cliente.getDataNascimento();
 		this.genero = cliente.getGenero();
 		this.rg = cliente.getRg();
 		this.raca = cliente.getRaca();

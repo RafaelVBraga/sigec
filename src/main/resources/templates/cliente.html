@@ -2,13 +2,13 @@
 <html xmlns:th="www.thymeleaf.org"
 	th:replace="~{template :: layout (~{:: main})}">
 
-<body>
+<body onshow="updateMessage()">
 	<main>
 		<p class=" mensagem mensagem_erro"
-			th:if="${#strings.isEmpty(mensagem_erro)}" th:text="${mensagem_erro}">Mensagem
+			th:unless="${#strings.isEmpty(mensagem_erro)}" th:text="${mensagem_erro}">Mensagem
 			de erro</p>
 		<p class=" mensagem mensagem_sucesso"
-			th:if="${#strings.isEmpty(mensagem_sucesso)}"
+			th:unless="${#strings.isEmpty(mensagem_sucesso)}"
 			th:text="${mensagem_sucesso}">Mensagem de sucesso!</p>
 		<div class="page_clientes">
 			<h1>Clientes</h1>
@@ -72,9 +72,9 @@
 						<td th:text="${cliente.email}">email</td>
 						<td>
 							<div class="tabela_acoes">
-								<a th:href="@{/sigec/cliente/{id}(id =*{id})}"><i
+								<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}"><i
 									class="fa-regular fa-pen-to-square acao_amarela"> </i></a> <a
-									th:href="@{/cliente/delete/{id}(id =*{id})}"><i
+									th:href="@{/sigec/cliente/deletar(id =${cliente.id})}"><i
 									class="fa-solid fa-trash acao_vermelha"></i></a>
 							</div>
 						</td>

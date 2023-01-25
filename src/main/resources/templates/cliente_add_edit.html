@@ -7,11 +7,11 @@
 </head>
 <body>
 	<main>
-		<h1 th:if="${cliente.id == null}">Cadastro de Clientes</h1>
-		<h1 th:unless="${cliente.id == null}">Edição de Clientes</h1>
+		<h1 th:text="${titulo_pagina}">Cadastro de Clientes</h1>
+		
 		<hr>
 		<form class="add_edit_form" th:object="${cliente}"
-			th:action="@{/sigec/cliente/salvar}" method="POST">
+			th:action="${cliente.id}==null?@{/sigec/cliente/salvar}:@{/sigec/cliente/editar}" method="POST">
 
 			<div class="addcliente_form_itens">
 				<label>Id: </label> <input class="input_id" type="text"
@@ -72,8 +72,8 @@
 			
 			
 			<div class="container_botoes">
-				<input class="add_edit_btn" type="submit" value="Salvar"> <a
-					class="add_edit_btn_voltar" th:href="@{/sigec/clientes}">Voltar</a>
+				<input class="add_edit_btn" type="submit" value="Salvar"> 				
+				<a class="add_edit_btn_voltar" th:href="@{/sigec/clientes}">Voltar</a>
 			</div>
 		</form>
 	</main>

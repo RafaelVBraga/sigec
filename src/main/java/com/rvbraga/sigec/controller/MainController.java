@@ -43,7 +43,7 @@ public class MainController {
 	@GetMapping("/clientes")
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "5") int size) { 
-		 
+		System.out.println("Controller:clientes");
 		System.out.println("page/size:" + page +"/"+size );
 		PesquisaDto pesquisa = new PesquisaDto();
 		pesquisa.setPaginas(size);
@@ -78,6 +78,7 @@ public class MainController {
 	@PostMapping("/clientes/pesquisa")
 	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisa") PesquisaDto pesquisa,  Errors errors,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		System.out.println("Controller:pesquisaPost");
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		if (errors.hasErrors()) { 
 			model.addAttribute("texto_pagina", "Página ");
@@ -136,7 +137,9 @@ public class MainController {
 
 	@GetMapping("/cliente/adicionar")
 	public String adicionarCliente(Model model) {
+		System.out.println("Controller:adicionarCliente");
 		Cliente cliente = new Cliente();
+		model.addAttribute("titulo_pagina", "Cadastro de clientes");
 		model.addAttribute("campo_raca", "Raça:");
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("cliente", cliente);
@@ -145,9 +148,11 @@ public class MainController {
 
 	@PostMapping("/cliente/salvar") 
 	public String salvarCliente(Model model, @Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
+		System.out.println("Controller:salvarCliente");
 		System.out.println(cliente.toString()); 
 		cliente.setDataCadastro(LocalDate.now());
 		if (errors.hasErrors()) { 
+			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			model.addAttribute("campo_raca", "Raça:");
 			model.addAttribute("racas", utilidades.getRacas());
 			model.addAttribute("cliente", cliente); 
@@ -156,22 +161,53 @@ public class MainController {
 	    }
 		try {
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
+			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			model.addAttribute("mensagem_sucesso", "Cliente " + cliente_salvo.getId() + " salvo!");
 		} catch (Exception e) {
+			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			model.addAttribute("cliente", cliente);
 			model.addAttribute("mensagem_erro", "Erro ao salvar cliente: " + e);
 			return "cliente_add_edit.html";
 		}
-		return cliente(model,1,3);
+		return cliente(model,1,5);
 	}
 	 
-	@GetMapping("/cliente/{id}")
-	public String editarCliente(Model model, @PathVariable("id") UUID id) {
+	@GetMapping("/cliente/editar")  
+	public String editarCliente(Model model, @ModelAttribute("id") UUID id) {
+		System.out.println("Controller:editar");
 		ClienteDto cliente = new ClienteDto(clienteService.findById(id));
+		System.out.println("ClienteDto:"+cliente);
+		model.addAttribute("titulo_pagina", "Edição de clientes");
 		model.addAttribute("cliente",cliente);
 		model.addAttribute("campo_raca", "Raça:");
 		model.addAttribute("racas", utilidades.getRacas());
 		return "cliente_add_edit.html";
+		
+	}
+	@PostMapping("/cliente/editar")
+	public String salvarEdicao(Model model, @Validated ClienteDto cliente, Errors errors, RedirectAttributes attributes) {
+		
+		System.out.println("Controller:salvarEdição");
+		if (errors.hasErrors()) { 
+			model.addAttribute("titulo_pagina", "Cadastro de clientes");
+			model.addAttribute("campo_raca", "Raça:");
+			model.addAttribute("racas", utilidades.getRacas());
+			model.addAttribute("cliente", cliente); 
+			model.addAttribute("erros", errors);
+	        return "cliente_add_edit.html"; 
+	    }
+		clienteService.saveCliente(clienteService.clienteDto2Cliente(cliente));
+		model.addAttribute("mensagem_sucesso", "Cliente " + cliente.getId() + " editado!");
+		
+		return cliente(model,1,5);
+	}
+	
+	@GetMapping("/cliente/deletar")
+	public String deletarCliente(Model model, @ModelAttribute("id") UUID id) {
+		System.out.println("Controller:deletarCliente");
+		clienteService.deleteCliente(id);
+		model.addAttribute("mensagem_sucesso", "Cliente deletado!");
+		return cliente(model,1,5);
 		
 	}
 }
