@@ -15,13 +15,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rvbraga.sigec.dto.ClienteDto;
+import com.rvbraga.sigec.dto.MensagemDto;
 import com.rvbraga.sigec.dto.PesquisaDto;
 import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.service.ClienteService;
@@ -67,8 +67,12 @@ public class MainController {
 			model.addAttribute("mensagem_tabela", clientes.isEmpty() ? "Dados indisponíveis" : "");
 
 		} catch (Exception e) {
-			model.addAttribute("mensagem_tabela", e.getMessage());
-			model.addAttribute("mensagem_erro", e.getMessage());
+			MensagemDto mensagem = new MensagemDto();
+			mensagem.setMensagem(e.getMessage());
+			mensagem.setStatus("Falha");
+			model.addAttribute("feedback",mensagem);
+			
+			
 			return "home.html";
 
 		}
@@ -83,6 +87,10 @@ public class MainController {
 		if (errors.hasErrors()) { 
 			model.addAttribute("texto_pagina", "Página ");
 			model.addAttribute("lista_clientes", clientes);
+			MensagemDto mensagem = new MensagemDto();
+			mensagem.setMensagem("Corrija os campos assinalados!");
+			mensagem.setStatus("AVISO");
+			model.addAttribute("feedback",mensagem);
 	        return "cliente_add_edit.html"; 
 	    }
 		model.addAttribute("texto_pagina", "Página ");
@@ -104,7 +112,10 @@ public class MainController {
 
 			} catch (Exception e) {
 				model.addAttribute("mensagem_tabela", e.getMessage());
-				model.addAttribute("mensagem_erro", e);
+				MensagemDto mensagem = new MensagemDto();
+				mensagem.setMensagem(e.getMessage());
+				mensagem.setStatus("FALHA");
+				model.addAttribute("feedback",mensagem);
 			}
 		
 		if (!pesquisa.getPesquisaCpf().isBlank()) {
@@ -112,7 +123,7 @@ public class MainController {
 				clientes.add(clienteService.findByCpf(pesquisa.getPesquisaCpf()));
 				model.addAttribute("lista_clientes", clientes);
 			}catch(Exception e) {
-				model.addAttribute("mensagem_erro", e);
+				
 			}
 		}
 		if(pesquisa.getPesquisaCpf().isBlank()&&pesquisa.getPesquisaNome().isBlank()) {
@@ -157,16 +168,29 @@ public class MainController {
 			model.addAttribute("racas", utilidades.getRacas());
 			model.addAttribute("cliente", cliente); 
 			model.addAttribute("erros", errors);
+			
+			MensagemDto mensagem = new MensagemDto();
+			mensagem.setMensagem("Corrija os campos assinalados");
+			mensagem.setStatus("AVISO");
+			model.addAttribute("feedback",mensagem);
+			
 	        return "cliente_add_edit.html"; 
 	    }
 		try {
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
-			model.addAttribute("mensagem_sucesso", "Cliente " + cliente_salvo.getId() + " salvo!");
+			MensagemDto mensagem = new MensagemDto();
+			mensagem.setMensagem("Cliente " + cliente_salvo.getId() + " salvo!");
+			mensagem.setStatus("SUCESSO");
+			model.addAttribute("feedback",mensagem);
+			//model.addAttribute("mensagem_sucesso", "Cliente " + cliente_salvo.getId() + " salvo!");
 		} catch (Exception e) {
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			model.addAttribute("cliente", cliente);
-			model.addAttribute("mensagem_erro", "Erro ao salvar cliente: " + e);
+			MensagemDto mensagem = new MensagemDto();
+			mensagem.setMensagem(e.getMessage());
+			mensagem.setStatus("FALHA");
+			model.addAttribute("feedback",mensagem);
 			return "cliente_add_edit.html";
 		}
 		return cliente(model,1,5);
@@ -196,8 +220,11 @@ public class MainController {
 			model.addAttribute("erros", errors);
 	        return "cliente_add_edit.html"; 
 	    }
-		clienteService.saveCliente(clienteService.clienteDto2Cliente(cliente));
-		model.addAttribute("mensagem_sucesso", "Cliente " + cliente.getId() + " editado!");
+		Cliente cliente_editado = clienteService.saveCliente(clienteService.clienteDto2Cliente(cliente));
+		MensagemDto mensagem = new MensagemDto();
+		mensagem.setMensagem("Cliente " + cliente_editado.getId() + " salvo!");
+		mensagem.setStatus("SUCESSO");
+		model.addAttribute("feedback",mensagem);
 		
 		return cliente(model,1,5);
 	}
@@ -206,7 +233,10 @@ public class MainController {
 	public String deletarCliente(Model model, @ModelAttribute("id") UUID id) {
 		System.out.println("Controller:deletarCliente");
 		clienteService.deleteCliente(id);
-		model.addAttribute("mensagem_sucesso", "Cliente deletado!");
+		MensagemDto mensagem = new MensagemDto();
+		mensagem.setMensagem("Cliente deletado!");
+		mensagem.setStatus("SUCESSO");
+		model.addAttribute("feedback",mensagem);
 		return cliente(model,1,5);
 		
 	}

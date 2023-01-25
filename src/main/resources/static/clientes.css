@@ -8,15 +8,23 @@ main {
 }
 .mensagem{
 	position: relative;
+	display: flex;
+	flex-direction:row;
+	justify-content:space-between;
+	height: 60px;
+	
 }
 .mensagem_sucesso{
 	background-color: green;
 	color: white;
 }
-.mensagem_erro{	
+.mensagem_falha{	
 	background-color: red;
-	color: white;
-	
+	color: white;	
+}
+.mensagem_aviso{
+	background-color: orange;
+	color:black;
 }
 
 .page_clientes {

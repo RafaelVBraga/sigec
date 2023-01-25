@@ -2,14 +2,17 @@
 <html xmlns:th="www.thymeleaf.org"
 	th:replace="~{template :: layout (~{:: main})}">
 
-<body onshow="updateMessage()">
+<body>
 	<main>
-		<p class=" mensagem mensagem_erro"
-			th:unless="${#strings.isEmpty(mensagem_erro)}" th:text="${mensagem_erro}">Mensagem
-			de erro</p>
-		<p class=" mensagem mensagem_sucesso"
-			th:unless="${#strings.isEmpty(mensagem_sucesso)}"
-			th:text="${mensagem_sucesso}">Mensagem de sucesso!</p>
+		<div th:if="${feedback}!=null" th:classappend ="${#strings.equals(feedback.status,'FALHA')}?'mensagem_falha':'mensagem_sucesso'" id="cnt_msg" class="mensagem">
+			<p id="msg_err"  
+				th:text="${feedback.mensagem}">				
+			</p>
+			<p id="msg_scs" 				
+				th:text="${feedback.mensagem}">				
+			</p>
+			<button onclick="updateMessage()"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+		</div>
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
@@ -36,9 +39,10 @@
 						<label></label> <input class="btn" type="submit" value="Pesquisar">
 					</div>
 					<div class="cliente_form_itens">
-					<label></label><div class="add_button">
-						<a th:href="@{/sigec/cliente/adicionar}">Adicionar</a>
-					</div>
+						<label></label>
+						<div class="add_button">
+							<a th:href="@{/sigec/cliente/adicionar}">Adicionar</a>
+						</div>
 					</div>
 
 
@@ -51,7 +55,7 @@
 		</div>
 		<hr>
 		<div class="tabela" th:if="${lista_clientes.size() > 0}">
-			<table>
+			<table th:onload="updateMessage()">
 				<thead>
 					<tr>
 						<!-- 						<th>Id</th> -->
@@ -105,6 +109,7 @@
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">
 			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
 		</div>
+
 
 	</main>
 </body>
