@@ -1,10 +1,7 @@
-function updateMessage(){
+function updateMessage(feedback){
+	$("#cnt_msg").fadeOut(1000);	
 	
-	console.log('Teste javascript');
-	var mensagem= document.getElementById("cnt_msg");	
-	console.log('Início');
-	mensagem.style.visibility="hidden";		
-	console.log('Fim contagem');		
+	var isHidden = $( "#cnt_msg" ).is( ":hidden" );
+	if(isHidden) $("#")
 	
-		
 }

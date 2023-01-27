@@ -222,7 +222,7 @@ public class MainController {
 	    }
 		Cliente cliente_editado = clienteService.saveCliente(clienteService.clienteDto2Cliente(cliente));
 		MensagemDto mensagem = new MensagemDto();
-		mensagem.setMensagem("Cliente " + cliente_editado.getId() + " salvo!");
+		mensagem.setMensagem("Cliente " + cliente_editado.getId() + " editado!");
 		mensagem.setStatus("SUCESSO");
 		model.addAttribute("feedback",mensagem);
 		

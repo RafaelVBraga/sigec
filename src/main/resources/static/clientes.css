@@ -6,62 +6,83 @@ main {
 	width: 100%;
 	height: 100%;
 }
-.mensagem{
+
+.mensagem {
 	position: relative;
 	display: flex;
-	flex-direction:row;
-	justify-content:space-between;
+	flex-direction: row;
+	justify-content: space-between;
 	height: 60px;
-	
+	text-align: center;
 }
-.mensagem_sucesso{
+.feedback{
+	background-color: #125385;
+	color: white;
+}
+.mensagem p{
+	margin: 0 auto;
+	padding: 15px;
+}
+.mensagem button {
+	width:25px;
+	height: 25px;
+	margin-right: 0;
 	background-color: green;
 	color: white;
 }
-.mensagem_falha{	
-	background-color: red;
-	color: white;	
+
+.mensagem_sucesso {
+	background-color: green;
+	color: white;
 }
-.mensagem_aviso{
+
+.mensagem_falha {
+	background-color: red;
+	color: white;
+}
+
+.mensagem_aviso {
 	background-color: orange;
-	color:black;
+	color: black;
 }
 
 .page_clientes {
 	margin: 20px;
 	padding: 10px;
 }
-.teste{
-	display:inline;
+
+.teste {
+	display: inline;
 }
-.input_paginas{
-	
-	margin:5px 5px;
+
+.input_paginas {
+	margin: 5px 5px;
 	width: 50px;
 	height: 40px;
 	border-radius: 15px;
 }
-.label_paginas{
+
+.label_paginas {
 	margin: 5px;
-	margin-top:2px;
+	margin-top: 2px;
 }
 
 .formulario {
-	display:flex;
+	display: flex;
 	margin-top: 20px;;
 	width: 100%;
 }
 
 .cliente_form_itens {
-	width:95%;
+	width: 95%;
 	margin: 0 auto;
 	padding: 5px;
 	display: flex;
 	flex-direction: column;
 }
+
 .cliente_form_itens .input_id {
-	width:50%;
-	
+	width: 50%;
 }
 
 .cliente_form_itens label, input, select {
@@ -91,11 +112,12 @@ main {
 	border-radius: 5px;
 	background-color: white;
 	color: #125385;
-	transition:0.5s;
+	transition: 0.5s;
 	height: 35px;
-	width:120px;
+	width: 120px;
 }
-.btn:hover {	
+
+.btn:hover {
 	background-color: #125385;
 	color: white;
 }
@@ -109,26 +131,28 @@ main {
 
 .add_button {
 	display: flex;
-	margin:5px;
+	margin: 5px;
 	border: 1px solid #125385;
-	border-radius : 5px; 	
-	height:35px;	
-	width:120px;		
-	transition:0.3s;	
+	border-radius: 5px;
+	height: 35px;
+	width: 120px;
+	transition: 0.3s;
 }
+
 .add_button a {
-	color: rgb(0,150,0);
-	text-decoration: none;	
+	color: rgb(0, 150, 0);
+	text-decoration: none;
 	text-align: center;
-	line-height:35px;	
-	height:50px;	
+	line-height: 35px;
+	height: 50px;
 	margin: 0 auto;
-	
 }
-.add_button:hover{
-	background-color: rgb(0,150,9);
+
+.add_button:hover {
+	background-color: rgb(0, 150, 9);
 }
-.add_button:hover a{
+
+.add_button:hover a {
 	color: white;
 }
 
@@ -143,70 +167,79 @@ main {
 	color: #125385;
 	text-align: center;
 	padding: 5px 0;
-	border:1px solid #125385;
+	border: 1px solid #125385;
 	border-radius: 6px;
-	bottom:100%;
-	left:50%;
-	margin-left:-60px;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
 	/* Position the tooltip text - see examples below! */
 	position: absolute;
 	z-index: 1;
-	
 }
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
-  visibility: visible;
-  transition:0.5s;
- 
+	visibility: visible;
+	transition: 0.5s;
 }
-.navegacao{
-	display:flex;
+
+.navegacao {
+	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 }
-.navegacao a:nth-child{
+
+.navegacao a:nth-child {
 	margin: 5px auto;
 }
-table thead th{
+
+table thead th {
 	background-color: #125385;
-	margin:0;
+	margin: 0;
 	padding: 0;
 	color: white;
 }
-table tbody tr:nth-child(even){	
+
+table tbody tr:nth-child(even) {
 	color: #0000cc;
-	}
-	table tr:nth-child(odd){
-	background-color: #f2f2f2;	
-	color: #0000cc;
-	}
-.tabela_acoes{
-	display:flex;
-	flex-direction: row;	
 }
 
-.tabela_acoes a:nth-child(n){
-	margin:15px;	
+table tr:nth-child(odd) {
+	background-color: #f2f2f2;
+	color: #0000cc;
 }
-	
-.setas{
-	background-color:#125385;
+
+.tabela_acoes {
+	display: flex;
+	flex-direction: row;
+}
+
+.tabela_acoes a:nth-child(n) {
+	margin: 15px;
+}
+
+.setas {
+	background-color: #125385;
 	margin: 10px;
 	padding: 10px;
-	color:white;	
+	color: white;
 }
-.acao_vermelha{
+
+.acao_vermelha {
 	color: red;
 }
-.acao_amarela{
+
+.acao_amarela {
 	color: green;
 }
-.visible{
+
+.visible {
 	visibility: visible;
 }
-.hidden{
+
+.hidden {
 	visibility: hidden;
 }
-.page_counter{
+
+.page_counter {
 	margin: 15px;
 }

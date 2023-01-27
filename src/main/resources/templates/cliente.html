@@ -3,16 +3,17 @@
 	th:replace="~{template :: layout (~{:: main})}">
 
 <body>
-	<main>
-		<div th:if="${feedback}!=null" th:classappend ="${#strings.equals(feedback.status,'FALHA')}?'mensagem_falha':'mensagem_sucesso'" id="cnt_msg" class="mensagem">
+	<main >
+		<div class="mensagem"  th:if="${feedback}!=null" th:classappend ="${#strings.equals(feedback.status,'FALHA')}?'mensagem_falha':'mensagem_sucesso'" id="cnt_msg">
 			<p id="msg_err"  
-				th:text="${feedback.mensagem}">				
+				th:if="${#strings.equals(feedback.status,'FALHA')}"th:text="${feedback.mensagem}">				
 			</p>
 			<p id="msg_scs" 				
-				th:text="${feedback.mensagem}">				
+				th:if="${#strings.equals(feedback.status,'SUCESSO')}" th:text="${feedback.mensagem}">				
 			</p>
-			<button onclick="updateMessage()"><i class="fa-sharp fa-solid fa-xmark"></i></button>
-		</div>
+			<button class="btn_msg" th:data-name="${feedback}" onclick="updateMessage(this.getAttribute('data-name'))"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+		</div >
+		
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
@@ -55,7 +56,7 @@
 		</div>
 		<hr>
 		<div class="tabela" th:if="${lista_clientes.size() > 0}">
-			<table th:onload="updateMessage()">
+			<table >
 				<thead>
 					<tr>
 						<!-- 						<th>Id</th> -->
@@ -109,7 +110,10 @@
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">
 			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
 		</div>
-
+		<script>
+				$(document).ready(updateMessage());
+	
+		</script>
 
 	</main>
 </body>
