@@ -11,10 +11,10 @@
 				th:text="${feedback.mensagem}"></p>
 			<p id="msg_scs" th:if="${#strings.equals(feedback.status,'SUCESSO')}"
 				th:text="${feedback.mensagem}"></p>
-			<button class="btn_msg" th:data-name="${feedback}"
-				onclick="updateMessage(this.getAttribute('data-name'))">
-				<i class="fa-sharp fa-solid fa-xmark"></i>
-			</button>
+<!-- 			<button class="btn_msg" th:data-name="${feedback}" -->
+<!-- 				onclick="updateMessage(this.getAttribute('data-name'))"> -->
+<!-- 				<i class="fa-sharp fa-solid fa-xmark"></i> -->
+<!-- 			</button> -->
 		</div>
 
 		<div class="page_clientes">

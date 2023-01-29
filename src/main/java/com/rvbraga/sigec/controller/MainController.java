@@ -235,7 +235,7 @@ public class MainController {
 		clienteService.deleteCliente(id);
 		MensagemDto mensagem = new MensagemDto();
 		mensagem.setMensagem("Cliente deletado!");
-		mensagem.setStatus("SUCESSO");
+		mensagem.setStatus("FALHA");
 		model.addAttribute("feedback",mensagem);
 		return cliente(model,1,5);
 		
