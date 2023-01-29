@@ -60,7 +60,8 @@ public class ClienteService {
 		cliente.get().setRaca(cDto.getRaca());
 		cliente.get().setGenero(cDto.getGenero());
 		cliente.get().setDataNascimento(cDto.getDataNascimento());
-		cliente.get().setEmail(cDto.getEmail());
+		cliente.get().setTelefone(cDto.getTelefone());
+		
 		
 		
 		return cliente.get();

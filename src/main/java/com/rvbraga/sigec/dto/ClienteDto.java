@@ -34,6 +34,7 @@ public class ClienteDto implements Serializable{
 	private String rg;
 	@Email@NotBlank
 	private String email;
+	private String telefone;
 	
 	public ClienteDto() {
 		
@@ -48,6 +49,7 @@ public class ClienteDto implements Serializable{
 		this.rg = cliente.getRg();
 		this.raca = cliente.getRaca();
 		this.email = cliente.getEmail();
+		this.telefone = cliente.getTelefone();
 	}
 
 }

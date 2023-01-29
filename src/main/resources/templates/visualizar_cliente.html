@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{template :: layout (~{:: main})}">
+
+<body>
+	<main>
+			<h2 th:text = "${cliente.nome}"></h2>			
+			<hr>
+			<label th:text="${#strings.concat('Telefone: ',cliente.telefone)}"></label>
+			<label th:text="${#strings.concat('RG: ',cliente.rg)}"></label>
+			<label th:text="${#strings.concat('CPF: ',cliente.cpf)}"></label>
+			<label th:text="${#strings.concat('E-mail: ',cliente.email)}"></label>
+			<label th:text="${#strings.concat('Raça: ',cliente.raca)}"></label>
+			<label th:text="${#strings.concat('Gênero: ',cliente.genero)}"></label>
+	
+		<a th:href="@{/sigec/clientes}">voltar</a>
+		<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a>
+	</main>
+</body>
+</html>

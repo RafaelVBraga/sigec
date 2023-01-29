@@ -43,6 +43,7 @@ public class Cliente implements Serializable{
 	private String rg;
 	@Email@NotBlank
 	private String email;
+	private String telefone;
 	
 	private LocalDate dataCadastro;
 	@OneToOne(mappedBy = "cliente")

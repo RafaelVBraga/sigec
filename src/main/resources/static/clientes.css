@@ -157,10 +157,12 @@ main {
 }
 
 .tooltip {
-	border-bottom: 1px solid black;
+	position:relative;
+	
 }
 
 .tooltip .tooltiptext {
+	position:absolute;
 	visibility: hidden;
 	width: 120px;
 	background-color: white;
@@ -197,20 +199,24 @@ table thead th {
 	margin: 0;
 	padding: 0;
 	color: white;
+	
 }
 
 table tbody tr:nth-child(even) {
 	color: #0000cc;
+	text-align: center;
 }
 
 table tr:nth-child(odd) {
 	background-color: #f2f2f2;
 	color: #0000cc;
+	text-align: center;
 }
 
 .tabela_acoes {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 }
 
 .tabela_acoes a:nth-child(n) {
@@ -229,7 +235,13 @@ table tr:nth-child(odd) {
 }
 
 .acao_amarela {
+	color: yellow;
+}
+.acao_verde{
 	color: green;
+}
+.acao_azul{
+	color:blue;
 }
 
 .visible {

@@ -3,17 +3,20 @@
 	th:replace="~{template :: layout (~{:: main})}">
 
 <body>
-	<main >
-		<div class="mensagem"  th:if="${feedback}!=null" th:classappend ="${#strings.equals(feedback.status,'FALHA')}?'mensagem_falha':'mensagem_sucesso'" id="cnt_msg">
-			<p id="msg_err"  
-				th:if="${#strings.equals(feedback.status,'FALHA')}"th:text="${feedback.mensagem}">				
-			</p>
-			<p id="msg_scs" 				
-				th:if="${#strings.equals(feedback.status,'SUCESSO')}" th:text="${feedback.mensagem}">				
-			</p>
-			<button class="btn_msg" th:data-name="${feedback}" onclick="updateMessage(this.getAttribute('data-name'))"><i class="fa-sharp fa-solid fa-xmark"></i></button>
-		</div >
-		
+	<main>
+		<div class="mensagem" th:if="${feedback}!=null"
+			th:classappend="${#strings.equals(feedback.status,'FALHA')}?'mensagem_falha':'mensagem_sucesso'"
+			id="cnt_msg">
+			<p id="msg_err" th:if="${#strings.equals(feedback.status,'FALHA')}"
+				th:text="${feedback.mensagem}"></p>
+			<p id="msg_scs" th:if="${#strings.equals(feedback.status,'SUCESSO')}"
+				th:text="${feedback.mensagem}"></p>
+			<button class="btn_msg" th:data-name="${feedback}"
+				onclick="updateMessage(this.getAttribute('data-name'))">
+				<i class="fa-sharp fa-solid fa-xmark"></i>
+			</button>
+		</div>
+
 		<div class="page_clientes">
 			<h1>Clientes</h1>
 			<hr>
@@ -56,11 +59,12 @@
 		</div>
 		<hr>
 		<div class="tabela" th:if="${lista_clientes.size() > 0}">
-			<table >
+			<table>
 				<thead>
 					<tr>
 						<!-- 						<th>Id</th> -->
 						<th>Nome</th>
+						<th>Telefone</th>
 						<th>CPF</th>
 						<th>RG</th>
 						<th>Email</th>
@@ -72,15 +76,18 @@
 						th:style="${iStat.odd}? 'font-weight:bold;'">
 						<!-- 						<td th:text="${cliente.id}">id</td> -->
 						<td th:text="${cliente.nome}">nome</td>
+						<td th:text="${cliente.telefone}">telefone</td>
 						<td th:text="${cliente.cpf}">cpf</td>
 						<td th:text="${cliente.rg}">rg</td>
 						<td th:text="${cliente.email}">email</td>
 						<td>
 							<div class="tabela_acoes">
-								<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}"><i
-									class="fa-regular fa-pen-to-square acao_amarela"> </i></a> <a
-									th:href="@{/sigec/cliente/deletar(id =${cliente.id})}"><i
+								<a class="acao_azul tooltip" th:href="@{/sigec/cliente/visualizar(id =${cliente.id})}"><span class="tooltiptext">Visualizar</span><i class="fa-regular fa-eye"></i></a>
+								<a class="tooltip" th:href="@{/sigec/cliente/editar(id =${cliente.id})}"><span class="tooltiptext">Editar</span><i
+									class="fa-regular fa-pen-to-square acao_verde"> </i></a> 
+								<a class="tooltip"	th:href="@{/sigec/cliente/deletar(id =${cliente.id})}"><span class="tooltiptext">Deletar</span><i
 									class="fa-solid fa-trash acao_vermelha"></i></a>
+
 							</div>
 						</td>
 					<tr>

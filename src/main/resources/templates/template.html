@@ -16,28 +16,24 @@
   <link th:href="@{/fontawesome/css/solid.css}" rel="stylesheet">
 	<title>Sistema de Gestão de Clientes - Página Inicial</title>
 </head>
-<body>
-	<div class="page">
-		<div class="header">
-			<p>Usuario logado </i>
-			<p />
-		</div>
-		<div class="center_container">
-			<div class="sidebar">
+<body>	
+		<div class="navbar">
+		<div class="logo"> <p>Logomarca</p></div>
 				<ul>
+					<li><a th:href="@{/sigec/home}">Início</a></li>
 					<li><a th:href="@{/sigec/dashboard}">Dashboard</a></li>
 					<li><a th:href="@{/sigec/clientes}">Clientes</a></li>
 					<li><a th:href="@{/sigec/processos}">Processos</a></li>
 					<li><a th:href="@{/sigec/pagamentos}">Pagamentos</a></li>
 				</ul>
-			</div>
-
+			</div>		
+		<div class="center_container">
 			<div class="desktop" th:replace="${conteudo}">
 				<h2>desktop</h2>
 			</div>
 		</div>
 		<div class="footer">@rvbraga soluções em T.I</div>
-	</div>
+	
 	
 </body>
 </html>

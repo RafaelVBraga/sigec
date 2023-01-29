@@ -240,4 +240,12 @@ public class MainController {
 		return cliente(model,1,5);
 		
 	}
+	@GetMapping("/cliente/visualizar")
+	public String visualizarCliente(Model model, @ModelAttribute("id") UUID id) {
+		System.out.println("Controller:visualizarCliente");
+		Cliente cliente = clienteService.findById(id);		
+		model.addAttribute("cliente",cliente);
+		return "visualizar_cliente.html";
+		
+	}
 }
