@@ -259,3 +259,23 @@ table tr:nth-child(odd) {
 .page_counter {
 	margin: 15px;
 }
+.dados_cliente{	
+	margin:25px;
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.container_visualizacao{
+	margin: 10px;
+	border: 1px solid #125385;
+	border-radius:5px;
+	display:flex;
+	flex-direction: row;
+}
+
+.dados_cliente h4{
+	margin:10px;	
+}
+.dados_cliente p{
+	margin: 20px;
+}

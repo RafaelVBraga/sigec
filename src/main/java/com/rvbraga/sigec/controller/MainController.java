@@ -1,8 +1,6 @@
 package com.rvbraga.sigec.controller;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +24,9 @@ import com.rvbraga.sigec.dto.ClienteDto;
 import com.rvbraga.sigec.dto.MensagemDto;
 import com.rvbraga.sigec.dto.PesquisaDto;
 import com.rvbraga.sigec.model.Cliente;
+import com.rvbraga.sigec.model.Processo;
 import com.rvbraga.sigec.service.ClienteService;
+import com.rvbraga.sigec.service.ProcessoService;
 import com.rvbraga.sigec.utils.Utilidades;
 
 @Controller
@@ -34,6 +34,8 @@ import com.rvbraga.sigec.utils.Utilidades;
 public class MainController {
 	@Autowired
 	private ClienteService clienteService;
+	@Autowired
+	private ProcessoService processoService;
 
 	private Utilidades utilidades = new Utilidades();
 
@@ -151,9 +153,9 @@ public class MainController {
 	public String adicionarCliente(Model model) {
 		
 		Cliente cliente = new Cliente();
-		model.addAttribute("titulo_pagina", "Cadastro de clientes");
-		model.addAttribute("campo_raca", "Raça:");
+		model.addAttribute("titulo_pagina", "Cadastro de clientes");		
 		model.addAttribute("racas", utilidades.getRacas());
+		model.addAttribute("generos", utilidades.getGeneros());
 		model.addAttribute("cliente", cliente);
 		return "cliente_add_edit.html";  
 	}  
@@ -163,9 +165,9 @@ public class MainController {
 		
 		cliente.setDataCadastro(LocalDate.now());
 		if (errors.hasErrors()) { 
-			model.addAttribute("titulo_pagina", "Cadastro de clientes");
-			model.addAttribute("campo_raca", "Raça:");
+			model.addAttribute("titulo_pagina", "Cadastro de clientes");			
 			model.addAttribute("racas", utilidades.getRacas());
+			model.addAttribute("generos", utilidades.getGeneros());
 			model.addAttribute("cliente", cliente); 
 			model.addAttribute("erros", errors);
 			
@@ -202,8 +204,8 @@ public class MainController {
 		ClienteDto cliente = new ClienteDto(clienteService.findById(id));
 		
 		model.addAttribute("titulo_pagina", "Edição de clientes");
-		model.addAttribute("cliente",cliente);
-		model.addAttribute("campo_raca", "Raça:");
+		model.addAttribute("cliente",cliente);		
+		model.addAttribute("generos", utilidades.getGeneros());
 		model.addAttribute("racas", utilidades.getRacas());
 		return "cliente_add_edit.html";
 		
@@ -240,14 +242,16 @@ public class MainController {
 		return cliente(model,1,5);
 		
 	}
-	@GetMapping("/cliente/visualizar")
+	@GetMapping("/cliente/visualizar") 
 	public String visualizarCliente(Model model, @ModelAttribute("id") UUID id) {
 		
 		Cliente cliente = clienteService.findById(id);		
+		List<Processo> processos = processoService.findProcessosByCliente(cliente);
 		model.addAttribute("cliente",cliente);
+		model.addAttribute("processos",processos);
 		return "visualizar_cliente.html";
 		
-	}
+	} 
 	
 	@GetMapping("/resumo")
 	public String resumo() {
@@ -256,7 +260,7 @@ public class MainController {
 	
 	@GetMapping("/pagamentos")
 	public String pagamentos() {
-		return "pagamentos.html";  
+		return "pagamentos.html";   
 	}
 	
 	@GetMapping("/processos")
@@ -278,6 +282,7 @@ public class MainController {
 		model.addAttribute("mes_atual",dataAtual.getMonth().getValue());
 		model.addAttribute("ano_atual", dataAtual.getYear()); 
 		model.addAttribute("hoje",hoje.getDayOfMonth());
+		model.addAttribute("texto_reunioes","Reuniões");
 		
 		return "agenda.html";  
 	}

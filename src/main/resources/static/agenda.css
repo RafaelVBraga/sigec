@@ -23,20 +23,30 @@
 	align-items: center;
 }  
 .container_dia{
-	display:flex;
+	
 	border: 1px solid #125385;
 	border-radius: 10px;
 	height:80px;
-	justify-content: center;
-	align-items: center;
+	
 }  
 .dia{
-	display:flex;
-	justify-content: space-between;	
-	flex-direction: column;
+	
 }
-.dia.header{
-	margin-top:0;
+
+.header{
+	
+	width: 20%;
+	position: relative;
+	left:5px;
+	top:1px;
+	
+}
+.data{
+	width: 20%;
+	
+	position: relative;
+	left:20px;
+	top:40px;
 }
 .dom{
 	grid-column:1/2;
@@ -58,4 +68,31 @@
 }
 .sab{
 	grid-column:7/8;
+}
+.tooltip {
+	position:relative;
+	
+}
+
+.tooltip .tooltiptext {
+	position:absolute;
+	visibility: hidden;
+	width: 120px;
+	background-color: white;
+	color: #125385;
+	text-align: center;
+	padding: 5px 0;
+	border: 1px solid #125385;
+	border-radius: 6px;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+	/* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-index: 1;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	transition: 0.5s;
 }

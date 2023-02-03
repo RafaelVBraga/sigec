@@ -9,6 +9,7 @@ import java.util.List;
 public class Utilidades {
 	private String racas[] = {"Não informado","Preto","Indígena","Pardo","Amarelo","Branco"};
 	private String dias_semana[] = {"Domingo","Segunda", "Terca","Quarta","Quinta", "Sexta", "Sabado"};
+	private String generos[] = {"Masculino","Feminino","Transgênero"};
 	
 	public Utilidades() {
 		
@@ -16,6 +17,10 @@ public class Utilidades {
 	
 	public List<String>getRacas() {
 		return Arrays.asList(racas);
+	}
+	
+	public List<String>getGeneros(){
+		return Arrays.asList(generos);
 	}
 	
 	public List<String> getDiasSemana() {

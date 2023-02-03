@@ -13,7 +13,8 @@
 	<name>SistemaDeGestaoDeClientes</name>
 	<description>Sistema para gestão de clientes</description>
 	<properties>
-		<java.version>19</java.version>		
+		<java.version>19</java.version>	
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
 	</properties>
 	<dependencies>
 		<dependency>

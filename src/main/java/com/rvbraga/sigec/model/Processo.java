@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -30,7 +31,7 @@ public class Processo implements Serializable{/**
 	private String descricao;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cliente cliente;
-	@ManyToOne
+	@OneToOne
 	private Pagamento pagamento;
 
 }

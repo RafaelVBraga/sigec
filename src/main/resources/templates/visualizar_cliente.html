@@ -4,17 +4,43 @@
 
 <body>
 	<main>
-			<h2 th:text = "${cliente.nome}"></h2>			
-			<hr>
-			<label th:text="${#strings.concat('Telefone: ',cliente.telefone)}"></label>
-			<label th:text="${#strings.concat('RG: ',cliente.rg)}"></label>
-			<label th:text="${#strings.concat('CPF: ',cliente.cpf)}"></label>
-			<label th:text="${#strings.concat('E-mail: ',cliente.email)}"></label>
-			<label th:text="${#strings.concat('Raça: ',cliente.raca)}"></label>
-			<label th:text="${#strings.concat('Gênero: ',cliente.genero)}"></label>
-	
-		<a th:href="@{/sigec/clientes}">voltar</a>
-		<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a>
+		<h2 th:text="${cliente.nome}"></h2>
+		<hr>
+		<div class="dados_cliente">
+			<div class="container_visualizacao">
+				<h4>RG:</h4>
+				<p th:text="${cliente.rg}"></p>
+				<h4>CPF:</h4>
+				<p th:text="${cliente.cpf}"></p>
+			</div>
+			<div class="container_visualizacao">
+				<h4>Telefone:</h4>
+				<p th:text="${cliente.telefone}"></p>
+				<h4>E-mail:</h4>
+				<p th:text="${cliente.email}"></p>
+			</div>
+			<div class="container_visualizacao">
+				<h4>RaÃ§a:</h4>
+				<p th:text="${cliente.raca}"></p>
+				<h4>GÃªnero:</h4>
+				<p th:text="${cliente.genero}"></p>
+			</div>
+			<div class="container_visualizacao">
+				<h4>Processos:</h4>
+				<div th:if="${processos.isEmpty()}">
+					<p>NÃ£o existem processos para o cliente</p>
+				</div>
+				<div th:each="processo, iStat : ${processos}">
+					<p th:text="${processo.numero}"></p>
+					<p th:text="${processo.tipo}"></p>
+					<p th:text="${processo.dataCadastro}"></p>
+					<p th:text="${processo.status}"></p>
+					<p th:text="${processo.dataConclusao}"></p>
+				</div>
+			</div>
+		</div>
+		<a th:href="@{/sigec/clientes}">voltar</a> <a
+			th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a>
 	</main>
 </body>
 </html>

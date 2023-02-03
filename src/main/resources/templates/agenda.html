@@ -20,44 +20,51 @@
 		<div th:switch="${primeiro_dia_semana_do_mes}" class="dias_semana">				
 				<div th:case="Domingo" th:class="container_dia" th:classappend="dom">
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 	
 					</div>							
 				</div>
 				<div th:case="Segunda" th:class="container_dia" th:classappend="seg">					
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Terca" th:class="container_dia" th:classappend="ter">					
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Quarta" th:class="container_dia" th:classappend="qua">					
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 	
 					</div>	
 				</div>
 				<div th:case="Quinta" th:class="container_dia" th:classappend="qui">					
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Sexta" th:class="container_dia" th:classappend="sex">					
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Sabado" th:class="container_dia" th:classappend="sab">					
 					<div class="dia" >							
-						<p th:text="1"></p> 	
+						<div class="header"><p th:text="1"></p> </div>						
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 	
 					</div>	
 				</div>
 				
 				<div class="container_dia" th:each="dia, iStats : ${mes}">
 					<div class="dia" >	
 						<div class="header"><p th:text="${dia}"></p> </div>						
-						<div class="data"><i class="fa-regular fa-handshake"></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
 						
 					</div>	
 				</div>		
