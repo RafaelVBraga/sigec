@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{template :: layout (~{:: main})}">
+
+<body>
+	<main>
+		<h2>Agenda</h2>
+		<hr>
+		<div class="navegacao_agenda">
+				<a th:href="@{/sigec/agenda(ano_atual=${mes_atual==1}?${ano_atual-1}:${ano_atual},mes_atual=${mes_atual==1}?12:${mes_atual-1})}">Anterior</a>
+				<h3 th:text="${nome_mes+'/'+ano_atual}"></h3>
+				<a th:href="@{/sigec/agenda(ano_atual=${mes_atual==12}?${ano_atual+1}:${ano_atual},mes_atual=${mes_atual==12}?1:${mes_atual+1})}">Seguinte</a>
+		</div>
+		<div class="dias_semana">
+			<div class="container_dia_head"
+				th:each="dia, iStats : ${dias_semana}">
+				<p class="dia" th:text="${dia}">dia</p>
+			</div>
+		</div>
+		<div th:switch="${primeiro_dia_semana_do_mes}" class="dias_semana">				
+				<div th:case="Domingo" th:class="container_dia" th:classappend="dom">
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>							
+				</div>
+				<div th:case="Segunda" th:class="container_dia" th:classappend="seg">					
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>	
+				</div>
+				<div th:case="Terca" th:class="container_dia" th:classappend="ter">					
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>	
+				</div>
+				<div th:case="Quarta" th:class="container_dia" th:classappend="qua">					
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>	
+				</div>
+				<div th:case="Quinta" th:class="container_dia" th:classappend="qui">					
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>	
+				</div>
+				<div th:case="Sexta" th:class="container_dia" th:classappend="sex">					
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>	
+				</div>
+				<div th:case="Sabado" th:class="container_dia" th:classappend="sab">					
+					<div class="dia" >							
+						<p th:text="1"></p> 	
+					</div>	
+				</div>
+				
+				<div class="container_dia" th:each="dia, iStats : ${mes}">
+					<div class="dia" >	
+						<div class="header"><p th:text="${dia}"></p> </div>						
+						<div class="data"><i class="fa-regular fa-handshake"></i></div>
+						
+					</div>	
+				</div>		
+		</div>
+
+
+	</main>
+</body>
+</html>

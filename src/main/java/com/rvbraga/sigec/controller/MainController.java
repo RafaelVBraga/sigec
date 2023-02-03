@@ -1,6 +1,8 @@
 package com.rvbraga.sigec.controller;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -43,8 +45,7 @@ public class MainController {
 	@GetMapping("/clientes")
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "5") int size) { 
-		System.out.println("Controller:clientes");
-		System.out.println("page/size:" + page +"/"+size );
+		
 		PesquisaDto pesquisa = new PesquisaDto();
 		pesquisa.setPaginas(size);
 		model.addAttribute("pesquisa", pesquisa); 
@@ -82,7 +83,7 @@ public class MainController {
 	@PostMapping("/clientes/pesquisa")
 	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisa") PesquisaDto pesquisa,  Errors errors,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-		System.out.println("Controller:pesquisaPost");
+		
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		if (errors.hasErrors()) { 
 			model.addAttribute("texto_pagina", "Página ");
@@ -148,7 +149,7 @@ public class MainController {
 
 	@GetMapping("/cliente/adicionar")
 	public String adicionarCliente(Model model) {
-		System.out.println("Controller:adicionarCliente");
+		
 		Cliente cliente = new Cliente();
 		model.addAttribute("titulo_pagina", "Cadastro de clientes");
 		model.addAttribute("campo_raca", "Raça:");
@@ -159,8 +160,7 @@ public class MainController {
 
 	@PostMapping("/cliente/salvar") 
 	public String salvarCliente(Model model, @Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
-		System.out.println("Controller:salvarCliente");
-		System.out.println(cliente.toString()); 
+		
 		cliente.setDataCadastro(LocalDate.now());
 		if (errors.hasErrors()) { 
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
@@ -198,9 +198,9 @@ public class MainController {
 	 
 	@GetMapping("/cliente/editar")  
 	public String editarCliente(Model model, @ModelAttribute("id") UUID id) {
-		System.out.println("Controller:editar");
+		
 		ClienteDto cliente = new ClienteDto(clienteService.findById(id));
-		System.out.println("ClienteDto:"+cliente);
+		
 		model.addAttribute("titulo_pagina", "Edição de clientes");
 		model.addAttribute("cliente",cliente);
 		model.addAttribute("campo_raca", "Raça:");
@@ -211,7 +211,7 @@ public class MainController {
 	@PostMapping("/cliente/editar")
 	public String salvarEdicao(Model model, @Validated ClienteDto cliente, Errors errors, RedirectAttributes attributes) {
 		
-		System.out.println("Controller:salvarEdição");
+		
 		if (errors.hasErrors()) { 
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			model.addAttribute("campo_raca", "Raça:");
@@ -231,7 +231,7 @@ public class MainController {
 	
 	@GetMapping("/cliente/deletar")
 	public String deletarCliente(Model model, @ModelAttribute("id") UUID id) {
-		System.out.println("Controller:deletarCliente");
+		
 		clienteService.deleteCliente(id);
 		MensagemDto mensagem = new MensagemDto();
 		mensagem.setMensagem("Cliente deletado!");
@@ -242,10 +242,45 @@ public class MainController {
 	}
 	@GetMapping("/cliente/visualizar")
 	public String visualizarCliente(Model model, @ModelAttribute("id") UUID id) {
-		System.out.println("Controller:visualizarCliente");
+		
 		Cliente cliente = clienteService.findById(id);		
 		model.addAttribute("cliente",cliente);
 		return "visualizar_cliente.html";
 		
 	}
+	
+	@GetMapping("/resumo")
+	public String resumo() {
+		return "resumo.html";  
+	}
+	
+	@GetMapping("/pagamentos")
+	public String pagamentos() {
+		return "pagamentos.html";  
+	}
+	
+	@GetMapping("/processos")
+	public String processos() {
+		return "processos.html";   
+	}
+	
+	@GetMapping("/agenda")
+	public String agenda(Model model,@RequestParam(defaultValue="2023")int ano_atual,@RequestParam(defaultValue="1")int mes_atual ) {
+		//ZoneId brazilZoneId = ZoneId.of("America/Sao_Paulo");		
+		LocalDate dataAtual = LocalDate.of(ano_atual, mes_atual, 1);
+		LocalDate hoje = LocalDate.now();
+		LocalDate primeiroDia = LocalDate.of(dataAtual.getYear(), dataAtual.getMonth(), 1);
+		ArrayList<Integer> mes = utilidades.fillMonth(primeiroDia.getMonth().length(primeiroDia.isLeapYear()));				
+		model.addAttribute("nome_mes", utilidades.translateMonth(dataAtual.getMonth()));
+		model.addAttribute("mes", mes);
+		model.addAttribute("dias_semana", utilidades.getDiasSemana());
+		model.addAttribute("primeiro_dia_semana_do_mes",utilidades.translateDayOfWeek(primeiroDia.getDayOfWeek()));
+		model.addAttribute("mes_atual",dataAtual.getMonth().getValue());
+		model.addAttribute("ano_atual", dataAtual.getYear()); 
+		model.addAttribute("hoje",hoje.getDayOfMonth());
+		
+		return "agenda.html";  
+	}
+	
+
 }
