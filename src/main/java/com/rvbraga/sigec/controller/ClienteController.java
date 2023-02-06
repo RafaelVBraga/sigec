@@ -31,7 +31,7 @@ import com.rvbraga.sigec.utils.Utilidades;
 
 @Controller
 @RequestMapping("/sigec")
-public class MainController {
+public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	@Autowired
@@ -263,15 +263,13 @@ public class MainController {
 		return "pagamentos.html";   
 	}
 	
-	@GetMapping("/processos")
-	public String processos() {
-		return "processos.html";   
-	}
+	
 	
 	@GetMapping("/agenda")
-	public String agenda(Model model,@RequestParam(defaultValue="2023")int ano_atual,@RequestParam(defaultValue="1")int mes_atual ) {
+	public String agenda(Model model,@RequestParam(defaultValue="0")int ano_atual,@RequestParam(defaultValue="0")int mes_atual ) {
 		//ZoneId brazilZoneId = ZoneId.of("America/Sao_Paulo");		
-		LocalDate dataAtual = LocalDate.of(ano_atual, mes_atual, 1);
+		
+		LocalDate dataAtual = (ano_atual==0||mes_atual==0)?LocalDate.now(): LocalDate.of(ano_atual, mes_atual, 1);
 		LocalDate hoje = LocalDate.now();
 		LocalDate primeiroDia = LocalDate.of(dataAtual.getYear(), dataAtual.getMonth(), 1);
 		ArrayList<Integer> mes = utilidades.fillMonth(primeiroDia.getMonth().length(primeiroDia.isLeapYear()));				

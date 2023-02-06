@@ -39,8 +39,14 @@
 				</div>
 			</div>
 		</div>
-		<a th:href="@{/sigec/clientes}">voltar</a> <a
-			th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a>
+		<div class="navegacao">
+			<div class="back_button">
+				<a th:href="@{/sigec/clientes}">voltar</a>
+			</div>
+			<div class="add_button">
+				<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a>
+			</div>
+		</div>
 	</main>
 </body>
 </html>

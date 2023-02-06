@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rvbraga.sigec.model.Cliente;
@@ -36,6 +38,14 @@ public class ProcessoService {
 		return processoRepo.findByCliente(cliente);
 	}
 	
+	public List<Processo> findAll(){
+		return processoRepo.findAll();
+	}
+	
+	public Page<Processo> findAll(Pageable page){
+		return processoRepo.findAll(page);
+		
+	}
 	public List<Processo> findProcessosByCliente(Cliente cliente){
 		return processoRepo.findByCliente(cliente);
 	}

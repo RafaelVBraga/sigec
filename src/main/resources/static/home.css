@@ -24,6 +24,7 @@
 	flex-direction: row;
 	width: auto;
 	height: 85vh;
+	
 }
 
 .navbar {
@@ -80,6 +81,7 @@
 	width: auto;
 	justify-content: center;
 	margin: auto;
+	margin-bottom: 5px;
 	box-sizing: border-box;
 }
 

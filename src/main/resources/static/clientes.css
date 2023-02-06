@@ -109,9 +109,9 @@ main {
 }
 
 .btn {
-	margin: 5px;
+	margin: 0 15px;
 	font-size: 15px;
-	padding: 1px 15px;
+	padding:  5px;
 	border-radius: 5px;
 	background-color: white;
 	color: #125385;
@@ -134,13 +134,14 @@ main {
 
 .add_button {
 	display: flex;
-	margin: 5px;
+	margin: 0 5px;
 	border: 1px solid #125385;
 	border-radius: 5px;
 	height: 35px;
 	width: 120px;
 	transition: 0.3s;
 }
+
 
 .add_button a {
 	color: rgb(0, 150, 0);
@@ -158,6 +159,33 @@ main {
 .add_button:hover a {
 	color: white;
 }
+
+.back_button{
+	display: flex;
+	margin: 5px;
+	border: 1px solid #125385;
+	border-radius: 5px;
+	height: 35px;
+	width: 120px;
+	transition: 0.3s;
+}
+.back_button a {
+	color: #125385;
+	text-decoration: none;
+	text-align: center;
+	line-height: 35px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+.back_button:hover {
+	background-color: #125385;
+}
+
+.back_button:hover a {
+	color: white;
+}
+
 
 .tooltip {
 	position:relative;

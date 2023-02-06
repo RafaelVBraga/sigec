@@ -1,0 +1,9 @@
+SELECT 
+    EXTRACT(DAY FROM data_nascimento) as birth_day, 
+    COUNT(*) as total_births
+FROM 
+    cliente
+WHERE 	
+	EXTRACT(MONTH FROM data_nascimento) = 8
+GROUP BY 
+    EXTRACT(DAY FROM data_nascimento)

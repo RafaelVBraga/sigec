@@ -7,57 +7,80 @@
 		<h2>Agenda</h2>
 		<hr>
 		<div class="navegacao_agenda">
+				<div class="b_button">
 				<a th:href="@{/sigec/agenda(ano_atual=${mes_atual==1}?${ano_atual-1}:${ano_atual},mes_atual=${mes_atual==1}?12:${mes_atual-1})}">Anterior</a>
+				</div>
+				<div>
 				<h3 th:text="${nome_mes+'/'+ano_atual}"></h3>
+				</div>
+				<div class="b_button">
 				<a th:href="@{/sigec/agenda(ano_atual=${mes_atual==12}?${ano_atual+1}:${ano_atual},mes_atual=${mes_atual==12}?1:${mes_atual+1})}">Seguinte</a>
+			</div>
 		</div>
-		<div class="dias_semana">
+		<div class="dias_semana_header">
 			<div class="container_dia_head"
 				th:each="dia, iStats : ${dias_semana}">
 				<p class="dia" th:text="${dia}">dia</p>
 			</div>
 		</div>
+		<!--  <i class="fa-regular fa-gavel"></i>-->
+		<!--  <i class="fa-regular fa-gavel"></i> -->
+		<!--  <i class="fa-regular fa-cake-candles"></i> -->
 		<div th:switch="${primeiro_dia_semana_do_mes}" class="dias_semana">				
 				<div th:case="Domingo" th:class="container_dia" th:classappend="dom">
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
-						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 	
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>	
 					</div>							
 				</div>
 				<div th:case="Segunda" th:class="container_dia" th:classappend="seg">					
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
 						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Terca" th:class="container_dia" th:classappend="ter">					
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
 						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Quarta" th:class="container_dia" th:classappend="qua">					
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
-						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 	
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>	
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Quinta" th:class="container_dia" th:classappend="qui">					
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
 						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Sexta" th:class="container_dia" th:classappend="sex">					
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
 						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>
 					</div>	
 				</div>
 				<div th:case="Sabado" th:class="container_dia" th:classappend="sab">					
 					<div class="dia" >							
 						<div class="header"><p th:text="1"></p> </div>						
-						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 	
+						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div> 
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>	
 					</div>	
 				</div>
 				
@@ -65,6 +88,8 @@
 					<div class="dia" >	
 						<div class="header"><p th:text="${dia}"></p> </div>						
 						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
+						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>
 						
 					</div>	
 				</div>		
