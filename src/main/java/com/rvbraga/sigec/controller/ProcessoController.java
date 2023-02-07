@@ -9,12 +9,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.rvbraga.sigec.dto.MensagemDto;
+import com.rvbraga.sigec.dto.PesquisaDto;
 import com.rvbraga.sigec.dto.PesquisaProcessoDto;
+import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.model.Processo;
 import com.rvbraga.sigec.service.ProcessoService;
 
@@ -68,6 +74,72 @@ public class ProcessoController {
 
 		}
 		return "processos.html";
+	}
+	@PostMapping("/processos/pesquisa")
+	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisaProcesso") PesquisaProcessoDto pesquisa,  Errors errors,
+			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+		
+		List<Processo> processos = new ArrayList<Processo>();
+		if (errors.hasErrors()) { 
+			
+			model.addAttribute("lista_processos", processos);
+			MensagemDto mensagem = new MensagemDto();
+			mensagem.setMensagem("Corrija os campos assinalados!");
+			mensagem.setStatus("AVISO");
+			model.addAttribute("feedback",mensagem);
+	        return "processo_add_edit.html"; 
+	    }
+		
+		if (!pesquisa.getPesquisaCliente().isBlank())
+			try {
+
+				Pageable paging = PageRequest.of(page - 1, pesquisa.getPaginas());
+
+				Page<Processo> pageProcesso;
+
+				pageProcesso = processoService.findByNome(pesquisa.getPesquisaCliente(), paging);
+				clientes = pageClientes.getContent();
+				model.addAttribute("lista_clientes", clientes);
+				model.addAttribute("currentPage", pageClientes.getNumber() + 1);
+				model.addAttribute("totalItems", pageClientes.getTotalElements());
+				model.addAttribute("totalPages", pageClientes.getTotalPages());
+				model.addAttribute("pageSize", size);
+				model.addAttribute("mensagem_tabela", clientes.isEmpty() ? "Dados indisponíveis" : "");
+
+			} catch (Exception e) {
+				model.addAttribute("mensagem_tabela", e.getMessage());
+				MensagemDto mensagem = new MensagemDto();
+				mensagem.setMensagem(e.getMessage());
+				mensagem.setStatus("FALHA");
+				model.addAttribute("feedback",mensagem);
+			}
+		
+		if (!pesquisa.getPesquisaCpf().isBlank()) {
+			try {
+				clientes.add(clienteService.findByCpf(pesquisa.getPesquisaCpf()));
+				model.addAttribute("lista_clientes", clientes);
+			}catch(Exception e) {
+				
+			}
+		}
+		if(pesquisa.getPesquisaCpf().isBlank()&&pesquisa.getPesquisaNome().isBlank()) {
+			Pageable paging = PageRequest.of(page - 1, pesquisa.getPaginas());
+
+			Page<Cliente> pageClientes;
+			pageClientes = clienteService.findAll(paging);
+
+			clientes = pageClientes.getContent(); 		
+
+			model.addAttribute("lista_clientes", clientes);
+			model.addAttribute("currentPage", pageClientes.getNumber()+1);
+			model.addAttribute("totalItems", pageClientes.getTotalElements());
+			model.addAttribute("totalPages", pageClientes.getTotalPages());
+			model.addAttribute("pageSize", size);
+			model.addAttribute("mensagem_tabela", clientes.isEmpty() ? "Dados indisponíveis" : "");
+			
+		}
+		
+		return "cliente.html";
 	}
  
 

@@ -46,6 +46,9 @@ public class ProcessoService {
 		return processoRepo.findAll(page);
 		
 	}
+	public List<Processo> findProcessosByNomeCliente(String cliente){
+		return processoRepo.findByNomeCliente(cliente);
+	}
 	public List<Processo> findProcessosByCliente(Cliente cliente){
 		return processoRepo.findByCliente(cliente);
 	}

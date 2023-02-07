@@ -17,13 +17,13 @@
 <!-- 			</button> -->
 		</div>
 
-		<div >
+		<div class="page_clientes">
 			<h2>Processos</h2>
 			<hr>
-			<div class="page_clientes">
+			<div class="teste">
 				<form class="formulario" th:object="${pesquisaProcesso}"
 					th:action="@{/sigec/processos/pesquisa}" method="POST">
-					<div >
+					<div class="addcliente_form_itens">
 						<label>Número: </label> <input type="text" th:field=*{pesquisaNumero} />
 					</div>
 					<div class="cliente_form_itens">
@@ -73,7 +73,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="processo, iStat : ${lista_processos}"
-						th:style="${iStat.odd}? 'font-weight:bold;'">
+						th:style="${iStat.odd}?'font-weight:bold;'">
 						
 						<td th:text="${processo.numero}">nome</td>
 						<td th:text="${processo.tipo}">telefone</td>

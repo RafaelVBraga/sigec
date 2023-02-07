@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.rvbraga.sigec.model.Cliente;
@@ -19,4 +21,6 @@ public interface ProcessoRepository extends JpaRepository<Processo, UUID>{
 	List<Processo> findByDataConclusao(LocalDate dataConclusao);
 	Optional<Processo> findById(UUID id);
 	Optional<Processo> findByNumero(String numero);
+	@Query("SELECT * FROM processo p WHERE (SELECT * FROM cliente c WHERE c.nome LIKE %:nome%) )")
+	List<Processo> findByNomeCliente(@Param("nome") String cliente);
 }
