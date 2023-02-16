@@ -24,6 +24,7 @@
 	flex-direction: row;
 	width: auto;
 	height: 85vh;
+	padding-bottom: 15px;
 	
 }
 
@@ -93,6 +94,6 @@
 	height:5vh;
 	width: auto;
 	color: white;
-	padding: 10px;
+	  
 	margin-bottom:0;
 }

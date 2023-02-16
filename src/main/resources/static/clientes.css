@@ -275,6 +275,9 @@ table tr:nth-child(odd) {
 .acao_azul{
 	color:blue;
 }
+.acao_violeta{
+	color:#800080;
+}
 
 .visible {
 	visibility: visible;

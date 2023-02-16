@@ -85,11 +85,12 @@
 								<a class="acao_azul tooltip" th:href="@{/sigec/cliente/visualizar(id =${cliente.id})}"><span class="tooltiptext">Visualizar</span><i class="fa-regular fa-eye"></i></a>
 								<a class="tooltip" th:href="@{/sigec/cliente/editar(id =${cliente.id})}"><span class="tooltiptext">Editar</span><i
 									class="fa-regular fa-pen-to-square acao_verde"> </i></a> 
+								<a class="acao_violeta tooltip" th:href="@{/sigec/cliente/processo(id =${cliente.id})}"><span class="tooltiptext">Adicionar Processo</span><i class="fa-regular fa-scale-balanced"></i></a>
 								<a class="tooltip"	th:href="@{/sigec/cliente/deletar(id =${cliente.id})}"><span class="tooltiptext">Deletar</span><i
 									class="fa-solid fa-trash acao_vermelha"></i></a>
 
 							</div>
-						</td>
+						</td> 
 					<tr>
 				</tbody>
 			</table>
@@ -117,10 +118,7 @@
 		<div class="tabela" th:else="${lista_clientes.size() > 0}">
 			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
 		</div>
-		<script>
-				$(document).ready(updateMessage());
-	
-		</script>
+		
 
 	</main>
 </body>

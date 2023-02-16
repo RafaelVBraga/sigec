@@ -33,10 +33,7 @@ public class ProcessoController {
 	
 	
 	
-	@GetMapping("/processos/cadastrar")
-	public String cadastrar(Model model) { 
-		return "";
-	}
+	
 	
 	@GetMapping("/processos")
 	public String processos(Model model, @RequestParam(defaultValue = "1") int page,
@@ -62,7 +59,7 @@ public class ProcessoController {
 			model.addAttribute("totalPages", pageProcessos.getTotalPages());
 			model.addAttribute("pageSize", size);
 			model.addAttribute("mensagem_tabela", processos.isEmpty() ? "Dados indisponíveis" : "");
-
+ 
 		} catch (Exception e) {
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem(e.getMessage());
@@ -75,10 +72,16 @@ public class ProcessoController {
 		}
 		return "processos.html";
 	}
+	@GetMapping("/processos/cadastrar")
+	public String cadastrar(Model model) { 
+		model.addAttribute("processo", new Processo());
+		model.addAttribute("título_pagina", "Cadastro de Processos");  		
+		return "processo_add_edit.html"; 
+	}
 	@PostMapping("/processos/pesquisa")
 	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisaProcesso") PesquisaProcessoDto pesquisa,  Errors errors,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
-		
+		System.out.println("Iniciando pesquisa...");
 		List<Processo> processos = new ArrayList<Processo>();
 		if (errors.hasErrors()) { 
 			
@@ -97,14 +100,14 @@ public class ProcessoController {
 
 				Page<Processo> pageProcesso;
 
-				pageProcesso = processoService.findByNome(pesquisa.getPesquisaCliente(), paging);
-				clientes = pageClientes.getContent();
-				model.addAttribute("lista_clientes", clientes);
-				model.addAttribute("currentPage", pageClientes.getNumber() + 1);
-				model.addAttribute("totalItems", pageClientes.getTotalElements());
-				model.addAttribute("totalPages", pageClientes.getTotalPages());
+				pageProcesso = processoService.findByNomeCliente(pesquisa.getPesquisaCliente(), paging);
+				processos = pageProcesso.getContent();
+				model.addAttribute("lista_processos", processos);
+				model.addAttribute("currentPage", pageProcesso.getNumber() + 1);
+				model.addAttribute("totalItems", pageProcesso.getTotalElements());
+				model.addAttribute("totalPages", pageProcesso.getTotalPages());
 				model.addAttribute("pageSize", size);
-				model.addAttribute("mensagem_tabela", clientes.isEmpty() ? "Dados indisponíveis" : "");
+				model.addAttribute("mensagem_tabela", processos.isEmpty() ? "Dados indisponíveis para esta pesquisa..." : "");
 
 			} catch (Exception e) {
 				model.addAttribute("mensagem_tabela", e.getMessage());
@@ -114,32 +117,32 @@ public class ProcessoController {
 				model.addAttribute("feedback",mensagem);
 			}
 		
-		if (!pesquisa.getPesquisaCpf().isBlank()) {
+		if (!pesquisa.getPesquisaNumero().isBlank()) {
 			try {
-				clientes.add(clienteService.findByCpf(pesquisa.getPesquisaCpf()));
-				model.addAttribute("lista_clientes", clientes);
+				processos.add(processoService.findByNumero(pesquisa.getPesquisaNumero()));
+				model.addAttribute("lista_processos", processos);
 			}catch(Exception e) {
 				
 			}
 		}
-		if(pesquisa.getPesquisaCpf().isBlank()&&pesquisa.getPesquisaNome().isBlank()) {
+		if(pesquisa.getPesquisaNumero().isBlank()&&pesquisa.getPesquisaCliente().isBlank()) {
 			Pageable paging = PageRequest.of(page - 1, pesquisa.getPaginas());
 
-			Page<Cliente> pageClientes;
-			pageClientes = clienteService.findAll(paging);
+			Page<Processo> pageProcessos;
+			pageProcessos = processoService.findAll(paging);
 
-			clientes = pageClientes.getContent(); 		
+			processos = pageProcessos.getContent(); 		
 
-			model.addAttribute("lista_clientes", clientes);
-			model.addAttribute("currentPage", pageClientes.getNumber()+1);
-			model.addAttribute("totalItems", pageClientes.getTotalElements());
-			model.addAttribute("totalPages", pageClientes.getTotalPages());
+			model.addAttribute("lista_processos", processos);
+			model.addAttribute("currentPage", pageProcessos.getNumber()+1);
+			model.addAttribute("totalItems", pageProcessos.getTotalElements());
+			model.addAttribute("totalPages", pageProcessos.getTotalPages());
 			model.addAttribute("pageSize", size);
-			model.addAttribute("mensagem_tabela", clientes.isEmpty() ? "Dados indisponíveis" : "");
+			model.addAttribute("mensagem_tabela", processos.isEmpty() ? "Dados indisponíveis" : "");
 			
 		}
-		
-		return "cliente.html";
+		System.out.println("Finalizando pesquisa...");
+		return "processos.html";
 	}
  
 

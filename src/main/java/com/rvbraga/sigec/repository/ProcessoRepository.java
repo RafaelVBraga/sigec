@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +22,12 @@ public interface ProcessoRepository extends JpaRepository<Processo, UUID>{
 	List<Processo> findByDataCadastro(LocalDate dataCadastro);
 	List<Processo> findByDataConclusao(LocalDate dataConclusao);
 	Optional<Processo> findById(UUID id);
-	Optional<Processo> findByNumero(String numero);
-	@Query("SELECT * FROM processo p WHERE (SELECT * FROM cliente c WHERE c.nome LIKE %:nome%) )")
-	List<Processo> findByNomeCliente(@Param("nome") String cliente);
+	Processo findByNumero(String numero);
+	@Query(value = "SELECT * FROM processo p WHERE p.cliente IN (SELECT * cliente c WHERE nome LIKE '%:nome%')",
+			countQuery = "SELECT count(*) FROM processo p WHERE p.cliente IN (SELECT * cliente c WHERE nome LIKE '%:nome%')",
+			nativeQuery = true)
+	Page<Processo> findByNomeCliente(@Param("nome") String cliente, Pageable paging);
+	
+	Page<Processo> findByClienteIn(List<Cliente> cliente, Pageable paging);
+	
 }

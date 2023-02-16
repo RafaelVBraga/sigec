@@ -38,7 +38,7 @@
 							<option value=10>10</option>
 							<option value=20>20</option>
 						</select>
-					</div>
+					</div> 
 					<div class="cliente_form_itens">
 						<label></label> <input class="btn" type="submit" value="Pesquisar">
 					</div>
@@ -58,7 +58,11 @@
 			</div>
 		</div>
 		<hr>
-		<div class="tabela" th:if="${lista_processos.size() > 0}">
+		<div class="tabela" th:if="${#arrays.isEmpty(lista_processos)}">
+			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
+		</div>
+		<div class="tabela" th:unless="${#arrays.isEmpty(lista_processos)}">
+			<p th:text="${#strings.concat('Encontrado(s) ',mensagem_tabela, ' registros')}"></p>
 			<table>
 				<thead>
 					<tr>
@@ -114,9 +118,7 @@
 				</a>
 			</div>
 		</div>
-		<div class="tabela" th:else="${lista_processos.size() > 0}">
-			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
-		</div>
+		
 		
 	</main>
 </body>

@@ -46,9 +46,15 @@ public class ProcessoService {
 		return processoRepo.findAll(page);
 		
 	}
-	public List<Processo> findProcessosByNomeCliente(String cliente){
-		return processoRepo.findByNomeCliente(cliente);
+	public Page<Processo> findProcessosByNomeCliente(String cliente, Pageable paging){
+		return processoRepo.findByNomeCliente(cliente, paging);
 	}
+	public Page<Processo> findByNomeCliente(String cliente, Pageable paging){
+		List<Cliente> clientes = clienteService.findByNome(cliente, paging).getContent();
+		return processoRepo.findByClienteIn(clientes, paging);
+	}
+	
+	
 	public List<Processo> findProcessosByCliente(Cliente cliente){
 		return processoRepo.findByCliente(cliente);
 	}
@@ -61,7 +67,7 @@ public class ProcessoService {
 	public Optional<Processo> findById(UUID id){
 		return processoRepo.findById(id);
 	}
-	public Optional<Processo> findByNumero(String numero){
+	public Processo findByNumero(String numero){
 		return processoRepo.findByNumero(numero);
 	}
 	

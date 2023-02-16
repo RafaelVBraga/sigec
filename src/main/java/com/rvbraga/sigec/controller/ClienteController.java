@@ -242,6 +242,18 @@ public class ClienteController {
 		return cliente(model,1,5);
 		
 	}
+	
+	@GetMapping("/cliente/processo")
+	public String processosCliente(Model model, @ModelAttribute("id") UUID id) {
+		
+		clienteService.deleteCliente(id);
+		MensagemDto mensagem = new MensagemDto();
+		mensagem.setMensagem("Cliente deletado!");
+		mensagem.setStatus("FALHA");
+		model.addAttribute("feedback",mensagem);
+		return cliente(model,1,5);
+		
+	}
 	@GetMapping("/cliente/visualizar") 
 	public String visualizarCliente(Model model, @ModelAttribute("id") UUID id) {
 		
@@ -269,8 +281,15 @@ public class ClienteController {
 	public String agenda(Model model,@RequestParam(defaultValue="0")int ano_atual,@RequestParam(defaultValue="0")int mes_atual ) {
 		//ZoneId brazilZoneId = ZoneId.of("America/Sao_Paulo");		
 		
+		int x = 45;
+		
+		String valor = String.valueOf(x);
+		
+		
+		
 		LocalDate dataAtual = (ano_atual==0||mes_atual==0)?LocalDate.now(): LocalDate.of(ano_atual, mes_atual, 1);
 		LocalDate hoje = LocalDate.now();
+		
 		LocalDate primeiroDia = LocalDate.of(dataAtual.getYear(), dataAtual.getMonth(), 1);
 		ArrayList<Integer> mes = utilidades.fillMonth(primeiroDia.getMonth().length(primeiroDia.isLeapYear()));				
 		model.addAttribute("nome_mes", utilidades.translateMonth(dataAtual.getMonth()));
