@@ -15,80 +15,59 @@
 			method="POST">
 
 			<div class="addcliente_form_itens">
-				<label>Id: </label> <input class="input_id" type="text"
-					th:field="*{id}" readonly="readonly">
-			</div>
-
+				<label>Cliente:  </label> <label th:text="${nome_cliente}" ></label>
+			</div> 
+			<input
+					type="text" th:field="*{idCliente}" hidden>
 
 			<div class="addcliente_form_itens">
-				<label>Nome: </label> <input type="text"
-					th:classappend="${#fields.hasErrors('nome')}?input_error:nda"
-					th:field="*{nome}">
-				<p class="error" th:if="${#fields.hasErrors('nome')}"
-					th:errors="*{nome}"></p>
+				<label>Processo: </label> <input type="text"
+					th:classappend="${#fields.hasErrors('numero')}?input_error:nda"
+					th:field="*{numero}">
+				<p class="error" th:if="${#fields.hasErrors('numero')}"
+					th:errors="*{numero}"></p>
 			</div>
+
+<!-- 			<div class="addcliente_form_itens"> -->
+<!-- 				<label>Descrição: </label> <textarea  -->
+<!-- 					th:classappend="${#fields.hasErrors('descricao')}?input_error:nda" -->
+<!-- 					th:field="*{descricao}" rows="15" cols="256"/></textarea> -->
+<!-- 				<p class="error" th:if="${#fields.hasErrors('descricao')}" -->
+<!-- 					th:errors="*{descricao}"></p> -->
+
+<!-- 			</div> -->
+
+
 			<div class="container_2_items">
-				<div class="addcliente_form_itens">
-					<label>CPF: </label> <input type="text" th:oninput="mascara(this)"
-						th:classappend="${#fields.hasErrors('cpf')}?input_error:nda"
-						th:field="*{cpf}">
-					<p class="error" th:if="${#fields.hasErrors('cpf')}"
-						th:errors="*{cpf}"></p>
+<!-- 				<div class="addcliente_form_itens"> -->
+<!-- 					<label>Data Inicial: </label> <input type="date" -->
+<!-- 						th:field="*{dataCadastro}"> -->
+<!-- 					<p class="error" th:if="${#fields.hasErrors('dataCadastro')}" -->
+<!-- 						th:errors="dataCadastro"></p> -->
+<!-- 				</div> -->
 
-				</div>
-				<div class="addcliente_form_itens">
-					<label>RG: </label> <input type="text"
-						th:classappend="${#fields.hasErrors('rg')}?input_error:nda"
-						maxlength="15" th:field="*{rg}">
-					<p class="error" th:if="${#fields.hasErrors('rg')}"
-						th:errors="*{rg}"></p>
+<!-- 				<div class="addcliente_form_itens"> -->
+<!-- 					<label>Data Final: </label> <input type="date" -->
+<!-- 						th:field="*{dataConclusao}"> -->
+<!-- 					<p class="error" th:if="${#fields.hasErrors('dataConclusao')}" -->
+<!-- 						th:errors="dataConclusao"></p> -->
 
-				</div>
-			</div>
-			<div class="container_2_items">
-				<div class="addcliente_form_itens">
-					<label>Data de Nascimento: </label> <input type="date"
-						th:field="*{dataNascimento}">
-					<p class="error" th:if="${#fields.hasErrors('dataNascimento')}"
-						th:errors="*{dataNascimento}"></p>
+<!-- 				</div> -->
 
-				</div>
-				
 				<div class="addcliente_form_itens">
-					<label for="selecao" class="add_edit_label" th:text="Raça"></label>
-					<select id="selecao" class="add_edit_input" th:field="*{raca}">
-						<option th:each="race : ${racas}" th:value="${race}"
-							th:text="${race}"></option>
+					<label for="selecao" class="add_edit_label" th:text="Status"></label>
+					<select id="selecao" class="add_edit_input" th:field="*{status}">
+						<option th:each="status : ${lista_status}" th:value="${status}"
+							th:text="${status}">rr</option>
 					</select>
 				</div>
-				
+
 				<div class="addcliente_form_itens">
-					<label for="selecao" class="add_edit_label" th:text="Gênero"></label>
-					<select id="selecao" class="add_edit_input" th:field="*{genero}">
-						<option th:each="genero : ${generos}" th:value="${genero}"
-							th:text="${genero}"></option>
+					<label for="selecaoTipo" class="add_edit_label" th:text="Tipo"></label>
+					<select id="selecaoTipo" class="add_edit_input" th:field="*{tipo}">
+						<option th:each="tipo : ${lista_tipos}" th:value="${tipo}"
+							th:text="${tipo}"></option>
 					</select>
-				</div>
-			</div>
-
-			<div class="container_2_items">
-			
-				<div class="addcliente_form_itens">
-					<label>Telefone: </label> <input type="text"
-						th:oninput="mascara_telefone(this)"
-						th:onfocus="focus_telefone(this)"
-						th:classappend="${#fields.hasErrors('telefone')}?input_error:nda"
-						th:field="*{telefone}">
-					<p class="error" th:if="${#fields.hasErrors('telefone')}"
-						th:errors="*{telefone}"></p>
-
-				</div>
-				<div class="addcliente_form_itens">
-					<label>E-mail: </label> <input type="text"
-						th:classappend="${#fields.hasErrors('email')}?input_error:nda"
-						th:field="*{email}">
-					<p class="error" th:if="${#fields.hasErrors('email')}"
-						th:errors="*{email}"></p>
 				</div>
 			</div>
 

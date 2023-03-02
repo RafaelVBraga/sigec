@@ -24,11 +24,7 @@ public class Processo implements Serializable{/**
 	private UUID id;
 	private String numero;	
 	private String tipo;
-	private String status;
-	private LocalDate dataCadastro;
-	private LocalDate dataConclusao;
-	private Double valor;
-	private String descricao;
+	private String status;		
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cliente cliente;
 	@OneToOne

@@ -55,5 +55,12 @@ public class Cliente implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Processo> processos;
 	
+	
+	private List<Cliente> representantes;
+	
+	private List<Cliente> herdeiros;
+	
+	
+	
 
 }

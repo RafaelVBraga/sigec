@@ -18,11 +18,10 @@ public class ProcessoDto implements Serializable{
 	private UUID id;
 	private String numero;
 	private String status;
-	private String tipo;
-	private String descricao;
-	private Double valor;
-	private LocalDate dataCadastro;
-	private LocalDate dataConclusao;
+	private String tipo;	
+	
+	
+	
 	
 	
 

@@ -10,6 +10,8 @@ public class Utilidades {
 	private String racas[] = {"Não informado","Preto","Indígena","Pardo","Amarelo","Branco"};
 	private String dias_semana[] = {"Domingo","Segunda", "Terca","Quarta","Quinta", "Sexta", "Sabado"};
 	private String generos[] = {"Masculino","Feminino","Transgênero"};
+	private String tiposProcessos[] = {"Civil", "Penal","Previdenciário","Trabalhista","Tributário"};
+	private String statusProcessos[] = {"Inicial","Recurso Ordinário", "Agrave de Instrumento", "Embargos de declaração", "Contestação","Manifestação sobre Contestação", "Recurso Inominado",};
 	
 	public Utilidades() {
 		
@@ -25,6 +27,13 @@ public class Utilidades {
 	
 	public List<String> getDiasSemana() {
 		return Arrays.asList(dias_semana);
+	}
+	
+	public List<String> getTiposProcessos(){
+		return Arrays.asList(tiposProcessos).stream().sorted().toList();
+	}
+	public List<String> getStatusProcessos() {
+		return Arrays.asList(statusProcessos);
 	}
 	
 	public String translateMonth(Month month) {

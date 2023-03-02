@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.rvbraga.sigec.dto.ClienteDto;
 import com.rvbraga.sigec.dto.MensagemDto;
 import com.rvbraga.sigec.dto.PesquisaDto;
+import com.rvbraga.sigec.dto.ProcessoDto;
 import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.model.Processo;
 import com.rvbraga.sigec.service.ClienteService;
@@ -245,13 +246,16 @@ public class ClienteController {
 	
 	@GetMapping("/cliente/processo")
 	public String processosCliente(Model model, @ModelAttribute("id") UUID id) {
+		ProcessoDto processo = new ProcessoDto();
+		String nomeCliente = clienteService.findById(id).getNome();
+		processo.setIdCliente(id);
+		model.addAttribute("titulo_pagina", "Cadastro de Processo");
+		model.addAttribute("nome_cliente",nomeCliente);
+		model.addAttribute("lista_status", utilidades.getStatusProcessos());
+		model.addAttribute("lista_tipos", utilidades.getTiposProcessos());
+		model.addAttribute("processo", processo);
 		
-		clienteService.deleteCliente(id);
-		MensagemDto mensagem = new MensagemDto();
-		mensagem.setMensagem("Cliente deletado!");
-		mensagem.setStatus("FALHA");
-		model.addAttribute("feedback",mensagem);
-		return cliente(model,1,5);
+		return "processo_add_edit.html";
 		
 	}
 	@GetMapping("/cliente/visualizar") 
@@ -303,6 +307,8 @@ public class ClienteController {
 		
 		return "agenda.html";  
 	}
+	
+	
 	
 
 }
