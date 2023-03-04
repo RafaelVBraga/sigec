@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Utilidades {
 	private String racas[] = {"Não informado","Preto","Indígena","Pardo","Amarelo","Branco"};
 	private String dias_semana[] = {"Domingo","Segunda", "Terca","Quarta","Quinta", "Sexta", "Sabado"};
 	private String generos[] = {"Masculino","Feminino","Transgênero"};
 	private String tiposProcessos[] = {"Civil", "Penal","Previdenciário","Trabalhista","Tributário"};
 	private String statusProcessos[] = {"Inicial","Recurso Ordinário", "Agrave de Instrumento", "Embargos de declaração", "Contestação","Manifestação sobre Contestação", "Recurso Inominado",};
+	
 	
 	public Utilidades() {
 		

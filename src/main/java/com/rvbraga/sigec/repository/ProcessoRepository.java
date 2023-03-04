@@ -1,6 +1,5 @@
 package com.rvbraga.sigec.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,8 +18,7 @@ import com.rvbraga.sigec.model.Processo;
 public interface ProcessoRepository extends JpaRepository<Processo, UUID>{
 	
 	List<Processo> findByCliente(Cliente cliente);
-	List<Processo> findByDataCadastro(LocalDate dataCadastro);
-	List<Processo> findByDataConclusao(LocalDate dataConclusao);
+	
 	Optional<Processo> findById(UUID id);
 	Processo findByNumero(String numero);
 	@Query(value = "SELECT * FROM processo p WHERE p.cliente IN (SELECT * cliente c WHERE nome LIKE '%:nome%')",

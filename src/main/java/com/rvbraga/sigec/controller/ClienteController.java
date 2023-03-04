@@ -37,8 +37,8 @@ public class ClienteController {
 	private ClienteService clienteService;
 	@Autowired
 	private ProcessoService processoService;
-
-	private Utilidades utilidades = new Utilidades();
+	@Autowired
+	private Utilidades utilidades;
 
 	@GetMapping("/home")
 	public String home() {
@@ -165,6 +165,7 @@ public class ClienteController {
 	public String salvarCliente(Model model, @Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
 		
 		cliente.setDataCadastro(LocalDate.now());
+		
 		if (errors.hasErrors()) { 
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");			
 			model.addAttribute("racas", utilidades.getRacas());
@@ -258,6 +259,11 @@ public class ClienteController {
 		return "processo_add_edit.html";
 		
 	}
+	
+	
+	
+	
+	
 	@GetMapping("/cliente/visualizar") 
 	public String visualizarCliente(Model model, @ModelAttribute("id") UUID id) {
 		
@@ -284,12 +290,6 @@ public class ClienteController {
 	@GetMapping("/agenda")
 	public String agenda(Model model,@RequestParam(defaultValue="0")int ano_atual,@RequestParam(defaultValue="0")int mes_atual ) {
 		//ZoneId brazilZoneId = ZoneId.of("America/Sao_Paulo");		
-		
-		int x = 45;
-		
-		String valor = String.valueOf(x);
-		
-		
 		
 		LocalDate dataAtual = (ano_atual==0||mes_atual==0)?LocalDate.now(): LocalDate.of(ano_atual, mes_atual, 1);
 		LocalDate hoje = LocalDate.now();

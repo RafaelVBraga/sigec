@@ -1,7 +1,7 @@
 package com.rvbraga.sigec.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
@@ -10,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
@@ -27,7 +27,7 @@ public class Processo implements Serializable{/**
 	private String status;		
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cliente cliente;
-	@OneToOne
-	private Pagamento pagamento;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Pagamento> pagamento;
 
 }

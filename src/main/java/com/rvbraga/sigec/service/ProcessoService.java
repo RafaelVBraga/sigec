@@ -1,6 +1,5 @@
 package com.rvbraga.sigec.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.rvbraga.sigec.dto.ProcessoDto;
 import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.model.Processo;
 import com.rvbraga.sigec.repository.ProcessoRepository;
@@ -58,17 +58,23 @@ public class ProcessoService {
 	public List<Processo> findProcessosByCliente(Cliente cliente){
 		return processoRepo.findByCliente(cliente);
 	}
-	public List<Processo> findByDataCadastro(LocalDate data){
-		return processoRepo.findByDataCadastro(data);
-	}
-	public List<Processo> findByDataConclusao(LocalDate data){
-		return processoRepo.findByDataConclusao(data);
-	}
+	
 	public Optional<Processo> findById(UUID id){
 		return processoRepo.findById(id);
 	}
 	public Processo findByNumero(String numero){
 		return processoRepo.findByNumero(numero);
+	}
+	
+	public Processo Dto2Processo(ProcessoDto processoDto, Processo processo) {
+		
+		processo.setCliente(clienteService.findById(processoDto.getIdCliente()));
+		processo.setNumero(processoDto.getNumero());
+		processo.setStatus(processoDto.getStatus());
+		processo.setTipo(processoDto.getTipo());
+		
+		return processo;
+		
 	}
 	
 }

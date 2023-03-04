@@ -14,6 +14,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
@@ -55,9 +58,11 @@ public class Cliente implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Processo> processos;
 	
-	
+	@ManyToMany
+	@JoinTable(name ="cliente_representantes", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="representante_id"))
 	private List<Cliente> representantes;
-	
+	@ManyToMany
+	@JoinTable(name ="cliente_herdeiros", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="herdeiro_id"))
 	private List<Cliente> herdeiros;
 	
 	

@@ -28,7 +28,7 @@ public class Pagamento implements Serializable{/**
 	private Double valor;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Cliente cliente;
-	@OneToMany	
-	private List<Processo> processos;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Processo processo;
 
 }

@@ -18,7 +18,9 @@
 				<label>Cliente:  </label> <label th:text="${nome_cliente}" ></label>
 			</div> 
 			<input
-					type="text" th:field="*{idCliente}" hidden>
+					type="text" th:field="*{idCliente}" >
+			<input
+					type="text" th:field="*{id}" >
 
 			<div class="addcliente_form_itens">
 				<label>Processo: </label> <input type="text"
