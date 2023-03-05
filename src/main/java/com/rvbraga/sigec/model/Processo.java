@@ -1,6 +1,7 @@
 package com.rvbraga.sigec.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,9 @@ public class Processo implements Serializable{/**
 	private String numero;	
 	private String tipo;
 	private String status;		
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Usuario responsavel;
+	private LocalDate cadastro;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cliente cliente;
 	@OneToMany(cascade = CascadeType.ALL)

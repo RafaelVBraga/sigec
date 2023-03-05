@@ -226,6 +226,9 @@ main {
 	margin: 5px auto;
 }
 
+table{
+	margin-bottom: 15px;
+}
 table thead th {
 	background-color: #125385;
 	margin: 0;

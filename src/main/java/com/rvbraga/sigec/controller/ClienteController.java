@@ -31,7 +31,7 @@ import com.rvbraga.sigec.service.ProcessoService;
 import com.rvbraga.sigec.utils.Utilidades;
 
 @Controller
-@RequestMapping("/sigec")
+@RequestMapping("/sigec") 
 public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;

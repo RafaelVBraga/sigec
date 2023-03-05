@@ -1,5 +1,6 @@
 package com.rvbraga.sigec.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -118,6 +119,7 @@ public class ProcessoController {
 	        return "cliente_add_edit.html"; 
 	    }
 		processo.setCliente(cliente);	
+		processo.setCadastro(LocalDate.now());
 		processoService.save(processo);	
 		List<Processo> processos = cliente.getProcessos();
 		processos.add(processo);
