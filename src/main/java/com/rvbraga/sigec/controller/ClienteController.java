@@ -260,10 +260,6 @@ public class ClienteController {
 		
 	}
 	
-	
-	
-	
-	
 	@GetMapping("/cliente/visualizar") 
 	public String visualizarCliente(Model model, @ModelAttribute("id") UUID id) {
 		

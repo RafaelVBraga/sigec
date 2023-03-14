@@ -19,13 +19,20 @@
 					th:field="*{id}" readonly="readonly">
 			</div>
 
-
-			<div class="addcliente_form_itens">
-				<label>Nome: </label> <input type="text"
-					th:classappend="${#fields.hasErrors('nome')}?input_error:nda"
-					th:field="*{nome}">
-				<p class="error" th:if="${#fields.hasErrors('nome')}"
-					th:errors="*{nome}"></p>
+			<div class="container_2_items">
+				<div class="addcliente_form_itens">
+					<label>Nome: </label> <input type="text"
+						th:classappend="${#fields.hasErrors('nome')}?input_error:nda"
+						th:field="*{nome}">
+					<p class="error" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></p>
+				</div>
+				<div class="addcliente_form_itens">
+					<label>Data de Nascimento: </label> <input type="date"
+						th:field="*{dataNascimento}">
+					<p class="error" th:if="${#fields.hasErrors('dataNascimento')}"
+						th:errors="*{dataNascimento}"></p>
+				</div>
 			</div>
 			<div class="container_2_items">
 				<div class="addcliente_form_itens">
@@ -45,34 +52,13 @@
 
 				</div>
 			</div>
-			<div class="container_2_items">
-				<div class="addcliente_form_itens">
-					<label>Data de Nascimento: </label> <input type="date"
-						th:field="*{dataNascimento}">
-					<p class="error" th:if="${#fields.hasErrors('dataNascimento')}"
-						th:errors="*{dataNascimento}"></p>
 
-				</div>
-				
-				<div class="addcliente_form_itens">
-					<label for="selecao" class="add_edit_label" th:text="Raça"></label>
-					<select id="selecao" class="add_edit_input" th:field="*{raca}">
-						<option th:each="race : ${racas}" th:value="${race}"
-							th:text="${race}"></option>
-					</select>
-				</div>
-				
-				<div class="addcliente_form_itens">
-					<label for="selecao" class="add_edit_label" th:text="Gênero"></label>
-					<select id="selecao" class="add_edit_input" th:field="*{genero}">
-						<option th:each="genero : ${generos}" th:value="${genero}"
-							th:text="${genero}"></option>
-					</select>
-				</div>
-			</div>
+
+
+
 
 			<div class="container_2_items">
-			
+
 				<div class="addcliente_form_itens">
 					<label>Telefone: </label> <input type="text"
 						th:oninput="mascara_telefone(this)"

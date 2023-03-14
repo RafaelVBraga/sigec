@@ -2,7 +2,6 @@ package com.rvbraga.sigec.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -11,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
@@ -25,7 +23,7 @@ public class Pagamento implements Serializable{/**
 	private UUID id;
 	private LocalDate dataPagamento;
 	private LocalDate dataVencimento;
-	private Double valor;
+	private Float valor;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Cliente cliente;
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -138,8 +138,7 @@ public class ProcessoController {
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		System.out.println("Iniciando pesquisa...");
 		List<Processo> processos = new ArrayList<Processo>();
-		if (errors.hasErrors()) { 
-			
+		if (errors.hasErrors()) { 			
 			model.addAttribute("lista_processos", processos);
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem("Corrija os campos assinalados!");
@@ -174,10 +173,13 @@ public class ProcessoController {
 		
 		if (!pesquisa.getPesquisaNumero().isBlank()) {
 			try {
-				processos.add(processoService.findByNumero(pesquisa.getPesquisaNumero()));
+				Processo proc = processoService.findByNumero(pesquisa.getPesquisaNumero());
+				if(proc == null) ;else 	processos.add(proc);
+				System.out.println("Número de processos :"+processos.size());
+				model.addAttribute("mensagem_tabela", processos.isEmpty() ? "Dados indisponíveis para esta pesquisa..." : "");
 				model.addAttribute("lista_processos", processos);
 			}catch(Exception e) {
-				
+				System.out.println("Erro recuperando lista de processos pelo número!");
 			}
 		}
 		if(pesquisa.getPesquisaNumero().isBlank()&&pesquisa.getPesquisaCliente().isBlank()) {

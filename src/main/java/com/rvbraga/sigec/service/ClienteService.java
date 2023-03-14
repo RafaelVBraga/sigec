@@ -58,8 +58,7 @@ public class ClienteService {
 		cliente.get().setCpf(cDto.getCpf());
 		cliente.get().setNome(cDto.getNome());
 		cliente.get().setRg(cDto.getRg());
-		cliente.get().setRaca(cDto.getRaca());
-		cliente.get().setGenero(cDto.getGenero());
+		
 		cliente.get().setDataNascimento(cDto.getDataNascimento());
 		cliente.get().setTelefone(cDto.getTelefone());
 		

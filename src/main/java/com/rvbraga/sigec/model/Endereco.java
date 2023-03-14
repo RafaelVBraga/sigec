@@ -3,6 +3,7 @@ package com.rvbraga.sigec.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,8 @@ public class Endereco implements Serializable{
 	private String complemento;
 	private String cep;
 	private String bairro;
-	@OneToOne
+	private String digitalizacao;
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cliente cliente;
 	
 		

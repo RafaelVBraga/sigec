@@ -44,10 +44,8 @@ public class ClienteDto implements Serializable{
 		this.id = cliente.getId();
 		this.nome = cliente.getNome();
 		this.cpf = cliente.getCpf();
-		this.dataNascimento = cliente.getDataNascimento();
-		this.genero = cliente.getGenero();
-		this.rg = cliente.getRg();
-		this.raca = cliente.getRaca();
+		this.dataNascimento = cliente.getDataNascimento();		
+		this.rg = cliente.getRg();		
 		this.email = cliente.getEmail();
 		this.telefone = cliente.getTelefone();
 	}

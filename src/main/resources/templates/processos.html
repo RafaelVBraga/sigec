@@ -70,16 +70,16 @@
 						<th>Processo</th>
 						<th>Tipo</th>
 						<th>Status</th>						
-						<th>----</th>
+						<th>Ações</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="processo, iStat : ${lista_processos}"
 						th:style="${iStat.odd}?'font-weight:bold;'">
 						
-						<td th:text="${processo.numero}">nome</td>
-						<td th:text="${processo.tipo}">telefone</td>
-						<td th:text="${processo.status}">cpf</td>						
+						<td th:text="${processo.numero}"></td>
+						<td th:text="${processo.tipo}"></td>
+						<td th:text="${processo.status}"></td>						
 						<td>
 							<div class="tabela_acoes">
 								<a class="acao_azul tooltip" th:href="@{/sigec/processo/visualizar(id =${processo.id})}"><span class="tooltiptext">Visualizar</span><i class="fa-regular fa-eye"></i></a>

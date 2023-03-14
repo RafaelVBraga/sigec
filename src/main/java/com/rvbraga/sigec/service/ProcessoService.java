@@ -63,7 +63,9 @@ public class ProcessoService {
 		return processoRepo.findById(id);
 	}
 	public Processo findByNumero(String numero){
-		return processoRepo.findByNumero(numero);
+		Processo processo = processoRepo.findByNumero(numero);
+		
+		return  processo;
 	}
 	
 	public Processo Dto2Processo(ProcessoDto processoDto, Processo processo) {

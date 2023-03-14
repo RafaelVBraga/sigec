@@ -37,9 +37,7 @@ public class Cliente implements Serializable{
 	@NotBlank
 	private String nome;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataNascimento;
-	private String genero;
-	private String raca;
+	private LocalDate dataNascimento;	
 	@CPF@NotBlank
 	private String cpf;
 	@Size(min=11, message="Tamanho deve ser no mínimo 11")@NotBlank
