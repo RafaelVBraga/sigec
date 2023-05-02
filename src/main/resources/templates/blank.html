@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:fragment="layout (header,conteudo)">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta th:replace="${header}">	
+	<script type="text/javascript" th:src="@{/maskinput.js}" defer="defer"></script>	
+	<script type="text/javascript" th:src="@{/cntl_msg_erro.js}" defer="defer"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" defer="defer"></script>
+
+	<link th:href="@{/fontawesome/css/fontawesome.css}" rel="stylesheet">
+    <link th:href="@{/fontawesome/css/brands.css}" rel="stylesheet">
+    <link th:href="@{/fontawesome/css/solid.css}" rel="stylesheet">
+	<title>Sistema de Gestão de Clientes - Página Inicial</title>
+	
+</head>
+<body onload="update_messages()">	
+		<div class="navbar">
+		<div class="logo"> <p>Logomarca</p></div>
+				<ul>
+					<li><a th:href="@{/sigec/home}"><span><ion-icon name="home-outline"></ion-icon></span>Início</a></li>
+					<li><a th:href="@{/sigec/resumo}">Resumos</a></li>
+					<li><a th:href="@{/sigec/clientes}">Clientes</a></li>
+					<li><a th:href="@{/sigec/processos}">Processos</a></li>
+					<li><a th:href="@{/sigec/pagamentos}">Pagamentos</a></li>
+					<li><a th:href="@{/sigec/pedidos}">Pedidos</a></li>
+					<li><a th:href="@{/sigec/agenda}">Agenda</a></li>
+				</ul>
+			</div>		
+		<div class="center_container" th:replace="${conteudo}">
+			<div class="desktop" >
+				<h2>desktop</h2>
+			</div>
+		</div>
+		<div class="footer">@rvbraga soluções em T.I</div>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	
+</body>
+</html>

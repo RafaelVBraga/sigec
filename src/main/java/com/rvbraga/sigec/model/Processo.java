@@ -28,7 +28,7 @@ public class Processo implements Serializable {
 	private String numero;
 	private String tipo;
 	private String status;
-	private String situacao;
+	private String situacao; 
 	private String prioridade;
 	@OneToMany(mappedBy = "tarefa")
 	private List<Link> links;

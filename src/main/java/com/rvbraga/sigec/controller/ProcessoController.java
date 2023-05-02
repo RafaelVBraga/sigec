@@ -40,11 +40,7 @@ public class ProcessoController {
 	private ClienteService clienteService;
 	
 	@Autowired
-	private Utilidades utilidades;
-	
-	
-	
-	
+	private Utilidades utilidades;	
 	
 	@GetMapping("/processos")
 	public String processos(Model model, @RequestParam(defaultValue = "1") int page,
@@ -82,7 +78,7 @@ public class ProcessoController {
 		}
 		return "processos.html";
 	}
-	@GetMapping("/processos/cadastrar")
+	@GetMapping("/processos/adicionar")
 	public String cadastrar(Model model, @ModelAttribute("id") UUID id) { 
 		ProcessoDto processo = new ProcessoDto();
 		String nomeCliente = clienteService.findById(id).getNome();

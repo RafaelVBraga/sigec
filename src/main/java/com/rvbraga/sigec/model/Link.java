@@ -22,6 +22,6 @@ public class Link implements Serializable{/**
 	private UUID id;
 	private String link;
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Tarefa tarefa;
+	private Processo tarefa;
 
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Utilidades {
 	private String racas[] = { "Não informado", "Preto", "Indígena", "Pardo", "Amarelo", "Branco" };
-	private String dias_semana[] = { "Domingo", "Segunda", "Terca", "Quarta", "Quinta", "Sexta", "Sábado" };
+	private String dias_semana[] = { "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
 	private String generos[] = { "Masculino", "Feminino"};
 	private String tiposProcessos[] = { "Civil","Empresarial", "Penal", "Previdenciário", "Trabalhista", "Tributário" };
 	private String statusProcessos[] = { "Inicial", "Recurso Ordinário", "Agrave de Instrumento",

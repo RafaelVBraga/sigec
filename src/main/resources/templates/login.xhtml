@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/login.css}" rel="stylesheet">
+<SCRIPT th:src="@{/login.js}" type="text/javascript" defer></SCRIPT>
+</head>
+<body>
+	<main>
+	<section class="wallpaper">
+			
+		</section>
+		<section class="login">
+			<form  th:action="@{login}" method="POST">
+			<div class="wrapper">
+
+				
+				<h1 class="login__title">Fazer login</h1>
+				
+				
+					<p th:if="${credenciaisInvalidas}" class="error" > Crendenciais inválidas</p>
+					<label class="login__label"> <span>nome de usuário</span> 
+						<input	 type="text" name="username" class="input"></label>
+					<label	class="login__label"> <span>password</span> 
+					 	<input	type="password" name="password" class="input"></label>
+<!-- 					<div class="login__icons"> -->
+<!-- 						<button type="button" class="icons__button"> -->
+<!-- 							<img src="facebook-icon.png" alt="facebook"> -->
+<!-- 						</button> -->
+
+<!-- 						<button type="button" class="icons__button"> -->
+<!-- 							<img src="google.jpg" alt="google"> -->
+<!-- 						</button> -->
+
+<!-- 						<button type="button" class="icons__button"> -->
+<!-- 							<img src="apple-icon.png" alt="apple"> -->
+<!-- 						</button> -->
+<!-- 					</div> -->
+
+					<label class="login__label--checkbox"> <input type=checkbox
+						class="input--checkbox"><span>Manter login</span>
+					</label>				
+			</div>
+
+			<div class="wrapper">
+
+				<input type="submit" class="login__button" disabled value="Login"/>
+
+
+				<a href="#" class="login__link">Não consegue inicar sessão?</a> <a
+					href="#" class="login__link">Criar conta</a>
+				
+			</div>
+			</form>
+		</section>
+		
+	</main>
+</body>
+</html>

@@ -26,13 +26,13 @@ public class ProcessoDto implements Serializable{
 	private String tipo;	
 	private String situacao;
 	private Usuario responsavel;
+	private String descricao;	
+	private String prioridade;
 	
-	public ProcessoDto() {
-		
+	public ProcessoDto() {		
 	}
 	
-    public 	ProcessoDto(Processo processo) {
-    	
+    public 	ProcessoDto(Processo processo) {    	
     	this.id = processo.getId();
     	this.idCliente = processo.getCliente().getId();
     	this.numero = processo.getNumero();
@@ -40,7 +40,7 @@ public class ProcessoDto implements Serializable{
     	this.tipo = processo.getTipo();   
     	this.situacao = processo.getSituacao();
     	this.responsavel = processo.getResponsavel();
-    	
+    	this.prioridade = processo.getPrioridade();    	
     }
     
 	

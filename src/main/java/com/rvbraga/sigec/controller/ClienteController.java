@@ -34,12 +34,17 @@ import com.rvbraga.sigec.utils.Utilidades;
 @RequestMapping("/sigec") 
 public class ClienteController {
 	@Autowired
-	private ClienteService clienteService;
+	private ClienteService clienteService; 
 	@Autowired
 	private ProcessoService processoService;
 	@Autowired
 	private Utilidades utilidades;
 
+	@GetMapping("/login")
+	public String login(Model model) {
+		return "login.xhtml";
+	}
+	
 	@GetMapping("/home")
 	public String home() {
 		return "home.html";  
@@ -153,11 +158,12 @@ public class ClienteController {
 	@GetMapping("/cliente/adicionar")
 	public String adicionarCliente(Model model) {
 		
-		Cliente cliente = new Cliente();
+		Cliente cliente = new Cliente();	
 		model.addAttribute("titulo_pagina", "Cadastro de clientes");		
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("generos", utilidades.getGeneros());
 		model.addAttribute("cliente", cliente);
+		
 		return "cliente_add_edit.html";  
 	}  
 

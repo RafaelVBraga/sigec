@@ -32,13 +32,18 @@
 	align-items: center;
 }  
 .container_dia{
-	
+	position : relative;
 	border: 1px solid #125385;
 	border-radius: 10px;
 	height:80px;
 	margin-bottom:5px;
+	transition: 0.5s;
 	
 }  
+.container_dia:hover{
+	background-color: #154878;
+	
+}
 .dia{
 	display: flex;
 }
