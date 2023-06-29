@@ -1,5 +1,10 @@
 package com.rvbraga.sigec.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rvbraga.sigec.dto.ClienteDto;
@@ -25,8 +31,10 @@ import com.rvbraga.sigec.dto.MensagemDto;
 import com.rvbraga.sigec.dto.PesquisaDto;
 import com.rvbraga.sigec.dto.ProcessoDto;
 import com.rvbraga.sigec.model.Cliente;
+import com.rvbraga.sigec.model.Endereco;
 import com.rvbraga.sigec.model.Processo;
 import com.rvbraga.sigec.service.ClienteService;
+import com.rvbraga.sigec.service.EnderecoService;
 import com.rvbraga.sigec.service.ProcessoService;
 import com.rvbraga.sigec.utils.Utilidades;
 
@@ -38,7 +46,11 @@ public class ClienteController {
 	@Autowired
 	private ProcessoService processoService;
 	@Autowired
-	private Utilidades utilidades;
+	private EnderecoService enderecoService;
+	@Autowired
+	private Utilidades utilidades; 
+	
+	public static String UPLOAD_DIRECTORY = System.getProperty("user.home") + File.separator+"sigec"+File.separator+"digitalizacoes"+File.separator;
 
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -88,7 +100,7 @@ public class ClienteController {
 		return "cliente.html";
 	}
  
-	@PostMapping("/clientes/pesquisa")
+	@PostMapping("/clientes/pesquisa") 
 	public String pesquisaCliente(Model model, @Validated@ModelAttribute("pesquisa") PesquisaDto pesquisa,  Errors errors,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
 		
@@ -159,19 +171,37 @@ public class ClienteController {
 	public String adicionarCliente(Model model) {
 		
 		Cliente cliente = new Cliente();	
+		Endereco endereco = new Endereco();
+		cliente.setEndereco(endereco);
 		model.addAttribute("titulo_pagina", "Cadastro de clientes");		
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("generos", utilidades.getGeneros());
 		model.addAttribute("cliente", cliente);
 		
-		return "cliente_add_edit.html";  
+		return "cliente_add_edit.html";   
 	}  
 
 	@PostMapping("/cliente/salvar") 
-	public String salvarCliente(Model model, @Validated Cliente cliente, Errors errors, RedirectAttributes attributes) {
+	public String salvarCliente(Model model, @Validated Cliente cliente,@RequestParam("cpfdig") MultipartFile cpfDig, @RequestParam("rgdig") MultipartFile rgDig, @RequestParam("enddig") MultipartFile endDig, Errors errors, RedirectAttributes attributes)throws IOException {
+		System.out.println("Entrou no controller salvar Cliente");
+		File path; 
 		
-		cliente.setDataCadastro(LocalDate.now());
+		path = new File(UPLOAD_DIRECTORY,cliente.getCpf().toString());
+        path.mkdir();
 		
+        Path fileCpfDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+cpfDig.getOriginalFilename());
+        
+        Path fileRgDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+rgDig.getOriginalFilename());
+        
+        Path fileEndDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+endDig.getOriginalFilename());
+        
+        
+        cliente.setDataCadastro(LocalDate.now());
+		cliente.setCpfDigital(fileCpfDig.toString());
+		cliente.setRgDigital(fileRgDig.toString());
+		cliente.setEnderecoDigital(fileEndDig.toString());
+		
+		System.out.println(UPLOAD_DIRECTORY);
 		if (errors.hasErrors()) { 
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");			
 			model.addAttribute("racas", utilidades.getRacas());
@@ -183,16 +213,25 @@ public class ClienteController {
 			mensagem.setMensagem("Corrija os campos assinalados");
 			mensagem.setStatus("AVISO");
 			model.addAttribute("feedback",mensagem);
-			
+			System.out.println("Encontrou erro -> voltando para a página");
+			System.out.println(errors.toString()); 
 	        return "cliente_add_edit.html"; 
 	    }
 		try {
+			Endereco endereco_salvo = enderecoService.saveEndereco(cliente.getEndereco());
+			cliente.setEndereco(endereco_salvo);
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
+			
+	        Files.write(fileCpfDig, cpfDig.getBytes());
+	        Files.write(fileCpfDig, endDig.getBytes());
+	        Files.write(fileCpfDig, rgDig.getBytes());
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem("Cliente " + cliente_salvo.getId() + " salvo!");
 			mensagem.setStatus("SUCESSO");
 			model.addAttribute("feedback",mensagem);
+			System.out.println("Sucesso");
+			
 			//model.addAttribute("mensagem_sucesso", "Cliente " + cliente_salvo.getId() + " salvo!");
 		} catch (Exception e) {
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
@@ -201,6 +240,8 @@ public class ClienteController {
 			mensagem.setMensagem(e.getMessage());
 			mensagem.setStatus("FALHA");
 			model.addAttribute("feedback",mensagem);
+			System.out.println("Encontrou erro ao salvar -> voltando para a página");
+			System.out.println(e.toString());
 			return "cliente_add_edit.html";
 		}
 		return cliente(model,1,5);

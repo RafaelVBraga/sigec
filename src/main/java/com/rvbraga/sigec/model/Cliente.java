@@ -40,8 +40,10 @@ public class Cliente implements Serializable{
 	private LocalDate dataNascimento;	
 	@CPF@NotBlank
 	private String cpf;
+	private String cpfDigital;
 	@Size(min=11, message="Tamanho deve ser no mínimo 11")@NotBlank
 	private String rg;
+	private String rgDigital;
 	@Email@NotBlank
 	private String email;
 	private String telefone;
@@ -49,6 +51,7 @@ public class Cliente implements Serializable{
 	private LocalDate dataCadastro;
 	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;
+	private String enderecoDigital;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Documento> documentos;
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
