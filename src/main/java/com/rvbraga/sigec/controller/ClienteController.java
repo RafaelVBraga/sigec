@@ -50,7 +50,7 @@ public class ClienteController {
 	@Autowired
 	private Utilidades utilidades; 
 	
-	public static String UPLOAD_DIRECTORY = System.getProperty("user.home") + File.separator+"sigec"+File.separator+"digitalizacoes"+File.separator;
+	public static String UPLOAD_DIRECTORY = "C:"+File.separator+"Users"+ File.separator+ "rafae"+File.separator+"sigec"+File.separator+"digitalizacoes"+File.separator;
 
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -172,7 +172,7 @@ public class ClienteController {
 		
 		Cliente cliente = new Cliente();	
 		Endereco endereco = new Endereco();
-		cliente.setEndereco(endereco);
+		cliente.setEndereco(endereco); 
 		model.addAttribute("titulo_pagina", "Cadastro de clientes");		
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("generos", utilidades.getGeneros());
@@ -187,13 +187,13 @@ public class ClienteController {
 		File path; 
 		
 		path = new File(UPLOAD_DIRECTORY,cliente.getCpf().toString());
-        path.mkdir();
+        if(path.mkdirs()) System.out.println("Diretório criado!");
 		
-        Path fileCpfDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+cpfDig.getOriginalFilename());
+        Path fileCpfDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+"CPF.png");
         
-        Path fileRgDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+rgDig.getOriginalFilename());
+        Path fileRgDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+"RG.png");
         
-        Path fileEndDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+endDig.getOriginalFilename());
+        Path fileEndDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+"ENDERECO.png");
         
         
         cliente.setDataCadastro(LocalDate.now());
@@ -223,8 +223,8 @@ public class ClienteController {
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
 			
 	        Files.write(fileCpfDig, cpfDig.getBytes());
-	        Files.write(fileCpfDig, endDig.getBytes());
-	        Files.write(fileCpfDig, rgDig.getBytes());
+	        Files.write(fileEndDig, endDig.getBytes());
+	        Files.write(fileRgDig, rgDig.getBytes());
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem("Cliente " + cliente_salvo.getId() + " salvo!");
