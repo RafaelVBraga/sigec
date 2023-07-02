@@ -40,7 +40,8 @@
 						th:classappend="${#fields.hasErrors('cpf')}?input_error:nda"
 						th:field="*{cpf}">
 					<div class="file">
-					<input type="file" name="cpfdig" accept="image/*">
+					<label for="cpf_file">Selecione o arquivo do CPF</label>
+					<input id ="cpf_file" type="file" name="cpfdig" accept="image/*">
 					</div>
 					<p class="error" th:if="${#fields.hasErrors('cpf')}"
 						th:errors="*{cpf}"></p>
@@ -53,7 +54,8 @@
 					<p class="error" th:if="${#fields.hasErrors('rg')}"
 						th:errors="*{rg}"></p>
 					<div class="file">
-						<input type="file" name="rgdig" accept="image/*">
+						<label for="rg_file">Selecione o arquivo do RG</label>
+						<input id="rg_file"type="file" name="rgdig" accept="image/*">
 					</div>
 				</div>
 			</div>
@@ -90,24 +92,31 @@
 				<div class="addcliente_form_itens">
 					<label>Número: </label> <input type="text" class="input_25"
 						maxlength="5" th:field="*{endereco.numero}">
-
-
+				</div>
+			</div>
+			<div class="container_2_items">
+				
+				<div class="addcliente_form_itens">
+					<label>Complemento: </label> <input type="text" class="input_50"
+						maxlength="5" th:field="*{endereco.complemento}"> 
+				</div>
+				
+				<div class="addcliente_form_itens">
+					<label>CEP: </label> <input type="text" class="input_50"
+						maxlength="5" th:field="*{endereco.cep}">
+					
 				</div>
 			</div>
 			<div class="container_2_items">
 				<div class="addcliente_form_itens">
-					<label>Complemento: </label> <input type="text" class="input_50"
-						maxlength="5" th:field="*{endereco.complemento}"> <label>Bairro:
-					</label> <input type="text" class="input_50" maxlength="5"
+				<label>Bairro:
+					</label> <input type="text" class="input_50" 
 						th:field="*{endereco.bairro}">
 				</div>
-				<div class="addcliente_form_itens">
-					<label>CEP: </label> <input type="text" class="input_50"
-						maxlength="5" th:field="*{endereco.cep}">
-					<div class="file">
-						<input type="file" name="enddig" accept="image/*">
+				<div class="file">
+						<label for="end_file">Selecione o arquivo do Endereço</label>
+						<input id="end_file"type="file" name="enddig" accept="image/*">
 					</div>
-				</div>
 			</div>
 			<div class="container_2_items"></div>
 

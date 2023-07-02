@@ -185,7 +185,7 @@ public class ClienteController {
 	@PostMapping("/cliente/salvar") 
 	public String salvarCliente(Model model, @Validated Cliente cliente,@RequestParam("cpfdig") MultipartFile cpfDig, @RequestParam("rgdig") MultipartFile rgDig, @RequestParam("enddig") MultipartFile endDig, Errors errors, RedirectAttributes attributes)throws IOException {
 		
-		MultipartFile[] files = {};
+		MultipartFile[] files = new MultipartFile[3];
         
         files[0] = cpfDig;
         files[1] = rgDig;
