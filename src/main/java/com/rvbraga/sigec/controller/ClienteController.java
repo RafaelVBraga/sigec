@@ -2,6 +2,7 @@ package com.rvbraga.sigec.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -50,7 +51,7 @@ public class ClienteController {
 	@Autowired
 	private Utilidades utilidades; 
 	
-	public static String UPLOAD_DIRECTORY = "C:"+File.separator+"Users"+ File.separator+ "rafae"+File.separator+"sigec"+File.separator+"digitalizacoes"+File.separator;
+	
 
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -183,25 +184,14 @@ public class ClienteController {
 
 	@PostMapping("/cliente/salvar") 
 	public String salvarCliente(Model model, @Validated Cliente cliente,@RequestParam("cpfdig") MultipartFile cpfDig, @RequestParam("rgdig") MultipartFile rgDig, @RequestParam("enddig") MultipartFile endDig, Errors errors, RedirectAttributes attributes)throws IOException {
-		System.out.println("Entrou no controller salvar Cliente");
-		File path; 
 		
-		path = new File(UPLOAD_DIRECTORY,cliente.getCpf().toString());
-        if(path.mkdirs()) System.out.println("Diretório criado!");
+		MultipartFile[] files = {};
+        
+        files[0] = cpfDig;
+        files[1] = rgDig;
+        files[2] = endDig;
 		
-        Path fileCpfDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+"CPF.png");
-        
-        Path fileRgDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+"RG.png");
-        
-        Path fileEndDig =  Paths.get(UPLOAD_DIRECTORY,cliente.getCpf().toString() ,File.separator+"ENDERECO.png");
-        
-        
-        cliente.setDataCadastro(LocalDate.now());
-		cliente.setCpfDigital(fileCpfDig.toString());
-		cliente.setRgDigital(fileRgDig.toString());
-		cliente.setEnderecoDigital(fileEndDig.toString());
 		
-		System.out.println(UPLOAD_DIRECTORY);
 		if (errors.hasErrors()) { 
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");			
 			model.addAttribute("racas", utilidades.getRacas());
@@ -212,27 +202,23 @@ public class ClienteController {
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem("Corrija os campos assinalados");
 			mensagem.setStatus("AVISO");
-			model.addAttribute("feedback",mensagem);
-			System.out.println("Encontrou erro -> voltando para a página");
-			System.out.println(errors.toString()); 
+			model.addAttribute("feedback",mensagem);			
 	        return "cliente_add_edit.html"; 
 	    }
 		try {
+			
 			Endereco endereco_salvo = enderecoService.saveEndereco(cliente.getEndereco());
 			cliente.setEndereco(endereco_salvo);
+			cliente = clienteService.saveDocs(cliente, files);
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
 			
-	        Files.write(fileCpfDig, cpfDig.getBytes());
-	        Files.write(fileEndDig, endDig.getBytes());
-	        Files.write(fileRgDig, rgDig.getBytes());
+	        
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem("Cliente " + cliente_salvo.getId() + " salvo!");
 			mensagem.setStatus("SUCESSO");
 			model.addAttribute("feedback",mensagem);
-			System.out.println("Sucesso");
 			
-			//model.addAttribute("mensagem_sucesso", "Cliente " + cliente_salvo.getId() + " salvo!");
 		} catch (Exception e) {
 			model.addAttribute("titulo_pagina", "Cadastro de clientes");
 			model.addAttribute("cliente", cliente);
@@ -240,8 +226,7 @@ public class ClienteController {
 			mensagem.setMensagem(e.getMessage());
 			mensagem.setStatus("FALHA");
 			model.addAttribute("feedback",mensagem);
-			System.out.println("Encontrou erro ao salvar -> voltando para a página");
-			System.out.println(e.toString());
+			
 			return "cliente_add_edit.html";
 		}
 		return cliente(model,1,5);
