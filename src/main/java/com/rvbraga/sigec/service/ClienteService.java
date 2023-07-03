@@ -47,7 +47,7 @@ public class ClienteService {
 		return clienteRepository.save(cliente);
 	}
 
-	public Cliente saveDocs(Cliente cliente, MultipartFile[] files) throws IOException{
+	public Cliente saveDocs(Cliente cliente, MultipartFile[] files) throws IOException{ 
 		File path;
 
 		path = new File(UPLOAD_DIRECTORY, cliente.getCpf().toString());

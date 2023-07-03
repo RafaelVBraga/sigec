@@ -32,36 +32,53 @@ public class Cliente implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)	
 	private UUID id;
+	
 	@NotBlank
 	private String nome;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;	
+	
+	private String profissao;
+	
 	@CPF@NotBlank
 	private String cpf;
+	
 	private String cpfDigital;
+	
 	@Size(min=11, message="Tamanho deve ser no mínimo 11")@NotBlank
 	private String rg;
+	
 	private String rgDigital;
+	
 	@Email@NotBlank
 	private String email;
+	
 	private String telefone;
 	
 	private LocalDate dataCadastro;
-	@OneToOne(mappedBy = "cliente")
-	private Endereco endereco;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Endereco endereco; 
+	
 	private String enderecoDigital;
+	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
-	private List<Documento> documentos;
+	private List<Documento> documentos; 
+	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Pagamento> pagamentos;
+	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
 	private List<Processo> processos;
 	
 	@ManyToMany
 	@JoinTable(name ="cliente_representantes", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="representante_id"))
 	private List<Cliente> representantes;
+	
 	@ManyToMany
 	@JoinTable(name ="cliente_herdeiros", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="herdeiro_id"))
 	private List<Cliente> herdeiros;

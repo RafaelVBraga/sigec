@@ -34,6 +34,22 @@
 						th:errors="*{dataNascimento}"></p>
 				</div>
 			</div>
+			
+			<div class="container_2_items">
+				<div class="addcliente_form_itens">
+					<label>Profissão: </label> 
+					<input th:if="${#arrays.isEmpty(profissoes)}" th:field="*{profissao}" th:value="${prof}">
+								
+					<p class="error" th:if="${#fields.hasErrors('profissao')}"
+						th:errors="*{profissao}"></p>
+				</div>
+				<div class="addcliente_form_itens">
+					<select th:unless="${#arrays.isEmpty(profissoes)}"th:classappend="${#fields.hasErrors('profissao')}?input_error:nda"
+							th:field="*{profissao}">
+					<option th:each="prof,stat: ${profissoes}" th:value="${prof.nome}" th:text="${prof.nome}">
+					</select> 		
+				</div>
+			</div>
 			<div class="container_2_items">
 				<div class="addcliente_form_itens">
 					<label>CPF: </label> <input type="text" th:oninput="mascara(this)"
@@ -42,6 +58,8 @@
 					<div class="file">
 					<label for="cpf_file">Selecione o arquivo do CPF</label>
 					<input id ="cpf_file" type="file" name="cpfdig" accept="image/*">
+					<img th:unless="${#strings.isEmpty(cpfdig)}" fffth:src="@{{path}(path=*{cpfDigital})}"></img>
+					
 					</div>
 					<p class="error" th:if="${#fields.hasErrors('cpf')}"
 						th:errors="*{cpf}"></p>
@@ -98,12 +116,12 @@
 				
 				<div class="addcliente_form_itens">
 					<label>Complemento: </label> <input type="text" class="input_50"
-						maxlength="5" th:field="*{endereco.complemento}"> 
+						 th:field="*{endereco.complemento}"> 
 				</div>
 				
 				<div class="addcliente_form_itens">
 					<label>CEP: </label> <input type="text" class="input_50"
-						maxlength="5" th:field="*{endereco.cep}">
+						 th:field="*{endereco.cep}">
 					
 				</div>
 			</div>

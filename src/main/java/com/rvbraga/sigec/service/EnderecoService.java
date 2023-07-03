@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.model.Endereco;
 import com.rvbraga.sigec.repository.EnderecoRepository;
 
@@ -16,12 +17,11 @@ public class EnderecoService {
 	
 	public List<Endereco> findAll() {
 		return enderecoRepository.findAll();
+	}	
+	
+	public Endereco findByCliente(Cliente cliente) {
+		return enderecoRepository.getReferenceById(cliente.getEndereco().getId());
 	}
-	
-	
-	
-	
-	
 	public Endereco saveEndereco(Endereco endereco) {
 		
 		return enderecoRepository.save(endereco);

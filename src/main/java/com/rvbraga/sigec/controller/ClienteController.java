@@ -1,11 +1,6 @@
 package com.rvbraga.sigec.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +29,11 @@ import com.rvbraga.sigec.dto.ProcessoDto;
 import com.rvbraga.sigec.model.Cliente;
 import com.rvbraga.sigec.model.Endereco;
 import com.rvbraga.sigec.model.Processo;
+import com.rvbraga.sigec.model.Profissao;
 import com.rvbraga.sigec.service.ClienteService;
 import com.rvbraga.sigec.service.EnderecoService;
 import com.rvbraga.sigec.service.ProcessoService;
+import com.rvbraga.sigec.service.ProfissaoService;
 import com.rvbraga.sigec.utils.Utilidades;
 
 @Controller
@@ -49,7 +46,10 @@ public class ClienteController {
 	@Autowired
 	private EnderecoService enderecoService;
 	@Autowired
+	private ProfissaoService profissaoService;
+	@Autowired
 	private Utilidades utilidades; 
+	
 	
 	
 
@@ -174,6 +174,8 @@ public class ClienteController {
 		Cliente cliente = new Cliente();	
 		Endereco endereco = new Endereco();
 		cliente.setEndereco(endereco); 
+		List<Profissao> profissoes = profissaoService.findAll();
+		model.addAttribute("profissoes", profissoes);
 		model.addAttribute("titulo_pagina", "Cadastro de clientes");		
 		model.addAttribute("racas", utilidades.getRacas());
 		model.addAttribute("generos", utilidades.getGeneros());
@@ -184,6 +186,9 @@ public class ClienteController {
 
 	@PostMapping("/cliente/salvar") 
 	public String salvarCliente(Model model, @Validated Cliente cliente,@RequestParam("cpfdig") MultipartFile cpfDig, @RequestParam("rgdig") MultipartFile rgDig, @RequestParam("enddig") MultipartFile endDig, Errors errors, RedirectAttributes attributes)throws IOException {
+		Profissao profissao = new Profissao();
+		profissao.setNome(cliente.getProfissao());
+		profissaoService.saveSafety(profissao);
 		
 		MultipartFile[] files = new MultipartFile[3];
         
@@ -207,8 +212,8 @@ public class ClienteController {
 	    }
 		try {
 			
-			Endereco endereco_salvo = enderecoService.saveEndereco(cliente.getEndereco());
-			cliente.setEndereco(endereco_salvo);
+			//Endereco endereco_salvo = enderecoService.saveEndereco(cliente.getEndereco());
+			//cliente.setEndereco(endereco_salvo);
 			cliente = clienteService.saveDocs(cliente, files);
 			Cliente cliente_salvo = clienteService.saveCliente(cliente);
 			
@@ -224,23 +229,27 @@ public class ClienteController {
 			model.addAttribute("cliente", cliente);
 			MensagemDto mensagem = new MensagemDto();
 			mensagem.setMensagem(e.getMessage());
-			mensagem.setStatus("FALHA");
-			model.addAttribute("feedback",mensagem);
+			mensagem.setStatus("FALHA"); 
+			model.addAttribute("feedback",mensagem); 
 			
 			return "cliente_add_edit.html";
 		}
-		return cliente(model,1,5);
+		return cliente(model,1,5); 
 	}
 	 
 	@GetMapping("/cliente/editar")  
 	public String editarCliente(Model model, @ModelAttribute("id") UUID id) {
-		
-		ClienteDto cliente = new ClienteDto(clienteService.findById(id));
-		
+		Cliente cliente = clienteService.findById(id);
+		ClienteDto clienteDto = new ClienteDto(cliente);
+		Endereco endereco = enderecoService.findByCliente(cliente);
+		clienteDto.setEndereco(endereco);
 		model.addAttribute("titulo_pagina", "Edição de clientes");
-		model.addAttribute("cliente",cliente);		
+		model.addAttribute("cliente",clienteDto);		
 		model.addAttribute("generos", utilidades.getGeneros());
 		model.addAttribute("racas", utilidades.getRacas());
+		model.addAttribute("cpfdig", cliente.getCpfDigital());
+		model.addAttribute("rgdig", cliente.getRgDigital());
+		model.addAttribute("enddig", cliente.getEnderecoDigital());
 		return "cliente_add_edit.html";
 		
 	}
