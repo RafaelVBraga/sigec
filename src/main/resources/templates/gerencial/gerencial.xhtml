@@ -19,29 +19,26 @@
 				<thead>
 					<tr>
 
-						<th>Nome</th>						
+						<th>Nome</th>
+						<th>Permissões</th>						
 						<th>Ações</th>
 				</thead>
 				<tbody>
-					<tr th:each="usuario, rowStat : ${usuarios}">
+					<tr th:unless="${usuario.authorities.^[authority=='ROLE_DEVELOPER']}" th:each="usuario, rowStat : ${usuarios}" >
 
 						<td th:text="${usuario.username}"></td>
-								
+						<td> <span class="mx-2" th:each="auth, iStat : ${usuario.authorities}" th:text="${#strings.equals(auth.authority,'ROLE_USER')}?'Usuário':'Admin'"></span></td>		
 						<td>
 							<input hidden th:name="usuario_id" th:value="${usuario.id}">
 							
 							<div class="btn btn-info">
-								<a th:href="@{/sigec/cliente/gerencial/usuario/editar(id=${usuario.id})}" 
+								<a th:href="@{/sigec/gerencial/usuario/editar(id=${usuario.id})}" 
 								data-bs-toggle="tooltip" data-bs-title="Editar"
 									data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/pencil-square.svg}" alt="cash" width="16" height="16">
 								</a>								
-							</div>
-							
-							
-							
-							<div class="btn btn-danger">
-								
+							</div>						
+							<div class="btn btn-danger">								
 								<a th:href="@{/sigec/gerencial/usuario/delete(id=${usuario.id})}" 
 								data-bs-toggle="tooltip" data-bs-title="Delete"
 									data-bs-custom-class="custom-tooltip">

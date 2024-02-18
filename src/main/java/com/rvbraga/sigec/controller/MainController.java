@@ -95,7 +95,7 @@ public class MainController {
 		return "home/home.xhtml";
 	}
 
-	@GetMapping("/clientes")
+	@GetMapping("/clientes")  
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "5") int size) {
 
@@ -789,29 +789,35 @@ public class MainController {
 	public String pageEditarUsuarios(Model model,@ModelAttribute("id") Long id) {
 		Users usuario =  usersService.findById(id);
 		UsersDto usuarioDto = new UsersDto(usuario);
+		if(usuario.getAuthorities().contains(authoritiesService.load("ROLE_ADMIN"))) usuarioDto.setCargoGerencial(true);
 		model.addAttribute("usuario",usuarioDto);
+		
 		return "gerencial/adicionar_editar_usuarios.xhtml";
 	}
-	@PostMapping("/gerencial/usuario/novo")
-	public String adicionarUsuarios(Model model, @ModelAttribute("usuario") UsersDto newUser, Errors error) {
-
+	@PostMapping("/gerencial/usuario/editar")
+	public String editarUsuarios(Model model, @ModelAttribute("usuario") UsersDto newUser, Errors error) {
+ 
 		if (error.hasErrors()) {
 			model.addAttribute("usuario", newUser);
-			return "gerencial/adicionar_editar_usuarios.xhtml";
+			return "gerencial/adicionar_editar_usuarios.xhtml";  
 		}
 
-		Users userToSave = new Users();
-		userToSave.setUsername(newUser.getUsername());
-		userToSave.setPassword(encoder.encode(newUser.getPassword()));
-		userToSave.setAccountNonExpired(true);
-		userToSave.setAccountNonLocked(true);
-		userToSave.setCredentialsNonExpired(true);
-		userToSave.setEnabled(true);
-		Set<Authorities> authorities = new HashSet<Authorities>();
-		if (newUser.getCargoGerencial())
-			authorities.add(authoritiesService.load("ROLE_ADMIN"));
-		authorities.add(authoritiesService.load("ROLE_USER"));
-		userToSave.setAuthorities(authorities);
+		Users userToSave = usersService.findById(newUser.getId());
+		System.out.println(userToSave.getUsername());
+		System.out.println(newUser.getUsername());
+		System.out.println(userToSave.getUsername().compareTo(newUser.getUsername()));
+		userToSave.setUsername(userToSave.getUsername().compareTo(newUser.getUsername())==0?userToSave.getUsername():newUser.getUsername());
+		userToSave.setPassword(userToSave.getPassword().compareTo(encoder.encode(newUser.getPassword()))==0?userToSave.getPassword():newUser.getPassword());
+				
+		if (newUser.getCargoGerencial()) {
+			if(!userToSave.getAuthorities().contains(authoritiesService.load("ROLE_ADMIN")))
+				userToSave.getAuthorities().add(authoritiesService.load("ROLE_ADMIN"));
+		}else {
+			if(userToSave.getAuthorities().contains(authoritiesService.load("ROLE_ADMIN")))
+				userToSave.getAuthorities().remove(authoritiesService.load("ROLE_ADMIN"));
+			
+		}
+		System.out.println(userToSave);
 		usersService.save(userToSave);
 		return gerencial(model);
 	}
