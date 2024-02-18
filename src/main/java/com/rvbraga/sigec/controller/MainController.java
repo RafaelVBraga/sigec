@@ -40,6 +40,7 @@ import com.rvbraga.sigec.model.Pagamento;
 import com.rvbraga.sigec.model.Parcela;
 import com.rvbraga.sigec.model.Processo;
 import com.rvbraga.sigec.model.Profissao;
+import com.rvbraga.sigec.model.Usuario;
 import com.rvbraga.sigec.security.Authorities;
 import com.rvbraga.sigec.security.Users;
 import com.rvbraga.sigec.service.AuthoritiesService;
@@ -761,6 +762,36 @@ public class MainController {
 		return "gerencial/adicionar_editar_usuarios.xhtml";
 	}
 
+	@PostMapping("/gerencial/usuario/novo")
+	public String adicionarUsuarios(Model model, @ModelAttribute("usuario") UsersDto newUser, Errors error) {
+
+		if (error.hasErrors()) {
+			model.addAttribute("usuario", newUser);
+			return "gerencial/adicionar_editar_usuarios.xhtml";
+		}
+
+		Users userToSave = new Users();
+		userToSave.setUsername(newUser.getUsername());
+		userToSave.setPassword(encoder.encode(newUser.getPassword()));
+		userToSave.setAccountNonExpired(true);
+		userToSave.setAccountNonLocked(true);
+		userToSave.setCredentialsNonExpired(true);
+		userToSave.setEnabled(true);
+		Set<Authorities> authorities = new HashSet<Authorities>();
+		if (newUser.getCargoGerencial())
+			authorities.add(authoritiesService.load("ROLE_ADMIN"));
+		authorities.add(authoritiesService.load("ROLE_USER"));
+		userToSave.setAuthorities(authorities);
+		usersService.save(userToSave);
+		return gerencial(model);
+	}
+	@GetMapping("/gerencial/usuario/editar")
+	public String pageEditarUsuarios(Model model,@ModelAttribute("id") Long id) {
+		Users usuario =  usersService.findById(id);
+		UsersDto usuarioDto = new UsersDto(usuario);
+		model.addAttribute("usuario",usuarioDto);
+		return "gerencial/adicionar_editar_usuarios.xhtml";
+	}
 	@PostMapping("/gerencial/usuario/novo")
 	public String adicionarUsuarios(Model model, @ModelAttribute("usuario") UsersDto newUser, Errors error) {
 
