@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head></head>
+<body>
+	<main>
+		<div class="container">		
+			
+			<div class="mensagem" th:if="${msg}!=null"
+			th:classappend="${#strings.equals(msg.status,'FALHA')}?'mensagem_falha':'mensagem_sucesso'"
+			id="cnt_msg">
+			<p id="msg_err" th:if="${#strings.equals(msg.status,'FALHA')}"
+				th:text="${msg.mensagem}"></p>
+			<p id="msg_scs" th:if="${#strings.equals(msg.status,'SUCESSO')}"
+				th:text="${msg.mensagem}"></p>
+
+		</div>
+
+		</div>
+		<h2 th:text="${cliente.nome}"></h2>
+		<hr>
+		<hr>
+		<div class="container-fluid text-bg-secondary row rounded">			
+			
+			<div class="col  ">
+				<a class="btn btn-light border mt-3 mb-3"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a>
+			</div>
+			
+			<div class="col">
+				<a class="btn btn-light border mt-3 mb-3"th:href="@{/sigec/cliente/docs(id =${cliente.id})}">Documentos</a>
+			</div>
+			
+			<div class="col">
+				<a class="btn btn-light border mt-3 mb-3"  th:href="@{/sigec/cliente/hipo(id =${cliente.id})}">Hipossuficiência</a>
+			</div>
+			
+			<div class="col">
+				<a class="btn btn-light border mt-3 mb-3"th:href="@{/sigec/cliente/proc(id =${cliente.id})}">Procuração</a>
+			</div>
+			<div class="col">
+				<a class="btn btn-light border mt-3 mb-3"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Pagamento</a>
+			</div>
+		</div>
+		<hr>
+			
+		<div class="container_visualizacao" th:if="${processos.isEmpty()}">
+			<p>Não existem processos para o cliente</p>
+		</div>
+
+		<table th:unless="${processos.isEmpty()}">
+			<thead>
+				<tr>
+					<th>Número</th>
+					<th>Tipo</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="processo, iStat : ${processos}">
+					<td th:text="${processo.numero}">a</td>
+					<td th:text="${processo.tipo}">b</td>
+					<td th:text="${processo.status}">c</td>
+				</tr>
+			</tbody>
+
+		</table>
+		<div class="row">
+				<a class=" col btn btn-light border"th:href="@{/sigec/clientes}">voltar</a>
+			</div>
+	</main>
+</body>
+</html>

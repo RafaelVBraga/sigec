@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main}, ~{::head})}">
+<head>
+<link th:href="@{/css/template.css}" rel="stylesheet">
+</head>
+<body>
+	<main>
+		<div class="d-flex flex-column">
+			<h2 class="mx-auto py-auto">Trocar Senha</h2>
+			<div
+				class="d-flex justify-content-center align-items-center border shadow mx-auto"
+				style="width: 500px; height: 200px">
+
+				<form class="mx-auto" th:object="${usuario}" method="post">
+					<label class="form-label m-4">Nova senha:<input
+						class="form-control" type="password" th:field="*{password}"></label>
+					<div class="d-flex justify-content-between">
+						<input class="btn btn-success" type="submit" value="Salvar"><a
+							class="btn btn-secondary" th:href="@{/sigec/home}">Voltar</a>
+					</div>
+
+				</form>
+			</div>	
+		</div>
+
+	</main>
+</body>
+</html>

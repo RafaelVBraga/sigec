@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/declaracoes/declaracao.css}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procuração "AD JUDICIA" e "ED EXTRA"</title>
+</head>
+<body>
+	<div class=conteudo>
+		<h1>JM Barreto</h1>
+	</div>
+	<div class="conteudo com_borda folha borda_top_curva ">
+		
+	
+		<h2>PROCURAÇÃO “AD JUDICIA” e “ET EXTRA”</h2>
+		<br>		
+		<p>
+			<strong>Outorgante(s): <span th:text="${cliente.nome}"></span></strong>,
+			brasileiro(a), portador(a) da cédula de identidade RG nº <span
+				th:text="${cliente.rg}"></span>, inscrito(a) no CPF nº <span
+				th:text="${cliente.cpf}"></span>, residente e domiciliado(a) na <span
+				th:text="${endereco.logradouro}"></span>, <span
+				th:text="${endereco.numero}"></span>, <span
+				th:text="${endereco.bairro}"></span>, CEP <span
+				th:text="${endereco.cep}"></span> - Fortaleza-CE.
+		</p>
+		<p>
+			<strong>Outorgada: Dra. Jeane Michele Moura Barreto</strong>,
+			brasileira, casada, advogada, inscrita na Ordem dos Advogados do
+			Brasil, Secção – CE sob o nº 24.055, com escritório profissional na
+			Av. Dr. Themberge, nº 2360, Álvaro Weyne, CEP: 60.355-000,
+			Fortaleza/CE onde recebe notificações e intimações.
+		</p>
+		
+		<p><strong>PODERES:</strong>Confere(em) amplo, geral e ilimitados poderes para foro
+			em geral, com a cláusula “ad judicia” e “et extra”, a fim de que, em
+			conjunto ou separadamente, possa(m) realizar todos os atos que se
+			fizerem necessários ao bom e fiel cumprimento deste mandato, propor
+			quaisquer ações administrativas ou extrajudiciais, apresentar defesa
+			nas ações que forem propostas, com natureza cíveis ou penais,
+			reconvir, promover quaisquer medidas cautelares, recorrer em qualquer
+			instância ou Tribunal, arrolar testemunhas, contraditar ou recusar,
+			produzir provas, arrazoar processos, requer vistas do mesmo,
+			concordar com cálculos, custas e contas processuais, podendo ainda,
+			fazer defesas prévias, alegações finais, firmar os documentos
+			necessários, efetuar levantamento, requer laudos, avaliações e
+			perícias, bem como argüir suspeição, falsidade, exceção, transigir,
+			fazer acordo, confessar, renunciar, desistir, impugnar, receber
+			Alvará, dar quitação, perante qualquer juízo, instância ou Tribunal,
+			repartição publica e órgão da administração pública direta ou
+			indireta, Federal, Estadual e Municipal, autarquia ou entidade
+			paraestatal, propondo ação competente em que os(as) outorgantes(s)
+			seja(m) autores(as) ou reclamante(s) e ou réus defendendo-os(as),e bem
+			como substabelecer a presente com ou sem reserva de poderes, se assim
+			lhe convier, dando tudo por bom, firme e valioso, especialmente para:
+			Ajuizar a competente AÇÃO PREVIDENCIARIA, inclusive para assinar
+			declaração de isento de imposto de renda.</p>
+		
+		
+		
+		<br>
+		<p class="data ">
+			Fortaleza, <span th:text="${dia}"></span> de <span th:text="${mes}"></span>
+			de <span th:text="${ano}"></span>.
+		</p>
+		<br>
+		<p class="assinatura">____________________________________________________________</p>
+		
+		
+		
+	</div>
+
+
+	<div class=" rodape conteudo com_borda borda_bottom_curva font-10">
+		<p>JM Barreto Advocacia</p>
+		<p>Matriz: Avenida Doutor Themberge, nº 2360 ,Álvaro Weyne
+			Fortaleza/CE -Cep: 60.355-000</p>
+		<p>85-3478-1908/ 85- 98708-6197.</p>
+		<p>E-mail:jeane.msantos@hotmail.com.</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+	<script th:src="@{/js/cliente/cad_cliente.js}"></script>
+	<script th:src="@{/js/cliente/maskinput.js}"></script>
+</head>
+<body>
+	<main>
+		<h2 th:text="${titulo_pagina}">Cadastro de Clientes</h2>
+
+		<hr>
+		<form class="container" th:object="${cliente}"
+			th:action="${cliente.id}==null?@{/sigec/cliente/salvar}:@{/sigec/cliente/editar}"
+			enctype="multipart/form-data" method="POST">
+
+			<div class="row">
+				<label hidden>Id: </label> <input hidden class="input_id"
+					type="text" th:field="*{id}" readonly="readonly">
+			</div>
+
+			<div class="row">
+				<div class="col w-75">
+					<label class="form-label ">Nome: </label> <input
+						class="form-control" type="text"
+						th:classappend="${#fields.hasErrors('nome')}?input_error:nda"
+						th:field="*{nome}">
+					<p class="error" th:if="${#fields.hasErrors('nome')}"
+						th:errors="*{nome}"></p>
+				</div>
+				<div class="col w-25">
+					<label class="form-label ">Data de Nascimento: </label> <input
+						class="form-select" type="date"
+						th:field="${cliente.dataNascimento}">
+					<p class="error" th:if="${#fields.hasErrors('dataNascimento')}"
+						th:errors="*{dataNascimento}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<label class="form-label">Profissão: </label> <input
+						class="form-control" id="input_prof" th:field="*{profissao}"
+						th:value="${prof}">
+					<p class="error" th:if="${#fields.hasErrors('profissao')}"
+						th:errors="*{profissao}"></p>
+				</div>
+				<div class="col">
+					<label class="form-label">Lista de profissões: <span
+						th:if="${#arrays.isEmpty(profissoes)}">Sem informações</span></label> <select
+						class="form-select" id="select_prof" onchange="sendData()"
+						th:unless="${#arrays.isEmpty(profissoes)}"
+						th:classappend="${#fields.hasErrors('profissao')}?input_error:nda">
+						<option> - Selecione uma profissão - </option>
+						<option th:each="prof,stat: ${profissoes}" th:value="${prof.nome}"
+							th:text="${prof.nome}">
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label class="form-label" >CPF: </label> <input class="form-control"  type="text" th:oninput="mascara(this)"
+						th:classappend="${#fields.hasErrors('cpf')}?input_error:nda"
+						th:field="*{cpf}">
+					<p class="error" th:if="${#fields.hasErrors('cpf')}"
+						th:errors="*{cpf}"></p>
+				</div>
+				<div class="col">
+					<label class="form-label" >RG: </label> <input class="form-control"  type="text"
+						th:classappend="${#fields.hasErrors('rg')}?input_error:nda"
+						maxlength="15" th:field="*{rg}">
+					<p class="error" th:if="${#fields.hasErrors('rg')}"
+						th:errors="*{rg}"></p>
+
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col">
+					<label class="form-label" >Telefone: </label> <input class="form-control"  type="text"
+						th:oninput="mascara_telefone(this)"
+						th:onfocus="focus_telefone(this)"
+						th:classappend="${#fields.hasErrors('telefone')}?input_error:nda"
+						th:field="*{telefone}">
+					<p class="error" th:if="${#fields.hasErrors('telefone')}"
+						th:errors="*{telefone}"></p>
+
+				</div>
+				<div class="col">
+					<label class="form-label" >E-mail: </label> <input class="form-control"
+						th:field="*{email}">
+					<p class="error" th:if="${#fields.hasErrors('email')}"
+						th:errors="*{email}"></p>
+				</div>
+			</div>
+			<div class="row">
+				<h2>Endereço</h2>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label class="form-label" >Logradouro: </label> <input class="form-control"  type="text"
+						th:field="*{endereco.logradouro}">
+				</div>
+
+				<div class="col">
+					<label class="form-label" >Número: </label> <input class="form-control" type="text" maxlength="5"
+						th:field="*{endereco.numero}">
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col">
+					<label class="form-label" >Complemento: </label> <input class="form-control" type="text"
+						th:field="*{endereco.complemento}">
+				</div>
+
+				<div class="col">
+					<label class="form-label">Bairro: </label> <input class="form-control"type="text"
+						th:field="*{endereco.bairro}">
+				</div>
+
+				<div class="col">
+					<label class="form-label">CEP: </label> <input class="form-control" type="text" th:field="*{endereco.cep}">
+				</div>
+			</div>
+			<div class="container row mt-4">				
+				<input class="btn btn-success border col w-25" type="submit" value="Salvar">
+				<p class="col" > </p>
+				<a class="btn btn-light border col w-25" th:href="@{/sigec/clientes}">Voltar</a>
+			</div>
+		</form>
+		
+	</main>
+
+</body>
+</html>

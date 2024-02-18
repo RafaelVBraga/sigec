@@ -1,0 +1,35 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+
+</head>
+<body>
+	<main>
+
+		<form class="add_edit_form" th:object="${documento}"
+			th:action="@{/sigec/cliente/doc/delete}" method="POST">
+			<input hidden th:name ="cliente_id" th:value="${cliente_id}">
+			<input type="hidden" th:field="*{id}">
+			<h2>Deleção de documento</h2>
+			<hr>
+			
+			<div class="container_alerta">
+				<h2> Atenção!</h2>
+				<div>
+					
+					<p>A deleção de documento é uma ação impossível de ser desfeita!</p>
+					<p>Deseja continuar com a operação?</p>
+				
+				</div>
+				<div class="container_botoes">					
+					<input class="del_button" type="submit" value="Deletar"></input>
+					<a class="del_link" th:href="@{/sigec/cliente/docs(id=${cliente_id})}">Voltar</a>
+				</div>
+			</div>
+		</form>
+	</main>
+
+</body>
+</html>

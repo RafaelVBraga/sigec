@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" th:href="@{/css/declaracoes/declaracao.css}">
+<title>Declaração de Hiposuficiência</title>
+</head>
+<body>
+	<div class=conteudo>
+		<h1>JM Barreto</h1>
+	</div>
+	<div class="conteudo com_borda folha borda_top_curva font-20">
+		<br><br><br>
+		<h2>Declaração de Hiposuficiência</h2>
+		<br>
+		<br>
+		
+		<p>
+			<strong><span th:text="${cliente.nome}"></span></strong>,
+			brasileiro(a), portador(a) da cédula de identidade RG nº <span
+				th:text="${cliente.rg}"></span>, inscrito(a) no CPF nº <span
+				th:text="${cliente.cpf}"></span>, residente e domiciliado(a) na <span
+				th:text="${endereco.logradouro}"></span>, <span
+				th:text="${endereco.numero}"></span>, <span
+				th:text="${endereco.bairro}"></span>, CEP <span
+				th:text="${endereco.cep}"></span> - Fortaleza-CE.
+		</p>
+		<br>
+		<p>Declaro, com fulcro no artigo 5°, LXXIV, da CF, bem como nos
+			termos do art. 98 e seguintes da Lei 13.105/2015 (Código de Processo
+			Civil), a concessão dos benefícios da gratuidade de justiça, uma vez
+			que não possui condições financeiras de arcar com o pagamento de
+			custas processuais, sem prejuízo do sustento próprio, conforme
+			declaração acostada a presente, declarando ainda a veracidade de
+			todos os documentos acostados sob as penas da lei. Declaro conhecer
+			que estou sujeito às sanções civis, administrativas e criminais
+			aplicáveis por força de Lei, em sendo comprovada a falsidade das
+			afirmações supra.</p>
+		<br>
+		<br>
+		
+		<br>
+		<p class="data font-20">
+			Fortaleza, <span th:text="${dia}"></span> de <span th:text="${mes}"></span>
+			de <span th:text="${ano}"></span>.
+		</p>
+		<br>
+		<p class="assinatura">____________________________________________________________</p>
+		<br>
+		
+	</div>
+
+
+	<div class=" rodape conteudo com_borda borda_bottom_curva font-10">
+		<p>Matriz: Avenida Doutor Themberge, nº 2360 ,Álvaro Weyne
+			Fortaleza/CE -Cep: 60.355-000</p>
+		<p>85-3478-1908/ 85- 98708-6197.</p>
+		<p>E-mail:jeane.msantos@hotmail.com.</p>
+	</div>
+</body>
+</html>

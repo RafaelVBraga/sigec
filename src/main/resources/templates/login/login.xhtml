@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/css/template.css}" rel="stylesheet">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<title>Sigec - Login</title>
+</head>
+<body>
+
+	<div class="container-fluid row vh-100">
+		<div
+			class="col w-50 h-100  d-flex  justify-content-center align-items-center" style="background-color:#000000">
+			<img th:src="@{/img/logo_jmbarreto3.png}" width="264" height="264" >
+		</div>
+		<div
+			class="col w-50 h-100 d-flex justify-content-center  bg-light align-items-center">
+			<div class="row w-100 ">
+				<div class="row justify-content-center mb-4 ">JM Barreto
+					Advocacia</div>
+				
+				<form class="form-floating" th:action="@{/sigec/login}" method="POST">
+
+					<div class="container shadow p-4">
+						<label class="form-label m-auto"> Usuário:</label> <input
+							class="form-control m-auto" type="text" name="username"><label
+							class="form-label m-auto"> Senha:</label> <input
+							class="form-control m-auto" type="password" name="password">
+					</div>
+					<div class="container row m-auto">
+						<input class="btn btn-dark mt-4 mb-4" type="submit" value="Login">
+					</div>
+				</form>
+				<div th:if="${param.error}">
+					<div class="alert alert-danger">Usuário ou senha incorretos!</div>
+				</div>
+				<div class="row">
+					<p th:text="${feedback}">Mensagem de erro</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<script th:src="@{/js/bootstrap.bundle.min.js}"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+</body>
+</html>

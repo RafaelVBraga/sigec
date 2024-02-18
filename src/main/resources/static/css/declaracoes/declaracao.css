@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+html { 
+	font-size: 12pt; 
+	}
+
+.folha { 
+	background-color: #ddd; padding: 0.5em; 
+	}
+.a4_vertical { 
+	width: 793px; height: 1122px; 
+	}
+.a4_horizontal { 
+	width: 1122px; height: 793px; 
+	}
+.conteudo{
+	display: flex;
+	flex-direction: column;
+	margin: 15px;	
+	padding: 5px;
+}
+.com_borda{
+	border: 1px solid black;
+}
+.borda_top_curva{
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+.borda_bottom_curva{
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+.logo{
+	border: 3px solid black;
+	border-radius: 80px;
+	margin:0 auto;
+	width: 150px;
+	height: 150px;
+}
+h1,h2{
+	margin: 0 auto;
+}
+.rodape{	
+	bottom: 0px;	
+	line-height: 2px;
+}
+.font-10{
+	font-size: 10px;
+}
+.font-20{
+	font-size: 20px;
+}
+.font-30{
+	font-size: 30px;
+}
+.assinatura{
+	margin: 0 auto;
+}
+.data{
+	margin: 0 auto;
+}

@@ -1,0 +1,53 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{:: head})}">
+<head>
+
+</head>
+<body>
+	<main>
+
+		<form class="d-flex flex-column m-auto justify-content-center"
+			th:object="${parcela}" th:action="${parcela.id}==null?@{/sigec/cliente/pagamento/parcela/adicionar}:@{/sigec/cliente/pagamento/parcela/editar}"
+			method="POST">
+			<div class="d-flex flex-column m-auto justify-content-center">
+				<h2 th:if="${parcela.id!=null}"class="m-auto mt-4">Edição de Parcela</h2>
+				<h2 th:unless="${parcela.id!=null}" class="m-auto mt-4">Adição de Parcela</h2>
+				<hr>
+				<div class="d-flex flex-column justify-content-center">
+
+
+					<input type="text" th:field="*{id}" hidden="true">
+					
+					<label class="form-label">Data de Vencimento: </label> 
+						<input th:if="${parcela.id!=null}" class="form-control" type ="text"  readonly th:field="${parcela.dataVencimento}" >
+						<input th:unless="${parcela.id!=null}" class="form-control" type ="date" th:field="${parcela.dataVencimento}" >
+					<label class="form-label">Data de Pagamento:
+						 <input	th:if="${parcela.id!=null}"  class="form-control" type="text" readonly th:field="${parcela.dataPagamento}" >
+						 <input	th:unless="${parcela.id!=null}"  class="form-control" type="date" th:field="${parcela.dataPagamento}" >
+					</label>
+					<div class="d-flex flex-row">
+						<label class="form-label">Valor: 
+							<input class="form-control" th:classappend="${#fields.hasErrors('valor')}?border-danger:nda" type="text" th:field="*{valor}">
+							<span class="text-danger" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></span>
+						</label> 				
+						
+					</div>
+
+			</div>
+			<input class="invisible" th:name="pagamento_id"
+				th:value="${pagamento.id}">
+			<div class="d-flex justify-content-between mt-4 w-100">
+
+				<input class="btn btn-success w-25" type="submit" value="Salvar"></input>
+				<a class="btn btn-secondary w-25"
+					th:href="@{/sigec/cliente/pagamento/parcelas(id =${pagamento.id},cliente_id=${pagamento.cliente.id})}">Voltar</a>
+			</div>
+
+			</div>
+		</form>
+	</main>
+
+</body>
+</html>

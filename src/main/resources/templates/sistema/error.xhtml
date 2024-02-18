@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<!-- 	th:replace="~{padrao/template :: layout (~{:: main}, ~{:: head})}">  -->
+<head>
+<link th:href="@{/css/template.css}" rel="stylesheet">
+</head>
+<body class="errorBg">
+
+
+	<div class="cntnr">
+		<h1 class="m-auto text-danger">Encontramos um erro !</h1>
+		<br>
+		<div class=" d-flex flex-column position-relative zindex-toast ">
+			<p>Infelizmente o sistema encontrou um erro do qual não consegue
+				se recuperar sozinho. Por favor entre em contato com o suporte e
+				informe o seguinte:</p>
+			<p>
+				<strong>Tipo de erro :</strong> <span th:text="${erro}"></span>.
+			</p>
+			<p>
+				<strong>Operação:</strong> <span th:text="${operacao}"></span>
+			</p>
+			<p>
+				<strong>Recurso:</strong> <span th:text="${recurso}"></span>
+			</p>
+			<div class="container_back_button">
+				<a class="botn" th:href="@{/sigec/home}">Página Inicial</a>
+			</div>
+			<a class="link"
+				href="http://br.freepik.com/fotos-gratis/estudante-estressante-posando-contra-a-parede-branca_11140113.htm">Imagem
+				de wayhomestudio no Freepik</a>
+		</div>
+		<!-- 			<img class="img-fluid zindex-dropdown w-50 h-50" th:src="@{/img/error_image.jpg}" > -->
+	</div>
+
+
+
+</body>
+</html>

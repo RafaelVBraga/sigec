@@ -1,0 +1,62 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap')
+	;
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;	
+	--text: #f9ff99;
+	font-family: "Montserrat", sans-serif;	
+	}
+
+.errorBg{	
+	    display: flexbox;	
+		background-image: url("../img/error_image.jpg");
+		background-size: cover;
+		width: 100vw;
+		height: 100vh;
+		border: 5px solid black;
+	}
+	.cntnr{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 45%;
+		margin:10%;
+		padding: 15px;
+		border: 2px double black;
+		border-radius: 0 25px 0 25px;
+		background-color: azure;
+	}
+	.cntnr p{
+		margin:10px;
+	}
+	.cntnr .link{
+		padding: 10px;
+		position:absolute;	
+		border-radius: 25px;
+		background-color: azure;	
+		right: 0;
+		bottom: 5px;
+	}
+	.botn{		
+		border: 1px solid black;
+		color:black;
+		text-decoration: none;
+		border-radius: 25px;
+		padding: 10px;
+		margin:0 auto;
+		transition: 0.5s;
+	}
+	.botn:hover{
+		background-color: 	black;
+		color:#fff;
+		
+	}
+	.container_back_button{
+	
+		width: 100%;
+		display: flex;
+		align-items: flex-end;
+	}

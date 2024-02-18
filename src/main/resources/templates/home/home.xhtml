@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main}, ~{::head})}">
+<head>
+<link th:href="@{/css/template.css}" rel="stylesheet">
+</head>
+<body>
+	<main>
+		<div class="d-flex vh-100">
+			<div class="d-flex m-auto border rounded-circle"
+				style="width: 420px; height: 420px;background-color:#000000">
+				<img class="m-auto" th:src="@{/img/logo_jmbarreto3.png}" width="264"
+					height="264">
+			</div>
+		</div>
+	</main>
+</body>
+</html>
