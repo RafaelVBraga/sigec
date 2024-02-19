@@ -94,7 +94,7 @@ public class MainController {
 	public String home() {
 		return "home/home.xhtml";
 	}
-
+	
 	@GetMapping("/clientes")  
 	public String cliente(Model model, @RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "5") int size) {
