@@ -22,9 +22,11 @@ public class SecurityConfiguration {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests(authConfig ->{				
-				authConfig.requestMatchers(HttpMethod.GET,"/css/**").permitAll();
+				authConfig.requestMatchers(HttpMethod.GET,"/css/**").permitAll();				
 				authConfig.requestMatchers(HttpMethod.GET,"/js/**").permitAll();
 				authConfig.requestMatchers(HttpMethod.GET,"/img/**").permitAll();
+				authConfig.requestMatchers(HttpMethod.GET,"/sigec/dev/**").permitAll();
+				authConfig.requestMatchers(HttpMethod.POST,"/sigec/dev/**").permitAll();
 				authConfig.requestMatchers(HttpMethod.GET,"/sigec/cliente").hasAnyAuthority("ROLE_USER");
 				authConfig.requestMatchers(HttpMethod.GET,"/sigec/clientes").hasAnyAuthority("ROLE_USER");
 				authConfig.requestMatchers(HttpMethod.GET,"/sigec/financeiro").hasRole("ADMIN");

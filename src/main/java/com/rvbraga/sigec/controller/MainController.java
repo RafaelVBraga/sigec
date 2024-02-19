@@ -799,15 +799,13 @@ public class MainController {
  
 		if (error.hasErrors()) {
 			model.addAttribute("usuario", newUser);
-			return "gerencial/adicionar_editar_usuarios.xhtml";  
+			return "gerencial/adicionar_editar_usuarios.xhtml";   
 		}
 
 		Users userToSave = usersService.findById(newUser.getId());
-		System.out.println(userToSave.getUsername());
-		System.out.println(newUser.getUsername());
-		System.out.println(userToSave.getUsername().compareTo(newUser.getUsername()));
+		
 		userToSave.setUsername(userToSave.getUsername().compareTo(newUser.getUsername())==0?userToSave.getUsername():newUser.getUsername());
-		userToSave.setPassword(userToSave.getPassword().compareTo(encoder.encode(newUser.getPassword()))==0?userToSave.getPassword():newUser.getPassword());
+		userToSave.setPassword(userToSave.getPassword().compareTo(encoder.encode(newUser.getPassword()))==0?userToSave.getPassword():encoder.encode(newUser.getPassword()));
 				
 		if (newUser.getCargoGerencial()) {
 			if(!userToSave.getAuthorities().contains(authoritiesService.load("ROLE_ADMIN")))
@@ -886,6 +884,34 @@ public class MainController {
 		model.addAttribute("calculo", calc);
 		return "calculadora/calculadora.xhtml";
 	}
+//	@GetMapping("/dev/usuario")	
+//	public String pageConfigUsuarios(Model model) {
+//			model.addAttribute("usuario", new UsersDto());
+//			return "gerencial/adicionar_editar_usuarios.xhtml";
+//	}
+//	@PostMapping("/dev/usuario")
+//	public String configUsuarios(Model model, @ModelAttribute("usuario") UsersDto newUser, Errors error) {
+//
+//		if (error.hasErrors()) {
+//			model.addAttribute("usuario", newUser);
+//			return "gerencial/adicionar_editar_usuarios.xhtml";
+//		}
+//
+//		Users userToSave = new Users();
+//		userToSave.setUsername(newUser.getUsername());
+//		userToSave.setPassword(encoder.encode(newUser.getPassword()));
+//		userToSave.setAccountNonExpired(true);
+//		userToSave.setAccountNonLocked(true);
+//		userToSave.setCredentialsNonExpired(true);
+//		userToSave.setEnabled(true);
+//		Set<Authorities> authorities = new HashSet<Authorities>();
+//		if (newUser.getCargoGerencial())
+//			authorities.add(authoritiesService.load("ROLE_ADMIN"));
+//		authorities.add(authoritiesService.load("ROLE_USER"));
+//		userToSave.setAuthorities(authorities);
+//		usersService.save(userToSave);
+//		return gerencial(model);
+//	}
 	
 
 }
