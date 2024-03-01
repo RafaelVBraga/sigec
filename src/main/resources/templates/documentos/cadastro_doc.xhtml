@@ -1,0 +1,54 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+
+</head>
+<body>
+	<main>
+
+		<form class="d-flex flex-column m-auto justify-content-center"
+			th:object="${documento}" th:action="${documento.id}==null?@{/sigec/cliente/doc/novo}:@{/sigec/cliente/doc/editar}"
+			method="POST">
+
+			<input type="hidden" th:field="*{id}">
+			<div class="d-flex flex-column m-auto justify-content-center">
+				<h2 class="m-auto mt-4">Cadastro de documento</h2>
+				<hr>
+				<div class="d-flex flex-column m-auto justify-content-between">
+					<input type="text" th:field="*{id}" hidden="true">
+					<div class="container-fluid">
+						<label class="form-label">Tipo de documento: <input
+							class="form-control" type="text" th:field="*{tipo}"></label>
+					</div>
+					<div class="container">
+						<label class="form-label">Data Recebimento: <input
+							class="form-control" type="date" th:field="*{dataRecebimento}"></label>
+						<label class="form-label">Responsável Recebimento: <input
+							class="form-control" type="text" th:field="*{respRecebimento}"></label>
+					</div>
+					<div class="container">
+						<label class="form-label">Data Devolução: <input
+							class="form-control" type="date" th:field="*{dataDevolucao}"></label>
+						<label class="form-label">Responsável devolução: <input
+							class="form-control" type="text" th:field="*{respDevolucao}"></label>
+						<label class="form-label">Local: <span class="badge text-bg-danger" th:if="${#fields.hasErrors('local')}"
+						th:errors="*{local}">*Campo obrigatório!</span><input
+							class="form-control" type="text" th:field="*{local}"></label>
+					</div>
+
+
+				</div>
+				<div class="d-flex justify-content-between mt-4">
+					<input hidden th:name="cliente_id" th:value="${cliente_id}"><input
+						class="btn btn-success w-25" type="submit" value="Salvar"></input>
+					<a class="btn btn-secondary w-25"
+						th:href="@{/sigec/cliente/docs(id =${cliente_id})}">Voltar</a>
+				</div>
+			</div>
+		</form>
+	</main>
+
+</body>
+</html>

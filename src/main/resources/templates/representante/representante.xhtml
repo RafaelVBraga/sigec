@@ -1,0 +1,118 @@
+
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+<link th:href="@{/css/cliente/cliente.css}" rel="stylesheet">
+<script th:src="@{/js/cliente/clientes.js}"></script>
+
+</head>
+<body>
+	<main>
+		<div th:switch="${feedback.status}">
+			<div th:case="'FALHA'"
+				class="alert alert-dismissible alert-danger fade show" role="alert"
+				id="cnt_msg">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<div th:case="'SUCESSO'"
+				class="alert alert-dismissible alert-success fade show" role="alert"
+				id="cnt_msg">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<div th:case="'INFO'"
+				class="alert alert-dismissible fade show text-bg-light" role="alert"
+				id="cnt_msg">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+		</div>
+
+		<div class="container-fluid ">
+			<h2>Representantes</h2>
+			<hr>
+			<div class="">
+				<form class="row" th:object="${pesquisa}"
+					th:action="@{/sigec/representante/pesquisa}" method="POST">
+					<div class="col">
+						<label class="form-label">Nome: </label> <input
+							class="form-control" type="text" th:field=*{pesquisaNome} />
+					</div>
+					<div class="col">
+						<label class="form-label">CPF:</label><input class="form-control"
+							th:oninput="mascara(this)" type="text" th:field=*{pesquisaCpf} />
+					</div>
+
+					<div class="d-flex">
+						<input class="btn btn-primary mt-4" type="submit"
+							value="Pesquisar">
+						<div>
+							<a class="btn btn-success mx-5 mt-4"
+								th:href="@{/sigec/representante/adicionar}">Cadastrar</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<hr>
+		<div th:if="${lista_representantes!=null}" >
+		<div id="accordion" class=""
+			th:if="${lista_representantes.size() > 0}">
+			<table class="table table-light table-striped rouded-top">
+				<thead>
+					<tr>
+						<!-- 						<th>Id</th> -->
+						<th class="table-light">Nome</th>
+						<th class="table-light">CPF</th>
+						<th class="table-light">RG</th>
+						<th class="table-light">Ações</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="representante, iStat : ${lista_representantes}"
+						th:style="${iStat.odd}? 'font-weight:bold;'">
+						<!-- 						<td th:text="${cliente.id}">id</td> -->
+
+						<td th:text="${representante.nome}">nome</td>
+						<td th:text="${representante.cpf}">cpf</td>
+						<td th:text="${representante.rg}">rg</td>
+
+						<td>
+							<div>
+								<a class="btn btn-primary" data-bs-toggle="tooltip"
+									data-bs-title="Visualizar"
+									data-bs-custom-class="custom-tooltip"
+									th:href="@{/sigec/representante/editar(id =${representante.id})}">
+									<span><img th:src="@{/img/pencil-square.svg}" alt="docs"
+										width="16" height="16"></span>
+								</a> <a class="btn btn-danger" data-bs-toggle="tooltip"
+									data-bs-title="Deletar" data-bs-custom-class="custom-tooltip"
+									th:href="@{/sigec/representante/delete(id =${representante.id})}"> <img
+									th:src="@{/img/trash.svg}" alt="docs" width="16" height="16"></a>
+
+							</div>
+
+						</td>
+					</tr>
+				</tbody>
+
+			</table>
+
+
+
+		</div>
+		</div>
+		<div class="tabela" th:unless="${lista_representantes!=null}">
+			<h2 >Sem retorno para sua pesquisa!</h2>
+		</div>
+
+	</main>
+
+
+</body>
+</html>

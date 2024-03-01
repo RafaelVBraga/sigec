@@ -1,0 +1,240 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+<script th:src="@{/js/cliente/cad_cliente.js}"></script>
+<script th:src="@{/js/cliente/maskinput.js}"></script>
+</head>
+<body>
+	<main>
+		<div class="d-flex flex-column">
+			<h2 class="mx-auto mt-4"
+				th:text="${cliente.id==null}?'Cadastro de Cliente':'Edição de Cliente' ">Cadastro
+				de Clientes</h2>
+			<hr>
+			<div th:if="${feedback}!=null"
+				class="alert alert-dismissible fade show"
+				th:classappend="${feedback.status}=='FALHA'?'text-bg-danger':'text-bg-success'">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<form class="container mb-4" th:object="${cliente}"
+				th:action="${cliente.id}==null?@{/sigec/cliente/salvar}:@{/sigec/cliente/editar}"
+				enctype="multipart/form-data" method="POST">
+
+				<div class="row">
+					<label hidden>Id: </label> <input hidden class="input_id"
+						type="text" th:field="*{id}" readonly="readonly">
+				</div>
+
+				<div class="row">
+					<div class="col w-75">
+						<label class="form-label ">Nome: <span class="text-danger"
+							th:if="${#fields.hasErrors('nome')}">Campo necessário</span></label> <input
+							class="form-control" type="text"
+							th:classappend="${#fields.hasErrors('nome')}?'border border-danger':''"
+							th:field="*{nome}">
+					</div>
+					<div class="col w-25">
+						<label class="form-label ">Data de Nascimento: <span
+							class="text-danger"
+							th:if="${#fields.hasErrors('dataNascimento')}"
+							th:errors="*{dataNascimento}"></span></label> <input class="form-select"
+							type="date" th:field="${cliente.dataNascimento}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<label class="form-label">Profissão:<span
+							class="text-danger" th:if="${#fields.hasErrors('profissao')}"
+							th:errors="*{profissao}"></span>
+						</label> <input class="form-control" id="input_prof"
+							th:field="*{profissao}" th:value="${prof}">
+					</div>
+					<div class="col">
+						<label class="form-label">Lista de profissões: <span
+							th:if="${#arrays.isEmpty(profissoes)}">Sem informações</span></label> <select
+							class="form-select" id="select_prof" onchange="sendData()"
+							th:unless="${#arrays.isEmpty(profissoes)}"
+							th:classappend="${#fields.hasErrors('profissao')}?'border border-danger':''">
+							<option>- Selecione uma profissão -</option>
+							<option th:each="prof,stat: ${profissoes}"
+								th:value="${prof.nome}" th:text="${prof.nome}">
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label class="form-label">CPF:<span class="text-danger"
+							th:if="${#fields.hasErrors('cpf')}">Campo necessário</span>
+						</label> <input class="form-control" type="text"
+							th:oninput="mascara(this)"
+							th:classappend="${#fields.hasErrors('cpf')}?'border border-danger':''"
+							th:field="*{cpf}">
+					</div>
+					<div class="col">
+						<label class="form-label">RG:<span class="text-danger"
+							th:if="${#fields.hasErrors('rg')}">Campo necessário</span>
+						</label> <input class="form-control" type="text"
+							th:classappend="${#fields.hasErrors('rg')}?'border border-danger':''"
+							maxlength="15" th:field="*{rg}">
+					</div>
+				</div>
+				<div class="row d-flex flex-row mt-4">
+					<div class="row d-flex flex-row mt-4">
+						<h3>Representantes</h3>
+						<div class="d-flex flex-row mt-4">
+							<label class="label-control"> <input class="form-control"
+								th:name="pesquisa_rep" th:value="${pesquisa_rep}" th:readonly="${cliente.id==null}"></label> <Label
+								class="form-label"><button
+									class="btn btn-primary mx-4 mw-25" type="submit"
+									th:name="pesqRep" th:disabled="${cliente.id==null}" >Pesquisar</button ><span th:if="${cliente.id==null}" class="text-danger">Somente para clientes cadastrados!</span></Label>
+						</div>
+						<div th:if="${listaRepresentantes!=null}" class="row mt-4">
+							<table class="table table-striped border rouded mt-4">
+								<thead>
+									<tr>
+
+										<th>Nome</th>
+										<th>CPF</th>
+										<th>Ação</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="representante, iStat:${listaRepresentantes}">
+
+										<td th:text="${listaRepresentantes[__${iStat.index}__].nome}"></td>
+										<td th:text="${listaRepresentantes[__${iStat.index}__].cpf}"></td>
+										<td>
+											<div
+												class="d-flex col mt-3 justify-content-center align-items-center">
+												<button class="btn btn-primary   align-self-center"
+													type="submit"
+													th:name="addRep"
+													th:value="${listaRepresentantes[__${iStat.index}__].id}">Adicionar</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="3">
+											<div class="d-flex flex-row justify-content-center ">
+												<input th:name="fechar_pesquisa" value="Fechar"
+													class="btn btn-danger" type="submit">
+											</div>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<div th:if="${cliente.representantes!=null}"
+							class="d-flex flex-column mt-4">
+							<div th:each="representante, iStat: ${cliente.representantes}"
+								class="row">
+								<input hidden
+									th:field="${cliente.representantes[__${iStat.index}__].id}"><label
+									class="form-label col">Representante: <span
+									th:text="${iStat.count}"></span>: <input
+									class="form-control-plaintext" type="text"
+									th:field="${cliente.representantes[__${iStat.index}__].nome}"></label>
+								<label class="form-label col">CPF <span
+									th:text="${iStat.count}"></span>: <input
+									class="form-control-plaintext" type="text"
+									th:field="${cliente.representantes[__${iStat.index}__].cpf}"></label>
+								<div class="d-flex col mt-3">
+									<button class="btn btn-danger   align-self-center"
+										type="submit" th:name="removeRep"
+										th:value="${cliente.representantes[__${iStat.index}__].id}">Remover</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					
+
+				</div>
+
+				<div class="row">
+
+					<div class="row d-flex flex-row mt-4">
+						<h3>Telefones</h3>
+						<Label class="form-label"><button
+								class="btn btn-success  mw-25" type="submit" th:name="addTel">Adicionar</button></Label>
+						<div th:each="telefone, iStat:${cliente.telefones}" class="row">
+							<input hidden
+								th:field="${cliente.telefones[__${iStat.index}__].id}"><label
+								class="form-label col">Telefone <span
+								th:text="${iStat.count}"></span>: <input class="form-control"
+								type="text" th:oninput="mascara_telefone(this)"
+								th:onfocus="focus_telefone(this)"
+								th:field="${cliente.telefones[__${iStat.index}__].numero}"></label>
+							<label class="form-label col">Contato <span
+								th:text="${iStat.count}"></span>: <input class="form-control"
+								type="text"
+								th:field="${cliente.telefones[__${iStat.index}__].contato}"></label>
+							<div class="d-flex col mt-3">
+								<button class="btn btn-danger   align-self-center" type="submit"
+									th:name="removeTel" th:value="${iStat.index}">Remover</button>
+							</div>
+
+						</div>
+					</div>
+					<div class="col">
+						<label class="form-label">E-mail:<span class="text-danger"
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+						</label> <input class="form-control" th:field="*{email}">
+					</div>
+				</div>
+				<div class="row mt-4">
+					<h3>Endereço</h3>
+					<input hidden th:field="*{endereco.id}">
+				</div>
+				<div class="row">
+					<div class="col">
+						<label class="form-label">Logradouro: </label> <input
+							class="form-control" type="text"
+							th:field="*{endereco.logradouro}">
+					</div>
+
+					<div class="col">
+						<label class="form-label">Número: </label> <input
+							class="form-control" type="text" maxlength="5"
+							th:field="*{endereco.numero}">
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="col">
+						<label class="form-label">Complemento: </label> <input
+							class="form-control" type="text"
+							th:field="*{endereco.complemento}">
+					</div>
+
+					<div class="col">
+						<label class="form-label">Bairro: </label> <input
+							class="form-control" type="text" th:field="*{endereco.bairro}">
+					</div>
+
+					<div class="col">
+						<label class="form-label">CEP: </label> <input
+							class="form-control" type="text" th:field="*{endereco.cep}">
+					</div>
+				</div>
+				<div class="container row mt-4">
+					<input class="btn btn-success border col w-25" type="submit"
+						value="Salvar">
+					<p class="col"></p>
+					<a class="btn btn-light border col w-25"
+						th:href="@{/sigec/clientes}">Voltar</a>
+				</div>
+			</form>
+		</div>
+	</main>
+
+</body>
+</html>

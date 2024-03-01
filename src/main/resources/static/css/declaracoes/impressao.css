@@ -1,0 +1,25 @@
+*{
+	background-image: none;
+}
+body{
+	background:white;
+	color:black;
+}
+@page {
+ margin-left: 20mm;
+ margin-right: 20mm;
+ margin-top: 20mm;
+ margin-bottom: 20mm;
+ }
+ @page :left {
+ margin-left: 20mm;
+ }
+ @page :right {
+ margin-right: 30mm;
+ }
+ p{
+	 widows: 3;
+ }
+ p{
+	 orphans: 3;
+ }

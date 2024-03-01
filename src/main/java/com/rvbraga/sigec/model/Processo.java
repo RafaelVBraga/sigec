@@ -5,11 +5,14 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -30,14 +33,19 @@ public class Processo implements Serializable {
 	private String status;
 	private String situacao; 
 	private String prioridade;
-	@OneToMany(mappedBy = "tarefa")
+	@OneToMany(mappedBy = "tarefa",cascade = CascadeType.ALL)
 	private List<Link> links;
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne
+    @JoinColumn(name = "responsavel_id")
 	private Usuario responsavel;
+	
 	private LocalDate cadastro;
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Pagamento> pagamento;
-
+	
+	
 }

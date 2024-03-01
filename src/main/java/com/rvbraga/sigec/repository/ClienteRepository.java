@@ -14,6 +14,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID>{
 	
 	public Page<Cliente> findByNomeContainingIgnoreCase(String nome, Pageable pageable);	
 	public List<Cliente> findByNomeContainingIgnoreCase(String nome);
+	public List<Cliente> findByCpfContaining(String cpf);
 	public Cliente findByCpf(String cpf);
+	public List<Cliente> findByRgContaining(String rg);
+	public Cliente findByRg(String rg);
+	
 
 }

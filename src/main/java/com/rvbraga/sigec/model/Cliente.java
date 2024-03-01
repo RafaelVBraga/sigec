@@ -19,9 +19,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -39,51 +37,67 @@ public class Cliente implements Serializable{
 	@NotBlank
 	private String nome;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataNascimento;	
 	
 	private String profissao;
 	
-	@CPF@NotBlank
+	@CPF(message="Cpf inválido")@NotBlank
 	private String cpf;
 	
-	private String cpfDigital;
 	
-	@Size(min=11, message="Tamanho deve ser no mínimo 11")@NotBlank
+	
+	@NotBlank
 	private String rg;
 	
-	private String rgDigital;
-	
-	@Email@NotBlank
 	private String email;
 	
-	private String telefone;
+	@OneToMany(mappedBy ="cliente" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	
+	private List<Telefone> telefones;
+	
+	
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCadastro;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)		
 	private Endereco endereco; 
 	
-	private String enderecoDigital;
-	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
 	private List<Documento> documentos; 
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
 	private List<Pagamento> pagamentos;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "cliente")
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Processo> processos;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name ="cliente_representantes", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="representante_id"))
-	private List<Cliente> representantes;
+	private List<Representante> representantes;	
 	
 	@ManyToMany
 	@JoinTable(name ="cliente_herdeiros", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="herdeiro_id"))
 	private List<Cliente> herdeiros;
 	
-	
+	public void update(Cliente cliente) {
+		if(cliente.getNome()!=null) this.nome = cliente.getNome();
+		if(cliente.getDataNascimento()!=null)this.dataNascimento = cliente.getDataNascimento();
+		if(cliente.getDataCadastro()!=null)this.dataCadastro = cliente.getDataCadastro();
+		if(cliente.getCpf()!=null) this.cpf = cliente.getCpf();
+		if(cliente.getRg()!=null) this.rg = cliente.getRg();
+		if(cliente.getEmail()!=null) this.email = cliente.getEmail();
+		if(cliente.getProfissao()!=null)this.profissao = cliente.getProfissao();
+		if(cliente.getEndereco().getLogradouro()!=null)this.endereco.setLogradouro(cliente.endereco.getLogradouro());
+		if(cliente.getEndereco().getNumero()!=null)this.endereco.setNumero(cliente.endereco.getNumero());
+		if(cliente.getEndereco().getComplemento()!=null)this.endereco.setComplemento(cliente.endereco.getComplemento());
+		if(cliente.getEndereco().getBairro()!=null)this.endereco.setBairro(cliente.endereco.getBairro());
+		if(cliente.getEndereco().getCep()!=null)this.endereco.setCep(cliente.endereco.getCep());
+		
+		
+		
+	}
 	
 
 }

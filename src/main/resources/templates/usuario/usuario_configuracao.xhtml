@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main}, ~{::head})}">
+<head>
+<link th:href="@{/css/template.css}" rel="stylesheet">
+<link th:href="@{/css/geral/geral.css}" rel="stylesheet">
+<script th:src="@{/js/geral/geral.js}" defer="defer"></script>
+</head>
+<body>
+	<main>
+		<div class="d-flex flex-column">
+			<h2 class="mx-auto py-auto">Trocar Senha</h2>
+			<div
+				class="d-flex justify-content-center align-items-center border shadow mx-auto"
+				style="width: 500px; height: 200px">
+
+				<form class="mx-auto" th:object="${usuario}" method="post">
+					<div class="position-relative">
+						<label class="form-label m-4">Nova senha: <input
+							id="password" class="form-control" type="password"
+							th:field="*{password}">
+						<button th:onclick="toggle()" type="button"
+								class="eye-button position-absolute" style="bottom:70px">
+								<img id="eye_slash_image" style="display: none"
+									th:src="@{/img/eye-slash.svg}" alt="eye-slash" width="16"
+									height="16"><img id="eye_image" th:src="@{/img/eye.svg}"
+									alt="eye" width="16" height="16">
+							</button>
+						</label>
+						<div class="d-flex justify-content-between">
+							<input class="btn btn-success" type="submit" value="Salvar"><a
+								class="btn btn-secondary" th:href="@{/sigec/home}">Voltar</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</main>
+</body>
+</html>

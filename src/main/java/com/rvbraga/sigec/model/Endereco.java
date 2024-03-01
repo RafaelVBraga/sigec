@@ -1,13 +1,15 @@
-package com.rvbraga.sigec.model;
+	package com.rvbraga.sigec.model;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -29,8 +31,14 @@ public class Endereco implements Serializable{
 	private String cep;
 	private String bairro;
 	private String digitalizacao;
-	@OneToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
+	@OneToOne(mappedBy="endereco")
+    @JoinColumn(name = "cliente_id") 
 	private Cliente cliente;
+	
+    public String toString() {
+    	return this.logradouro+" "+this.numero+" "+this.complemento+" "+this.bairro+" "+this.cep;
+    }
 	
 		
 	

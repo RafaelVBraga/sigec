@@ -1,0 +1,77 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+
+</head>
+<body>
+	<main>
+	<div class="container">
+		<h1 th:text="${cliente.nome}"></h1>
+		<input type="hidden" th:name="cliente_nome" th:value="${cliente.nome}">
+		<h2>Documentos</h2>
+		<hr>
+		<input th:name="cliente_id" th:field="${cliente.id}" type="hidden">
+		<div class="add_button" style="margin-left: 21px">
+			<a class="btn btn-success"type="submit"
+				th:href="@{/sigec/cliente/doc/novo(id =${cliente.id})}">
+				Adicionar </a>
+		</div>
+		<div th:if="${cliente.documentos.size() > 0}">
+			<table class="table table-light table-striped mt-4">
+				<thead>
+					<tr>						
+						<th>Tipo</th>
+						<th>Data Recebimento</th>
+						<th>Responsável Recebimento</th>
+						<th>Data Devolução</th>
+						<th>Responsável Devolução</th>						
+						<th>Local</th>
+						<th>Ações
+				</thead>
+				<tbody>
+					<tr th:each="documento, rowStat : ${cliente.documentos}"
+						th:style="${rowStat.odd}? 'font-weight:bold;'">
+
+						<td th:text="${documento.tipo}"></td>
+						<td th:text="${#temporals.format(documento.dataRecebimento, 'dd/MM/yyyy')}"></td>
+						<td th:text="${documento.respRecebimento}"></td>
+						<td th:text="${#temporals.format(documento.dataDevolucao, 'dd/MM/yyyy')}"></td>
+						<td th:text="${documento.respDevolucao}"></td>
+						<td th:text="${documento.local}"></td>
+						<td>
+							<div class="btn btn-info" >
+								<a th:href="@{/sigec/cliente/doc/editar(id=${documento.id},cliente_id=${cliente.id})}" 
+								data-bs-toggle="tooltip" data-bs-title="Editar"
+									data-bs-custom-class="custom-tooltip">
+									<img th:src="@{/img/pencil-square.svg}" alt="docs" width="16" height="16">
+								</a>
+							</div>
+							<div class="btn btn-danger" >
+								<a th:href="@{/sigec/cliente/doc/delete(id=${documento.id},cliente_id=${cliente.id})}" 
+								data-bs-toggle="tooltip" data-bs-title="Deletar"
+									data-bs-custom-class="custom-tooltip">
+									<img th:src="@{/img/trash.svg}" alt="docs" width="16" height="16">
+								</a>
+							</div>
+						</td>
+				</tbody>
+			</table>
+			<hr>
+		</div>
+		<div th:unless="${cliente.documentos.size()>0}">
+			<p>Não existem documentos cadastrados para esse cliente!</p>
+			<hr>
+		</div>
+
+
+		<div class="container-fluid">
+			<a class="btn btn-secondary w-100"
+				th:href="@{/sigec/clientes}">Voltar</a>
+		</div>
+		</div>
+	</main>
+
+</body>
+</html>

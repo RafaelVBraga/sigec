@@ -12,8 +12,9 @@ public class PesquisaDto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String pesquisaNome;	
-	private String pesquisaCpf;
+	private String pesquisaNome;
+	
+	private String pesquisaCpf; 
 	@Min(value = 1)
 	private Integer paginas;
 

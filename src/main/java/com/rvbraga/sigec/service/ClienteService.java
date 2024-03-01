@@ -1,10 +1,5 @@
 package com.rvbraga.sigec.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -14,19 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.rvbraga.sigec.dto.ClienteDto;
 import com.rvbraga.sigec.model.Cliente;
+import com.rvbraga.sigec.model.Documento;
 import com.rvbraga.sigec.repository.ClienteRepository;
 
 @Service
 public class ClienteService {
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteRepository clienteRepository;	
 
-	public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + File.separator + "sigec" + File.separator
-			+ "digitalizacoes" + File.separator;
+	
 
 	public List<Cliente> findAll() {
 		return clienteRepository.findAll();
@@ -35,42 +29,23 @@ public class ClienteService {
 	public Page<Cliente> findByNome(String nome, Pageable paging) {
 		return clienteRepository.findByNomeContainingIgnoreCase(nome, paging);
 	}
+	public List<Cliente> findByNome(String nome) {
+		return clienteRepository.findByNomeContainingIgnoreCase(nome);
+	}
 
 	public Page<Cliente> findAll(Pageable paging) {
 
 		return clienteRepository.findAll(paging);
 	}
 
-	public Cliente saveCliente(Cliente cliente)  {
-		
+	public Cliente saveCliente(Cliente cliente) {
+
 		cliente.setDataCadastro(LocalDate.now());
 		return clienteRepository.save(cliente);
 	}
-
-	public Cliente saveDocs(Cliente cliente, MultipartFile[] files) throws IOException{ 
-		File path;
-
-		path = new File(UPLOAD_DIRECTORY, cliente.getCpf().toString());
-		path.mkdirs();
-		Path fileCpfDig = Paths.get(UPLOAD_DIRECTORY, cliente.getCpf().toString(), File.separator + "CPF.png");
-		Path fileRgDig = Paths.get(UPLOAD_DIRECTORY, cliente.getCpf().toString(), File.separator + "RG.png");
-		Path fileEndDig = Paths.get(UPLOAD_DIRECTORY, cliente.getCpf().toString(), File.separator + "ENDERECO.png");
+	public Cliente editCliente(Cliente cliente) {
 		
-		cliente.setCpfDigital(fileCpfDig.toString());
-		cliente.setRgDigital(fileRgDig.toString());
-		cliente.setEnderecoDigital(fileEndDig.toString());
-		
-		Files.write(fileCpfDig, files[0].getBytes());
-		Files.write(fileEndDig, files[1].getBytes());
-		Files.write(fileRgDig, files[2].getBytes());
-		
-		return cliente;
-	}
-
-	public MultipartFile[] loadDocs(Cliente cliente) {
-		MultipartFile[] files = {};
-		File path = new File(UPLOAD_DIRECTORY, cliente.getCpf().toString());
-		return files;
+		return clienteRepository.save(cliente);
 	}
 
 	public Boolean deleteCliente(Cliente cliente) {
@@ -80,10 +55,17 @@ public class ClienteService {
 		} catch (Exception e) {
 			return false;
 		}
+	} 
+	public Boolean checkExisteCpfCadastrado(Cliente cliente) {
+		return clienteRepository.findByCpf(cliente.getCpf())!=null;
+	
+	}
+	public Boolean checkExisteRgCadastrado(Cliente cliente) {
+		 return clienteRepository.findByRg(cliente.getRg())!=null; 			
 	}
 
-	public Cliente findByCpf(String Cpf) {
-		return clienteRepository.findByCpf(Cpf);
+	public List<Cliente> findByCpf(String Cpf) {
+		return clienteRepository.findByCpfContaining(Cpf);
 	}
 
 	public Cliente findById(UUID id) {
@@ -93,18 +75,61 @@ public class ClienteService {
 	public Cliente clienteDto2Cliente(ClienteDto cDto) {
 		Optional<Cliente> cliente = clienteRepository.findById(cDto.getId());
 		cliente.get().setCpf(cDto.getCpf());
+		
 		cliente.get().setNome(cDto.getNome());
 		cliente.get().setRg(cDto.getRg());
-
+		
+		cliente.get().setProfissao(cDto.getProfissao());
 		cliente.get().setDataNascimento(cDto.getDataNascimento());
-		cliente.get().setTelefone(cDto.getTelefone());
-
+		cliente.get().setTelefones(cDto.getTelefones());
+		cliente.get().setEndereco(cDto.getEndereco());
+		
 		return cliente.get();
 
+	}
+	
+		
+	public List<Documento> getDocumentos(UUID id){
+		return this.findById(id).getDocumentos();
 	}
 
 	public void deleteCliente(UUID id) {
 		clienteRepository.deleteById(id);
 	}
+/*
+	public JasperPrint gerarRelatorio(String tipoRelatorio, UUID idCliente) throws IOException, JRException {
+		Map<String, Object> params = new HashMap<>();
+		InputStream jasperStream = null;
+		
+		switch (tipoRelatorio) {
+		case "Dec_Hipo":
+			jasperStream = resourceLoader.getResource("classpath:reports/Declaracao_hipo_A4.jasper").getInputStream();
+			break;
+		case "Proc":
+			jasperStream = resourceLoader.getResource("classpath:reports/Procuracao_A4.jasper").getInputStream();
+			params.put("nomeAdvogado", "Nome_Advogado"); 
+			params.put("OAB_Advogado", "OAB_Advogado"); 
+			params.put("cpf_Advogado", "cpf_Advogado"); 
+			params.put("rg_Advogado", "rg_Advogado"); 			
+			break;
+		}
 
+		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+		Cliente cliente = clienteRepository.findById(idCliente).get();
+
+		
+		params.put("cpf", cliente.getCpf());
+		params.put("logradouro", cliente.getEndereco().getLogradouro());
+		params.put("numero", cliente.getEndereco().getNumero());
+		params.put("complemento", cliente.getEndereco().getComplemento());
+		params.put("bairro", cliente.getEndereco().getBairro());
+		params.put("cep", cliente.getEndereco().getCep());
+
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		clientes.add(cliente);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params,
+				new JRBeanCollectionDataSource(clientes, false));
+		return jasperPrint;
+	}
+*/
 }

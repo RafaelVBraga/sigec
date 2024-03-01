@@ -1,0 +1,35 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+
+</head>
+<body>
+	<main>
+
+		<form class="d-flex flex-column justify-content-center"
+			th:object="${representante}"
+			th:action="@{/sigec/representante/deletar}"
+			method="POST">
+
+			<h3 class="m-auto">Deleção de Representante</h3>
+			<hr>
+			<div class="m-auto d-flex flex-column justify-content-between">
+				<h2 class="m-auto mb-4 text-bg-danger rounded p-4">Atenção!</h2>
+				<p>A deleção de cliente é uma ação impossível de ser desfeita e ficará registrada a responsabilidade da ação !</p>
+				<p>Todos os dados referente ao representante abaixo serão apagados <strong>permanentemente</strong>:</p>
+				<strong class="m-auto"th:text="${representante.nome}"> cliente</strong>
+				<input class="invisible" th:field="*{id}">
+				<p>Deseja continuar com a operação?</p>
+
+				<div class="d-flex justify-content-between">
+					<input class="btn btn-danger w-25" type="submit" value="Deletar"></input>
+					<a class="btn btn-secondary w-25" th:href="@{/sigec/clientes}">Voltar</a>
+				</div>
+			</div>
+		</form>
+	</main>
+
+</body>
+</html>

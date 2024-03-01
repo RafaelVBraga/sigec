@@ -1,0 +1,9 @@
+.eye-button{
+		background-color: white;
+		border: none;
+		border-radius:35px;
+		color:black;
+		right: 35px; bottom: 30px;
+/*		animation: pulse 2s infinite;*/
+		
+}

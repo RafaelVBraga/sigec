@@ -1,0 +1,54 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+
+</head>
+<body>
+	<main>
+
+		<form class="d-flex flex-column m-auto justify-content-center"
+			th:object="${pagamento}" th:action="@{/sigec/cliente/pagamento/novo}"
+			method="POST">
+			<div class="d-flex flex-column m-auto justify-content-center">
+				<h2 class="m-auto mt-4">Cadastro de Pagamentos</h2>
+				<hr>
+				<div class="d-flex flex-column justify-content-center">
+
+
+					<input type="text" th:field="*{id}" hidden="true">
+					<label class="form-label">Descrição: 
+						<textarea class="form-control" th:field="*{descricao}"></textarea>
+					</label> 
+					<label class="form-label">Data Primeira Parcela:
+						 <input	class="form-control" type="date" th:field="*{dataCadastro}">
+					</label>
+					<div class="d-flex flex-row">
+						<label class="form-label">Valor: 
+							<input class="form-control" th:classappend="${#fields.hasErrors('valor')}?border-danger:nda" type="text" th:field="*{valor}">
+							<span class="text-danger" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></span>
+						</label> 
+						
+						<label class="form-label ms-4">Número de parcelas: 
+							<input th:classappend="${#fields.hasErrors('numeroParcelas')}?border-danger:nda" class="form-control" type="text" th:field="*{numeroParcelas}">
+								<span class="text-danger" th:if="${#fields.hasErrors('numeroParcelas')}" th:errors="*{numeroParcelas}"></span>
+						</label>
+					</div>
+
+			</div>
+			<input class="invisible" th:name="cliente_id"
+				th:value="${cliente_id}">
+			<div class="d-flex justify-content-between mt-4 w-100">
+
+				<input class="btn btn-success w-25" type="submit" value="Salvar"></input>
+				<a class="btn btn-secondary w-25"
+					th:href="@{/sigec/cliente/pagamentos(id =${cliente_id})}">Voltar</a>
+			</div>
+
+			</div>
+		</form>
+	</main>
+
+</body>
+</html>

@@ -37,9 +37,6 @@ public class EnderecoService {
 	}
 	
 	
-	
-	
-	
 	public void deleteEndereco(UUID id) {
 		enderecoRepository.deleteById(id);
 	}

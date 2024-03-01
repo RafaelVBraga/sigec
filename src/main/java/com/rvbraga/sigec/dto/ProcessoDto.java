@@ -39,7 +39,7 @@ public class ProcessoDto implements Serializable{
     	this.status = processo.getStatus();
     	this.tipo = processo.getTipo();   
     	this.situacao = processo.getSituacao();
-    	this.responsavel = processo.getResponsavel();
+    	//this.responsavel = processo.getResponsavel();
     	this.prioridade = processo.getPrioridade();    	
     }
     

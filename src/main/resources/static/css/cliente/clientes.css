@@ -1,0 +1,354 @@
+
+.mensagem {
+	position: absolute;
+	border-radius: 10px;
+	right:0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 60px;
+	width:50%;
+	text-align: center;
+}
+.feedback{
+	background-color: #000;
+	color: white;
+}
+.mensagem p{
+	margin: 0 auto;
+	padding: 15px;
+}
+.mensagem button {
+	width:25px;
+	height: 25px;
+	margin-right: 0;
+	background-color: green;
+	color: white;
+}
+
+.mensagem_sucesso {
+	background-color: green;
+	color: white;
+}
+
+.mensagem_falha {
+	background-color: red;
+	color: white;
+}
+
+.mensagem_aviso {
+	background-color: orange;
+	color: black;
+}
+
+.page_clientes {
+	margin: 20px;
+	padding: 10px;
+}
+
+.teste {
+	display: inline;
+}
+
+.input_paginas {
+	margin: 5px 5px;
+	width: 50px;
+	height: 40px;
+	border-radius: 15px;
+}
+
+.label_paginas {
+	margin: 5px;
+	margin-top: 2px;
+}
+
+.formulario {
+	display: flex;
+	margin-top: 20px;;
+	width: 100%;
+}
+
+.cliente_form_itens {
+	width: 95%;
+	margin: 0 auto;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.cliente_form_itens .input_id {
+	width: 50%;
+}
+
+.cliente_form_itens label, input, select {
+	margin-right: 5px;
+	width: 100%;
+	height: 40px;
+	border-radius: 5px;
+}
+
+.input_label {
+	margin: 5px;
+	font-size: 15px;
+}
+
+.input_style {
+	margin: 5px;
+	padding: 5px;
+	font-size: 15px;
+	border: 1px solid #125385;
+	border-radius: 10px;
+}
+
+.btn {
+	margin: 0 15px;
+	font-size: 15px;
+	padding:  5px;
+	border-radius: 5px;
+	background-color: white;
+	color: #125385;
+	transition: 0.5s;
+	height: 35px;
+	width: 120px;	
+}
+
+.btn:hover {
+	background-color: #000;
+	color: white;
+}
+
+.tabela {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.add_button {
+	
+	display: flex;
+	margin: 0 5px;
+	border: 1px solid #125385;
+	border-radius: 5px;
+	height: 35px;
+	width: 150px;
+	transition: 0.3s;
+}
+
+
+.add_button a {
+	text-decoration: none;
+	color: rgb(0, 150, 0);
+	text-decoration: none;
+	text-align: center;
+	line-height: 35px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+.add_button:hover {
+	background-color: rgb(0, 150, 9);
+	text-decoration: none;
+}
+
+.add_button:hover a {
+	color: white;
+}
+
+.back_button{
+	display: flex;
+	margin: 5px;
+	border: 1px solid #125385;
+	border-radius: 5px;
+	height: 35px;
+	width: 120px;
+	transition: 0.3s;
+}
+.back_button a {
+	color: #125385;
+	text-decoration: none;
+	text-align: center;
+	line-height: 35px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+.back_button:hover {
+	background-color: #125385;
+}
+
+.back_button a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.visualizacao_painel_acoes{
+	display: flex;
+	padding: 25px;
+}
+
+.tooltip {
+	position:relative;
+	
+}
+
+.tooltip .tooltiptext {
+	position:absolute;
+	visibility: hidden;
+	width: 120px;
+	background-color: white;
+	color: #125385;
+	text-align: center;
+	padding: 5px 0;
+	border: 1px solid #125385;
+	border-radius: 6px;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+	/* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-index: 1;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	transition: 0.5s;
+}
+
+.navegacao {
+	
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	margin-bottom: 25px;
+}
+
+.navegacao a:nth-child {
+	margin: 5px auto;
+}
+
+table{
+	margin-bottom: 15px;
+}
+table thead th {
+	background-color: #000;
+	margin: 0;
+	padding: 0;
+	color: white;
+	
+}
+
+table tbody tr:nth-child(even) {
+	color: #111;
+	text-align: center;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f2f2f2;
+	color: #111;
+	text-align: center;
+}
+
+.tabela_acoes {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.tabela_acoes a:nth-child(n) {
+	margin: 15px;
+}
+
+.setas {
+	background-color: #125385;
+	margin: 10px;
+	padding: 10px;
+	color: white;
+}
+
+.acao_vermelha {
+	color: red;
+}
+
+.acao_amarela {
+	color: yellow;
+}
+.acao_verde{
+	color: green;
+}
+.acao_azul{
+	color:blue;
+}
+.acao_violeta{
+	color:#800080;
+}
+
+.visible {
+	visibility: visible;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.page_counter {
+	margin: 15px;
+}
+.dados_cliente{	
+	margin:25px;
+	display:flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+.container_row{
+	margin: 10px;
+/*	border: 1px solid #125385;*/
+/*	border-radius:5px;*/
+	display:flex;
+	flex-direction: row;
+	align-content: center;
+	text-align: center;
+}
+.container_col{
+	margin: 10px;
+/*	border: 1px solid #125385;*/
+/*	border-radius:5px;*/
+	display:flex;
+	flex-direction: col;
+	align-content: center;
+	text-align: center;
+}
+
+.container_visualizacao{
+	margin: 10px;
+/*	border: 1px solid #125385;*/
+/*	border-radius:5px;*/
+	display:flex;
+	flex-direction: row;
+	align-content: center;
+	text-align: center;
+}
+
+.dados_cliente h4{
+	margin:10px;	
+}
+.dados_cliente p{
+	margin: 20px;
+}
+input{
+	padding: 5px;
+}
+.cel_tab_doc{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	vertical-align: middle;
+}
+.cel_tab_doc input{
+	width:100%;
+	
+}
+.cel_tab_doc label{
+	width: 75%;
+	
+}

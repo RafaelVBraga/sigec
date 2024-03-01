@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main}, ~{::head})}">
+<head>
+<link th:href="@{/css/template.css}" rel="stylesheet">
+</head>
+<body>
+	<main>
+		<div class="d-flex flex-column mh-100 p-4">
+			<div class="d-flex mx-auto p-4">
+				<h1>Calculadora</h1>
+			</div>
+			<form th:action="@{/sigec/calculadora}" th:object="${calculo}"
+				method="post">
+
+				<span class="badge text-bg-dark">Valores de Entrada</span>
+				
+				<div class="d-flex flex-row flex-wrap border m-3 p-4 shadow">
+
+					<label class="form-label m-2 ">Salário-Base:<span
+						class="badge text-bg-danger"
+						th:if="${#fields.hasErrors('salarioBase')}"
+						th:errors="*{salarioBase}">Salário Base obrigatório</span><input
+						th:field="*{salarioBase}" class="form-control"></label> <label
+						class="form-label m-2 ">Periculosidade:<span
+						class="badge text-bg-danger"
+						th:if="${#fields.hasErrors('periculosidade')}"
+						th:errors="*{periculosidade}">Campo obrigatório</span><input
+						th:field="*{periculosidade}" class="form-control"></label> <label
+						class="form-label m-2 ">Insalubridade:<span
+						class="badge text-bg-danger"
+						th:if="${#fields.hasErrors('insalubridade')}"
+						th:errors="*{insalubridade}">Campo obrigatório</span><input
+						th:field="*{insalubridade}" class="form-control"></label> <label
+						class="form-label m-2 ">Horas Mensais:<span
+						class="badge text-bg-danger"
+						th:if="${#fields.hasErrors('horasMensais')}"
+						th:errors="*{horasMensais}">Campo obrigatório</span><input
+						th:field="*{horasMensais}" class="form-control"></label> <label
+						class="form-label m-2 ">Data Admissão:<span
+						class="badge text-bg-danger"
+						th:if="${#fields.hasErrors('dataAdmissao')}"
+						th:errors="*{dataAdmissao}">Data de admissão obrigatória</span><input
+						th:field="*{{dataAdmissao}}" type="date" class="form-select"></label>
+
+					<label class="form-label m-2 ">Data Demissão:<input
+						th:field="*{dataDemissao}" type="date" class="form-select"></label>
+					<label class="form-label m-2 ">Saldo FGTS fins rescisórios:<input
+						th:field="*{fgtsRescisorio}" type="text" class="form-control"></label>
+						<input class="btn btn-primary m-4" type="submit" value="Calcular">
+				</div>
+				<h1 class="mx-auto">Valores Calculados</h1>
+				<span class="badge text-bg-dark">Cálculos individuais</span>
+				<div class="d-flex flex-row border m-3 p-4 shadow flex-wrap">
+
+					<label class="form-label m-2 ">Hora-Trabalhada:<input
+						th:field="*{valorHoraTrabalhada}" class="form-control"></label> <label
+						class="form-label m-2 ">Hora-Extra:<input
+						th:field="*{valorHoraExtra}" class="form-control"></label> <label
+						class="form-label m-2 ">Hora Noturna:<input
+						th:field="*{valorHoraNoturna}" class="form-control"></label> <label
+						class="form-label m-2 ">Hora Extra Noturna:<input
+						th:field="*{valorHoraExtraNoturna}" class="form-control"></label>
+					<label class="form-label m-2 ">Férias:<input
+						th:field="*{valorFerias}" class="form-control"></label> <label
+						class="form-label m-2 ">13º Salário:<input
+						th:field="*{valorDecimoTerceiro}" class="form-control"></label> <label
+						class="form-label m-2 ">Tempo de Empresa:<input
+						th:field="*{tempoEmpresaTexto}" class="form-control"></label>
+				</div>
+				<span class="badge text-bg-dark">Seguro Desemprego</span>
+				<div class="d-flex flex-row border m-3 p-4 shadow flex-wrap">
+					<label class="form-label m-2 ">Número Parcelas:<input
+						th:field="*{parcelasSeguro}" class="form-control"></label> <label
+						class="form-label m-2 ">Valor Parcela:<input
+						th:field="*{valorParcelaSeguro}" class="form-control"></label>
+				</div>
+				<span class="badge text-bg-dark">Recisão <span
+					class=" text-success">sem</span> justa causa
+				</span>
+				<div class="d-flex flex-row border m-3 p-4 shadow flex-wrap">
+					<label class="form-label m-2 ">Saldo de Salário:<input
+						th:field="*{saldoSalario}" class="form-control"></label> <label
+						class="form-label m-2 ">13º Proporcional:<input
+						th:field="*{decimoTerceiroProporcional}" class="form-control"></label>
+					<label class="form-label m-2 ">Férias vencidas:<input
+						class="form-control"></label> <label class="form-label m-2 ">Férias
+						proporcionais:<input class="form-control">
+					</label> <label class="form-label m-2 ">Aviso Prévio:<input
+						class="form-control"></label> <label class="form-label m-2 ">Multa
+						40% FGTS:<input class="form-control">
+					</label> <label class="form-label m-2 ">Saque FGTS:<input
+						class="form-control"></label>
+				</div>
+				<span class="badge text-bg-dark">Recisão <span
+					class=" text-danger">com</span> justa causa
+				</span>
+				<div class="d-flex flex-row border m-3 p-4 shadow flex-wrap">
+					<label class="form-label m-2 ">Número Parcelas:<input
+						class="form-control"></label> <label class="form-label m-2 ">Valor
+						Parcela:<input class="form-control">
+					</label>
+				</div>
+				<span class="badge text-bg-dark">Recisão com acordo</span>
+				<div class="d-flex flex-row border m-3 p-4 shadow flex-wrap">
+					<label class="form-label m-2 ">Número Parcelas:<input
+						class="form-control"></label> <label class="form-label m-2 ">Valor
+						Parcela:<input class="form-control">
+					</label>
+				</div>
+				
+			</form>
+		</div>
+	</main>
+</body>
+</html>

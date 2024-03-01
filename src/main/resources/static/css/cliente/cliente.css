@@ -1,0 +1,12 @@
+
+.hidden {
+	visibility: hidden;
+}
+table .clientOptions{
+	display:block;
+}
+thead tr.clt {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}

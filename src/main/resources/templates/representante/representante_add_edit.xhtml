@@ -1,0 +1,126 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+<script th:src="@{/js/cliente/cad_cliente.js}"></script>
+<script th:src="@{/js/cliente/maskinput.js}"></script>
+</head>
+<body>
+	<main>
+		<div class="d-flex flex-column">
+			<h2 class="mx-auto mt-4"
+				th:text="${representante.id==null}?'Cadastro de Representante':'Edição de Representante' ">Cadastro
+				de Representantes</h2>
+			<hr>
+			<div th:if="${feedback}!=null"
+				class="alert alert-dismissible fade show"
+				th:classappend="${feedback.status}=='FALHA'?'text-bg-danger':'text-bg-success'">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<form class="container mb-4" th:object="${representante}"
+				th:action="${representante.id}==null?@{/sigec/representante/salvar}:@{/sigec/representante/editar}"
+				enctype="multipart/form-data" method="POST">
+
+				<div class="row">
+					<label hidden>Id: </label> <input hidden class="input_id"
+						type="text" th:field="*{id}" readonly="readonly">
+				</div>
+
+				<div class="row">
+					<div class="col w-75">
+						<label class="form-label ">Nome: <span class="text-danger"
+							th:if="${#fields.hasErrors('nome')}">Campo necessário</span></label> <input
+							class="form-control" type="text"
+							th:classappend="${#fields.hasErrors('nome')}?'border border-danger':''"
+							th:field="*{nome}">
+					</div>
+					<div class="col w-25">
+						<label class="form-label ">Data de Nascimento: <span
+							class="text-danger"
+							th:if="${#fields.hasErrors('dataNascimento')}"
+							th:errors="*{dataNascimento}"></span></label> <input class="form-select"
+							type="date" th:field="${representante.dataNascimento}">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<label class="form-label">Profissão:<span
+							class="text-danger" th:if="${#fields.hasErrors('profissao')}"
+							th:errors="*{profissao}"></span>
+						</label> <input class="form-control" id="input_prof"
+							th:field="*{profissao}" th:value="${prof}">
+					</div>
+					<div class="col">
+						<label class="form-label">Lista de profissões: <span
+							th:if="${#arrays.isEmpty(profissoes)}">Sem informações</span></label> <select
+							class="form-select" id="select_prof" onchange="sendData()"
+							th:unless="${#arrays.isEmpty(profissoes)}"
+							th:classappend="${#fields.hasErrors('profissao')}?'border border-danger':''">
+							<option>- Selecione uma profissão -</option>
+							<option th:each="prof,stat: ${profissoes}"
+								th:value="${prof.nome}" th:text="${prof.nome}">
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label class="form-label">CPF:<span class="text-danger"
+							th:if="${#fields.hasErrors('cpf')}">Campo necessário</span>
+						</label> <input class="form-control" type="text"
+							th:oninput="mascara(this)"
+							th:classappend="${#fields.hasErrors('cpf')}?'border border-danger':''"
+							th:field="*{cpf}">
+					</div>
+					<div class="col">
+						<label class="form-label">RG:<span class="text-danger"
+							th:if="${#fields.hasErrors('rg')}">Campo necessário</span>
+						</label> <input class="form-control" type="text"
+							th:classappend="${#fields.hasErrors('rg')}?'border border-danger':''"
+							maxlength="15" th:field="*{rg}">
+					</div>
+				</div>
+				<div class="row d-flex flex-row mt-4">					
+				     <div th:if="${representante.representados!=null}">
+						<div th:if="${#lists.size(representante.representados)!=0}"
+							class="row d-flex flex-row mt-4">
+							<h3>Representados</h3>
+							<div class="row mx-0">
+								<table class="table table-striped border rouded mt-4">
+									<thead>
+										<tr>
+											<th>Nome</th>
+											<th>CPF</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="rep, iStat:${representante.representados}">
+											<td
+												th:text="${representante.representados[__${iStat.index}__].nome}"></td>
+											<td
+												th:text="${representante.representados[__${iStat.index}__].cpf}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>		
+				
+				<div class="container row mt-4">
+					<input class="btn btn-success border col w-25" type="submit"
+						value="Salvar">
+					<p class="col"></p>
+					<a class="btn btn-light border col w-25"
+						th:href="@{/sigec/clientes}">Voltar</a>
+				</div>
+			</form>
+		</div>
+	</main>
+
+</body>
+</html>
