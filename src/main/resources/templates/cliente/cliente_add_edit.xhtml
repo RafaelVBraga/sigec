@@ -1,4 +1,4 @@
-
+t
 
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
@@ -41,9 +41,14 @@
 						<label class="form-label ">Data de Nascimento: <span
 							class="text-danger"
 							th:if="${#fields.hasErrors('dataNascimento')}"
-							th:errors="*{dataNascimento}"></span></label> <input class="form-select"
-							type="date" th:field="${cliente.dataNascimento}">
+							th:errors="*{dataNascimento}"></span></label>
+						<div class="d-flex row px-1">
+							<input id="dn_select" class="form-control col mx-2" type="date"
+								onchange="setBornDate()">
+						<input id="dn_input" class="form-control col mx-2" type="text"
+							th:field="*{dataNascimento}">
 					</div>
+						</div>
 				</div>
 
 				<div class="row">
@@ -83,80 +88,83 @@
 							maxlength="15" th:field="*{rg}">
 					</div>
 				</div>
-				<div class="row d-flex flex-row mt-4">
+				<div class="d-flex flex-column mt-4">
 					<div class="row d-flex flex-row mt-4">
-						<h3>Representantes</h3>
-						<div class="d-flex flex-row mt-4">
-							<label class="label-control"> <input class="form-control"
-								th:name="pesquisa_rep" th:value="${pesquisa_rep}" th:readonly="${cliente.id==null}"></label> <Label
-								class="form-label"><button
-									class="btn btn-primary mx-4 mw-25" type="submit"
-									th:name="pesqRep" th:disabled="${cliente.id==null}" >Pesquisar</button ><span th:if="${cliente.id==null}" class="text-danger">Somente para clientes cadastrados!</span></Label>
+						<h3>Representante</h3>
+						<button th:if="${cliente.representante==null}"
+							class="btn btn-primary mx-3 w-25" type="submit" th:name="addRep">Adicionar</button>
+					</div>
+					<div th:if="${cliente.representante!=null}" class="border p-4">
+						<div class="row">
+							<label th:if="${cliente.representante.id!=null}" hidden>Id: </label> <input hidden class="input_id"
+								type="text" th:field="${cliente.representante.id}"
+								readonly="readonly">
 						</div>
-						<div th:if="${listaRepresentantes!=null}" class="row mt-4">
-							<table class="table table-striped border rouded mt-4">
-								<thead>
-									<tr>
 
-										<th>Nome</th>
-										<th>CPF</th>
-										<th>Ação</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="representante, iStat:${listaRepresentantes}">
-
-										<td th:text="${listaRepresentantes[__${iStat.index}__].nome}"></td>
-										<td th:text="${listaRepresentantes[__${iStat.index}__].cpf}"></td>
-										<td>
-											<div
-												class="d-flex col mt-3 justify-content-center align-items-center">
-												<button class="btn btn-primary   align-self-center"
-													type="submit"
-													th:name="addRep"
-													th:value="${listaRepresentantes[__${iStat.index}__].id}">Adicionar</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="3">
-											<div class="d-flex flex-row justify-content-center ">
-												<input th:name="fechar_pesquisa" value="Fechar"
-													class="btn btn-danger" type="submit">
-											</div>
-										</td>
-									</tr>
-								</tfoot>
-							</table>
-						</div>
-						<div th:if="${cliente.representantes!=null}"
-							class="d-flex flex-column mt-4">
-							<div th:each="representante, iStat: ${cliente.representantes}"
-								class="row">
-								<input hidden
-									th:field="${cliente.representantes[__${iStat.index}__].id}"><label
-									class="form-label col">Representante: <span
-									th:text="${iStat.count}"></span>: <input
-									class="form-control-plaintext" type="text"
-									th:field="${cliente.representantes[__${iStat.index}__].nome}"></label>
-								<label class="form-label col">CPF <span
-									th:text="${iStat.count}"></span>: <input
-									class="form-control-plaintext" type="text"
-									th:field="${cliente.representantes[__${iStat.index}__].cpf}"></label>
-								<div class="d-flex col mt-3">
-									<button class="btn btn-danger   align-self-center"
-										type="submit" th:name="removeRep"
-										th:value="${cliente.representantes[__${iStat.index}__].id}">Remover</button>
-								</div>
+						<div class="row">
+							<div class="col w-75">
+								<label class="form-label ">Nome: </label><span
+									class="text-danger"
+									th:if="${#fields.hasErrors('${cliente.representante.nome}')}">Campo
+									necessário</span> <input class="form-control" type="text"
+									th:classappend="${#fields.hasErrors('${cliente.representante.nome}')}?'border border-danger':''"
+									th:field="${cliente.representante.nome}">
+							</div>
+							<div class="col w-25">
+								<label class="form-label ">Data de Nascimento: </label> <input
+									class="form-select" type="date"
+									th:field="${cliente.representante.dataNascimento}">
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="col">
+								<label class="form-label">Profissão: </label> <input
+									class="form-control" id="input_prof_rep"
+									th:field="${cliente.representante.profissao}"
+									th:value="${prof}">
+							</div>
+							<div class="col">
+								<label class="form-label">Lista de profissões: </label> <select
+									class="form-select" id="select_prof_rep" onchange="sendData()"
+									th:unless="${#arrays.isEmpty(profissoes)}"
+									th:classappend="${#fields.hasErrors('profissao')}?'border border-danger':''">
+									<option>- Selecione uma profissão -</option>
+									<option th:each="prof,stat: ${profissoes}"
+										th:value="${prof.nome}" th:text="${prof.nome}">
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label class="form-label">CPF: <span class="text-danger"
+									th:if="${#fields.hasErrors('${cliente.representante.cpf}')}">Campo
+										necessário</span>
+								</label> <input class="form-control" type="text"
+									th:classappend="${#fields.hasErrors('${cliente.representante.cpf}')}?'border border-danger':''"
+									th:oninput="mascara(this)"
+									th:field="${cliente.representante.cpf}">
+							</div>
+							<div class="col">
+								<label class="form-label">RG: <span class="text-danger"
+									th:if="${#fields.hasErrors('${cliente.representante.rg}')}">Campo
+										necessário</span>
+								</label> <input class="form-control" type="text"
+									th:classappend="${#fields.hasErrors('${cliente.representante.rg}')}?'border border-danger':''"
+									maxlength="15" th:field="${cliente.representante.rg}">
+							</div>
+							<div class="col">
+								<label class="form-label">Relação: </label> <input
+									class="form-control" type="text"
+									th:field="${cliente.representante.relacaoCliente}">
+							</div>
+							<div class="d-flex flex-column">
+								<button th:if="${cliente.representante!=null}"
+									class="btn btn-danger w-25 my-3" type="submit"
+									th:name="removeRep">Remover</button>
+							</div>
+						</div>
 					</div>
-
-					
-
 				</div>
 
 				<div class="row">
@@ -164,7 +172,7 @@
 					<div class="row d-flex flex-row mt-4">
 						<h3>Telefones</h3>
 						<Label class="form-label"><button
-								class="btn btn-success  mw-25" type="submit" th:name="addTel">Adicionar</button></Label>
+								class="btn btn-primary  mw-25" type="submit" th:name="addTel">Adicionar</button></Label>
 						<div th:each="telefone, iStat:${cliente.telefones}" class="row">
 							<input hidden
 								th:field="${cliente.telefones[__${iStat.index}__].id}"><label

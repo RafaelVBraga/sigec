@@ -13,4 +13,13 @@ function sendDataRep(){
 			console.log(input.value)
 			console.log(select.value)
 			input.value = select.value
-			}			
+			}	
+function setBornDate(){
+			var input = document.getElementById('dn_input');
+			var select = document.getElementById('dn_select');
+			
+			
+			console.log(input.value)
+			console.log(select.value)
+			input.value = select.value
+}	

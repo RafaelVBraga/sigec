@@ -33,8 +33,7 @@ public class Processo implements Serializable {
 	private String status;
 	private String situacao; 
 	private String prioridade;
-	@OneToMany(mappedBy = "tarefa",cascade = CascadeType.ALL)
-	private List<Link> links;
+	
 	
 	@ManyToOne
     @JoinColumn(name = "responsavel_id")

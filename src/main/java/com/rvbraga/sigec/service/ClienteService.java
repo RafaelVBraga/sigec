@@ -45,7 +45,7 @@ public class ClienteService {
 	}
 	public Cliente editCliente(Cliente cliente) {
 		
-		return clienteRepository.save(cliente);
+		return clienteRepository.saveAndFlush(cliente);
 	}
 
 	public Boolean deleteCliente(Cliente cliente) {

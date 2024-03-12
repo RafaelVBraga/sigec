@@ -37,7 +37,7 @@ public class Cliente implements Serializable{
 	@NotBlank
 	private String nome;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate dataNascimento;	
 	
 	private String profissao;
@@ -52,13 +52,12 @@ public class Cliente implements Serializable{
 	
 	private String email;
 	
-	@OneToMany(mappedBy ="cliente" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)	
 	private List<Telefone> telefones;
 	
 	
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate dataCadastro;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)		
@@ -73,9 +72,8 @@ public class Cliente implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Processo> processos;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name ="cliente_representantes", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="representante_id"))
-	private List<Representante> representantes;	
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, orphanRemoval = true)	
+	private Representante representante;	
 	
 	@ManyToMany
 	@JoinTable(name ="cliente_herdeiros", joinColumns = @JoinColumn(name="cliente_id"), inverseJoinColumns = @JoinColumn(name="herdeiro_id"))
@@ -93,10 +91,7 @@ public class Cliente implements Serializable{
 		if(cliente.getEndereco().getNumero()!=null)this.endereco.setNumero(cliente.endereco.getNumero());
 		if(cliente.getEndereco().getComplemento()!=null)this.endereco.setComplemento(cliente.endereco.getComplemento());
 		if(cliente.getEndereco().getBairro()!=null)this.endereco.setBairro(cliente.endereco.getBairro());
-		if(cliente.getEndereco().getCep()!=null)this.endereco.setCep(cliente.endereco.getCep());
-		
-		
-		
+		if(cliente.getEndereco().getCep()!=null)this.endereco.setCep(cliente.endereco.getCep());	
 	}
 	
 
