@@ -41,9 +41,9 @@
 						th:style="${rowStat.odd}? 'font-weight:bold;'">
 
 						<td th:text="${pagamento.descricao}"></td>
-						<td class="text-primary" th:text="${pagamento.valor_total}"></td>
-						<td class="text-success" th:text="${pagamento.valor_pago}"></td>
-						<td class="text-danger" th:text="${pagamento.valor_restante}"></td>
+						<td class="text-primary" th:text="${#numbers.formatCurrency(pagamento.valor_total)}"></td>
+						<td class="text-success" th:text="${#numbers.formatCurrency(pagamento.valor_pago)}"></td>
+						<td class="text-danger" th:text="${#numbers.formatCurrency(pagamento.valor_restante)}"></td>
 						<td th:text="${pagamento.parcelas}"></td>
 						<td th:text="${pagamento.parcelas_pagas}"></td>
 						<td th:text="${pagamento.parcelas_a_vencer}"></td>

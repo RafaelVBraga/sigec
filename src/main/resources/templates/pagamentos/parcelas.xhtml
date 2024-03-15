@@ -29,7 +29,7 @@
 					<tr th:each="parcela, rowStat : ${pagamento.parcelas}">
 
 						<td th:classappend="${parcela.vencida}?text-danger:text-dark" th:text="${#temporals.format(parcela.dataVencimento, 'dd/MM/yyyy')}"></td>
-						<td th:text="${parcela.Valor}"></td>
+						<td th:text="${#numbers.formatCurrency(parcela.valor)}"></td>
 						<td th:text="${#temporals.format(parcela.dataPagamento, 'dd/MM/yyyy')}"></td>
 						
 						

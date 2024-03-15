@@ -17,13 +17,13 @@
 		<br> <div class="container-fluid border border-dark rounded"><h1 class="m-auto">JM Barreto</h1></div><br>
 		<div class="d-flex flex-row justify-content-between m-2"> 
 			<h2>Recibo</h2>
-			<h2 class="border border-dark rounded m-0" >R$<span th:text="${parcela.valor}"></span></h2>
+			<h2 class="border border-dark rounded m-0" ><span th:text="${#numbers.formatCurrency(parcela.valor)}"></span></h2>
 		</div>
 		
 		
 		<p>
 			Declaro que recebemos do(a) Sr(a) <strong><span th:text="${cliente.nome}"></span></strong>,
-			a quantia de R$ <strong><span th:text="${parcela.valor}"></span></strong>, referente a <span
+			a quantia de <strong><span th:text="${#numbers.formatCurrency(parcela.valor)}"></span></strong>, referente a <span
 				th:text="${pagamento.descricao}"></span>.
 				
 		</p>
