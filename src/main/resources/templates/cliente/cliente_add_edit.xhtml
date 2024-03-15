@@ -44,9 +44,10 @@ t
 							th:errors="*{dataNascimento}"></span></label>
 						<div class="d-flex row px-1">
 							<input id="dn_select" class="form-control col mx-2" type="date"
-								onchange="setBornDate()"th:value="${#dates.format(cliente.dataNascimento,'yyyy-MM-dd')}" th:field="*{dataNascimento}">
+								th:value="${cliente.dataNascimento}" th:field="*{dataNascimento}">
 			
 					</div>
+					
 						</div>
 				</div>
 
@@ -112,6 +113,7 @@ t
 							<div class="col w-25">
 								<label class="form-label ">Data de Nascimento: </label> <input
 									class="form-select" type="date"
+									th:value="${cliente.representante.dataNascimento}"
 									th:field="*{representante.dataNascimento}">
 							</div>
 						</div>
