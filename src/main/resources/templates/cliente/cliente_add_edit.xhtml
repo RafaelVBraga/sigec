@@ -32,7 +32,7 @@ t
 				<div class="row">
 					<div class="col w-75">
 						<label class="form-label ">Nome: <span class="text-danger"
-							th:if="${#fields.hasErrors('nome')}">Campo necessário</span></label> <input
+							th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Campo necessário</span></label> <input
 							class="form-control" type="text"
 							th:classappend="${#fields.hasErrors('nome')}?'border border-danger':''"
 							th:field="*{nome}">
@@ -44,9 +44,8 @@ t
 							th:errors="*{dataNascimento}"></span></label>
 						<div class="d-flex row px-1">
 							<input id="dn_select" class="form-control col mx-2" type="date"
-								onchange="setBornDate()">
-						<input id="dn_input" class="form-control col mx-2" type="text"
-							th:field="*{dataNascimento}">
+								onchange="setBornDate()"th:value="${#dates.format(cliente.dataNascimento,'yyyy-MM-dd')}" th:field="*{dataNascimento}">
+			
 					</div>
 						</div>
 				</div>
@@ -74,7 +73,7 @@ t
 				<div class="row">
 					<div class="col">
 						<label class="form-label">CPF:<span class="text-danger"
-							th:if="${#fields.hasErrors('cpf')}">Campo necessário</span>
+							th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">Campo necessário</span>
 						</label> <input class="form-control" type="text"
 							th:oninput="mascara(this)"
 							th:classappend="${#fields.hasErrors('cpf')}?'border border-danger':''"
@@ -82,7 +81,7 @@ t
 					</div>
 					<div class="col">
 						<label class="form-label">RG:<span class="text-danger"
-							th:if="${#fields.hasErrors('rg')}">Campo necessário</span>
+							th:if="${#fields.hasErrors('rg')}" th:errors="*{rg}">Campo necessário</span>
 						</label> <input class="form-control" type="text"
 							th:classappend="${#fields.hasErrors('rg')}?'border border-danger':''"
 							maxlength="15" th:field="*{rg}">
@@ -96,8 +95,8 @@ t
 					</div>
 					<div th:if="${cliente.representante!=null}" class="border p-4">
 						<div class="row">
-							<label th:if="${cliente.representante.id!=null}" hidden>Id: </label> <input hidden class="input_id"
-								type="text" th:field="${cliente.representante.id}"
+							<label th:if="*{representante.id!=null}" hidden>Id: </label> <input hidden class="input_id"
+								type="text" th:field="*{representante.id}"
 								readonly="readonly">
 						</div>
 
@@ -105,15 +104,15 @@ t
 							<div class="col w-75">
 								<label class="form-label ">Nome: </label><span
 									class="text-danger"
-									th:if="${#fields.hasErrors('${cliente.representante.nome}')}">Campo
+									th:if="${#fields.hasErrors('representante.nome')}">Campo
 									necessário</span> <input class="form-control" type="text"
-									th:classappend="${#fields.hasErrors('${cliente.representante.nome}')}?'border border-danger':''"
-									th:field="${cliente.representante.nome}">
+									th:classappend="${#fields.hasErrors('representante.nome')}?'border border-danger':''"
+									th:field="*{representante.nome}">
 							</div>
 							<div class="col w-25">
 								<label class="form-label ">Data de Nascimento: </label> <input
 									class="form-select" type="date"
-									th:field="${cliente.representante.dataNascimento}">
+									th:field="*{representante.dataNascimento}">
 							</div>
 						</div>
 
@@ -121,14 +120,14 @@ t
 							<div class="col">
 								<label class="form-label">Profissão: </label> <input
 									class="form-control" id="input_prof_rep"
-									th:field="${cliente.representante.profissao}"
+									th:field="*{representante.profissao}"
 									th:value="${prof}">
 							</div>
 							<div class="col">
 								<label class="form-label">Lista de profissões: </label> <select
 									class="form-select" id="select_prof_rep" onchange="sendData()"
 									th:unless="${#arrays.isEmpty(profissoes)}"
-									th:classappend="${#fields.hasErrors('profissao')}?'border border-danger':''">
+									th:classappend="${#fields.hasErrors('representante.profissao')}?'border border-danger':''">
 									<option>- Selecione uma profissão -</option>
 									<option th:each="prof,stat: ${profissoes}"
 										th:value="${prof.nome}" th:text="${prof.nome}">
@@ -138,25 +137,28 @@ t
 						<div class="row">
 							<div class="col">
 								<label class="form-label">CPF: <span class="text-danger"
-									th:if="${#fields.hasErrors('${cliente.representante.cpf}')}">Campo
+									th:if="${#fields.hasErrors('representante.cpf')}" th:errors="*{representante.cpf}">Campo
 										necessário</span>
 								</label> <input class="form-control" type="text"
-									th:classappend="${#fields.hasErrors('${cliente.representante.cpf}')}?'border border-danger':''"
+									th:classappend="${#fields.hasErrors('representante.cpf')}?'border border-danger':''"
 									th:oninput="mascara(this)"
-									th:field="${cliente.representante.cpf}">
+									th:field="*{representante.cpf}">
 							</div>
 							<div class="col">
 								<label class="form-label">RG: <span class="text-danger"
-									th:if="${#fields.hasErrors('${cliente.representante.rg}')}">Campo
+									th:if="${#fields.hasErrors('representante.rg')}" th:errors="*{representante.rg}">Campo
 										necessário</span>
 								</label> <input class="form-control" type="text"
-									th:classappend="${#fields.hasErrors('${cliente.representante.rg}')}?'border border-danger':''"
-									maxlength="15" th:field="${cliente.representante.rg}">
+									th:classappend="${#fields.hasErrors('representante.rg')}?'border border-danger':''"
+									maxlength="15" th:field="*{representante.rg}">
 							</div>
 							<div class="col">
-								<label class="form-label">Relação: </label> <input
+								<label class="form-label">Relação: </label> <span class="text-danger"
+									th:if="${#fields.hasErrors('representante.relacaoCliente')}" th:errors="*{representante.relacaoCliente}">Campo
+										necessário</span> <input
+								th:classappend="${#fields.hasErrors('representante.relacaoCliente')}?'border border-danger':''"
 									class="form-control" type="text"
-									th:field="${cliente.representante.relacaoCliente}">
+									th:field="*{representante.relacaoCliente}">
 							</div>
 							<div class="d-flex flex-column">
 								<button th:if="${cliente.representante!=null}"
