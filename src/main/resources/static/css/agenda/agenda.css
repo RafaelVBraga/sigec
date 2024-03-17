@@ -44,6 +44,10 @@
 	background-color: #154878;
 	
 }
+.container_dia_hoje{
+	background-color: rgb(128, 128, 255);
+	border-radius:10px 10px 0 0;
+}
 .dia{
 	display: flex;
 }

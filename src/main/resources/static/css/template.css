@@ -18,6 +18,7 @@ nav{
 	margin-bottom:auto;
 }
 footer{
-	margin-top:auto;
+	position:relative;
+	margin-top:10px;
 }
 

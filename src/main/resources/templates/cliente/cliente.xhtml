@@ -7,7 +7,7 @@
 
 </head>
 <body>
-	<main>
+	<main class=" vh-100">
 		<div th:switch="${feedback.status}">
 			<div th:case="'FALHA'"
 				class="alert alert-dismissible alert-danger fade show" role="alert"
@@ -35,7 +35,7 @@
 		<div class="container-fluid ">
 			<h2>Clientes</h2>
 			<hr>
-			<div class="">
+			<div class="shadow p-2">
 				<form class="row" th:object="${pesquisa}"
 					th:action="@{/sigec/clientes/pesquisa}" method="POST">
 					<div class="col">
@@ -67,9 +67,9 @@
 				</form>
 			</div>
 		</div>
-		<hr>
-		<div id="accordion" class="container-fluid" th:if="${lista_clientes.size() > 0}">
-			<table class="table table-light table-striped rouded-top container-fluid">
+		
+		<div id="accordion" class="container-fluid p-2" th:if="${lista_clientes.size() > 0}">
+			<table class="table table-light table-striped rouded-top shadow ">
 				<thead>
 					<tr>
 						<!-- 						<th>Id</th> -->
@@ -126,7 +126,7 @@
 						</td>
 					</tr>
 				</tbody>
-				<tfoot class="container-fluid">
+				<tfoot >
 					<tr>
 						<td colspan="5">
 							<div th:each="cliente, iStat : ${lista_clientes}">

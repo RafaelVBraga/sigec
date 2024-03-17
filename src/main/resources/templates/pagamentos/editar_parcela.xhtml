@@ -6,14 +6,14 @@
 
 </head>
 <body>
-	<main>
+	<main class="vh-100">
 
 		<form class="d-flex flex-column m-auto justify-content-center"
 			th:object="${parcela}" th:action="${parcela.id}==null?@{/sigec/cliente/pagamento/parcela/adicionar}:@{/sigec/cliente/pagamento/parcela/editar}"
 			method="POST">
-			<div class="d-flex flex-column m-auto justify-content-center">
-				<h2 th:if="${parcela.id!=null}"class="m-auto mt-4">Edição de Parcela</h2>
-				<h2 th:unless="${parcela.id!=null}" class="m-auto mt-4">Adição de Parcela</h2>
+			<div class="d-flex flex-column m-auto justify-content-center mt-4 p-5 shadow">
+				<h2 th:if="${parcela.id!=null}"class="m-auto mt-1">Edição de Parcela</h2>
+				<h2 th:unless="${parcela.id!=null}" class="m-auto mt-1">Adição de Parcela</h2>
 				<hr>
 				<div class="d-flex flex-column justify-content-center">
 

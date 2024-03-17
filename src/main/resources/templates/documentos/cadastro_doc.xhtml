@@ -6,14 +6,14 @@
 
 </head>
 <body>
-	<main>
+	<main class="vh-100">
 
 		<form class="d-flex flex-column m-auto justify-content-center"
 			th:object="${documento}" th:action="${documento.id}==null?@{/sigec/cliente/doc/novo}:@{/sigec/cliente/doc/editar}"
 			method="POST">
 
 			<input type="hidden" th:field="*{id}">
-			<div class="d-flex flex-column m-auto justify-content-center">
+			<div class="d-flex flex-column m-auto justify-content-center shadow p-4">
 				<h2 class="m-auto mt-4">Cadastro de documento</h2>
 				<hr>
 				<div class="d-flex flex-column m-auto justify-content-between">

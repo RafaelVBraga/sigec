@@ -5,7 +5,7 @@
  	<link th:href="@{/css/template.css}"rel="stylesheet"> 
 </head>
 <body>
-	<main>
+	<main class="vh-100">
 		
 		
 		<div class="d-flex flex-column mb-4" >		
@@ -14,8 +14,8 @@
 			<a class="btn btn-success mx-auto" th:href="@{/sigec/gerencial/usuario/novo}" style="width: 100px">Adicionar</a>	
 		</div>
 		
-		<div th:if="${usuarios.size() > 0}">
-			<table class="table table-light table-striped mt-4">
+		<div class="p-2" th:if="${usuarios.size() > 0}">
+			<table class="table table-light table-striped mt-4  shadow border">
 				<thead>
 					<tr>
 
@@ -50,13 +50,13 @@
 					</tr>
 				</tbody>
 			</table>
-			<hr>
+			
 		</div>
 		<div class="container"th:unless="${usuarios.size()>0}">
 			<p>Não existem usuários cadastrados!</p>
 			
 		</div>
-		<hr>
+		
 
 		
 	</main>

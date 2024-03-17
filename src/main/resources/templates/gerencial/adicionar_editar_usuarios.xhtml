@@ -8,7 +8,7 @@
 <body>
 	<main>
 
-		<form class="d-flex flex-column m-auto justify-content-center"
+		<form class="d-flex flex-column m-auto justify-content-center vh-100"
 			th:object="${usuario}" th:action="${usuario.id}==null?@{/sigec/gerencial/usuario/novo}:@{/sigec/gerencial/usuario/editar}"
 			method="POST">
 			<div class="d-flex flex-column m-auto justify-content-center border mt-4 p-4 shadow" >
