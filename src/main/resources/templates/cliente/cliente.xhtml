@@ -13,22 +13,22 @@
 				class="alert alert-dismissible alert-danger fade show" role="alert"
 				id="cnt_msg">
 				<p th:text="${feedback.mensagem}"></p>
-				<button type="button" class="btn-close" data-bs-dismiss="alert"
-					aria-label="Close"></button>
+<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
+<!-- 					aria-label="Close"></button> -->
 			</div>
 			<div th:case="'SUCESSO'"
 				class="alert alert-dismissible alert-success fade show" role="alert"
 				id="cnt_msg">
 				<p th:text="${feedback.mensagem}"></p>
-				<button type="button" class="btn-close" data-bs-dismiss="alert"
-					aria-label="Close"></button>
+<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
+<!-- 					aria-label="Close"></button> -->
 			</div>
 			<div th:case="'INFO'"
 				class="alert alert-dismissible fade show text-bg-light" role="alert"
 				id="cnt_msg">
 				<p th:text="${feedback.mensagem}"></p>
-				<button type="button" class="btn-close" data-bs-dismiss="alert"
-					aria-label="Close"></button>
+<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
+<!-- 					aria-label="Close"></button> -->
 			</div>
 		</div>
 
@@ -68,8 +68,8 @@
 			</div>
 		</div>
 		<hr>
-		<div id="accordion" class="" th:if="${lista_clientes.size() > 0}">
-			<table class="table table-light table-striped rouded-top">
+		<div id="accordion" class="container-fluid" th:if="${lista_clientes.size() > 0}">
+			<table class="table table-light table-striped rouded-top container-fluid">
 				<thead>
 					<tr>
 						<!-- 						<th>Id</th> -->
@@ -126,7 +126,7 @@
 						</td>
 					</tr>
 				</tbody>
-				<tfoot>
+				<tfoot class="container-fluid">
 					<tr>
 						<td colspan="5">
 							<div th:each="cliente, iStat : ${lista_clientes}">
