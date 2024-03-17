@@ -9,53 +9,68 @@
 </head>
 <body>
 	<main>
-		<div class="d-flex flex-row justify-content-between align-items-center">
-		<div><a class="btn btn-dark mx-2 my-2" th:href="@{/sigec/clientes}">Voltar</a></div>
-		<div><strong class="text-danger mx-4 border border-danger rounded">Para imprimir, pressione "Ctrl + p"</strong></div>
-		</div>
-		
-		
-<!-- 		<div class=" d-flex justify-content-start row text-dark border printable conteudo "> -->
-				
-<!-- 			<div class="col"> -->
-<!-- 			<img th:src="@{/img/logo_jm_barreto_no_bg.png}"  -->
-<!-- 				 width="64" height="49" class="img-thumbail rounded mx-4 my-2"> -->
-<!-- 			</div> -->
-			
-<!-- 			<div class=" printable col m-4 paragrafo"> -->
-<!-- 				<p>JM Barreto Advocacia</p> -->
-<!-- 				<p>Matriz: Avenida Doutor Themberge, nº 2360 ,Álvaro Weyne -->
-<!-- 					Fortaleza/CE -Cep: 60.355-000</p> -->
-<!-- 				<p>85-3478-1908/ 85- 98708-6197.</p> -->
-<!-- 				<p>E-mail:jeane.msantos@hotmail.com.</p> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-			<div
-				class=" d-flex conteudo printable border align-items-center justify-content-center">
-				<h2>Recibo</h2>
-				<br>
-				
-				<p class="m-3">
-			Eu, <strong>JEANE MICHELE MOURA BARRETO</strong> , advogada, OAB/CE 24.055, recebi de <strong><span th:text="${cliente.nome}"></span></strong>,
-			o valor de <strong><span th:text="${#numbers.formatCurrency(parcela.valor)}"></span></strong>, da parcela com vencimento em <span th:text="${#temporals.format(parcela.dataVencimento, 'dd-MM-yyyy')}"></span>, referente a <span
-				th:text="${pagamento.descricao}"></span>.
-				
-		</p>
-
-
-
-				<br>
-				<p class="data printable">
-					Fortaleza, <span th:text="${dia}"></span> de <span th:text="${mes}"></span>
-					de <span th:text="${ano}"></span>.
-				</p>
-				<br>
-				<p class="assinatura">____________________________________________________________</p>
-				<p class="font-12" style="margin: 0 auto;">JEANE MICHELE MOURA BARRETO</p>
-				<p class="font-8" style="margin: 0 auto;">OAB/CE 24.055</p>
-
-
+		<div
+			class="d-flex flex-row justify-content-between align-items-center">
+			<div>
+				<a class="btn btn-dark mx-2 my-2" th:href="@{/sigec/clientes}">Voltar</a>
 			</div>
+			<div>
+				<strong class="text-danger mx-4 p-2 border border-danger rounded">Para
+					imprimir, pressione "Ctrl + p"</strong>
+			</div>
+		</div>
+
+
+		<div
+			class="d-flex  border p-0 border-bottom-0 text-dark printable myContainer mx-2">
+			<img th:src="@{/img/bg_top_grey.png}" class="bg_printable">
+			<div class="col mt-4">
+				<div class="d-flex flex-row">
+					<img th:src="@{/img/logo_jm_barreto_no_bg.png}" width="64"
+						height="49" class="img-thumbail ms-4 mt-2">
+					<h4 class="mt-3 ms-2">JM Barreto Advocacia</h4>
+				</div>
+			</div>
+
+			<div class=" printable col mt-4 paragrafo header">
+
+				<p>Matriz: Avenida Doutor Themberge, nº 2360 ,Álvaro Weyne
+					Fortaleza/CE -Cep: 60.355-000</p>
+				<p>85-3478-1908/ 85- 98708-6197.</p>
+				<p>E-mail:jeane.msantos@hotmail.com.</p>
+			</div>
+			<br><br>
+		</div>
+		<div
+			class=" d-flex flex-column printable border border-top-0 align-items-center justify-content-center mx-2">
+			<h2>Recibo</h2>
+			<br>
+			<p class="m-3">
+				Eu, <strong>JEANE MICHELE MOURA BARRETO</strong> , advogada, OAB/CE
+				24.055, recebi de <strong><span th:text="${cliente.nome}"></span></strong>,
+				o valor de <strong><span
+					th:text="${#numbers.formatCurrency(parcela.valor)}"></span></strong>, da
+				parcela com vencimento em <span
+					th:text="${#temporals.format(parcela.dataVencimento, 'dd-MM-yyyy')}"></span>,
+				referente a <span th:text="${pagamento.descricao}"></span>.
+
+			</p>
+
+
+
+			<br>
+			<p class="data printable">
+				Fortaleza, <span th:text="${dia}"></span> de <span th:text="${mes}"></span>
+				de <span th:text="${ano}"></span>.
+			</p>
+			<br>
+			<p class="assinatura">____________________________________________________________</p>
+			<p class="font-12" style="margin: 0 auto;">JEANE MICHELE MOURA
+				BARRETO</p>
+			<p class="font-8" style="margin: 0 auto;">OAB/CE 24.055</p>
+
+
+		</div>
 	</main>
 </body>
 </html>

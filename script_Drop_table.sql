@@ -1,0 +1,1 @@
+drop table agendamento,cliente,cliente_documentos,cliente_telefones,cliente_herdeiros,cliente_pagamentos,cliente_processos,cliente,telefone,documento,endereco,faixa,pagamento,pagamento_parcelas,parcela, processo, profissao, representante, tabela_seguro_desemprego, usuario cascade

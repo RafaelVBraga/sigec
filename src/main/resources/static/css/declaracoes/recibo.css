@@ -30,9 +30,16 @@ html {
 		font-size: 0.5em;
 		line-height: 0.1em;
 	}
-
-
-
+.myContainer{
+	position:relative;
+}
+.bg_printable{
+	position: absolute;
+	top:0;
+	left:0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;}
 h1,
 h2 {
 	margin: 0 auto;
