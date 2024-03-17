@@ -133,83 +133,68 @@
 								<div id="" th:attr="id='clientOption'+${iStat.count}"
 									class="collapse clientOptions">
 									<div class="d-flex">
-										<div class="card bg-light text-dark m-2 border border-dark"
-											style="width: 16rem">
+										<div class="card bg-light text-success m-2 border border-success"
+											style="width: 13rem">
 
 											<div class="card-body">
-												<h5 class="card-title">Editar</h5>
-
-												<p class="card-text">Editar os dados.</p>
+												<h5 class="card-title">Dados Pessoais</h5>
 												<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}"
-													class="btn btn-outline-dark w-100"><img
-													class="card-img-top text-light"
-													th:src="@{/img/pencil-square.svg}" alt="docs" width="16"
-													height="16"></a>
+													class="btn btn-success w-100 mt-5">Editar</a>
 												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
 											</div>
 										</div>
 										<div
-											class="card bg-light text-warning m-2 border border-warning"
-											style="width: 16rem">
+											class="card bg-light text-success m-2 border border-success"
+											style="width: 13rem">
 
 											<div class="card-body">
-												<h5 class="card-title">Documentos</h5>
-
-												<p class="card-text">Gerenciar documentos.</p>
+												<h5 class="card-title">Documentos</h5>												
 												<a th:href="@{/sigec/cliente/docs(id =${cliente.id})}"
-													class="btn btn-warning w-100"><img class="card-img-top"
-													th:src="@{/img/file-text.svg}" alt="docs" width="16"
-													height="16"></a>
+													class="btn btn-success w-100 mt-5">Gerenciar</a>
+<!-- 													<img class="card-img-top" -->
+<!-- 													th:src="@{/img/file-text.svg}" alt="docs" width="16" -->
+<!-- 													height="16"> -->
 												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
 											</div>
 										</div>
-										<div class="card bg-light text-info m-2 border border-info"
-											style="width: 16rem">
+										<div class="card bg-light text-success m-2 border border-success"
+											style="width: 13rem">
 
 											<div class="card-body">
 												<h5 class="card-title">Procuração</h5>
 												<form th:action="@{/sigec/cliente/proc}">
 													<input type="text" class="form-control" th:name="id" th:value=${cliente.id} hidden>
-													<input type="text" class="form-control" th:name="tipo" placeholder="Tipo de ação...">
-													<input type="submit" class="btn btn-info w-100 mt-1 text-light" value="Gerar">
+													<input type="text" class="form-control mt-1 mb-1" th:name="tipo" placeholder="Tipo de ação...">
+													<input type="submit" class="btn btn-success w-100 mt-2 text-light" value="Gerar">
 												</form>
 												
 											</div>
 										</div>
 										<div
-											class="card bg-light text-primary m-2 border border-primary"
-											style="width: 16rem">
+											class="card bg-light text-success m-2 border border-success"
+											style="width: 13rem">
 
 											<div class="card-body">
 												<h5 class="card-title">Hiposuficiência</h5>
-
-												<p class="card-text">Gerar declaração.</p>
 												<a th:href="@{/sigec/cliente/hipo(id =${cliente.id})}"
-													class="btn btn-primary w-100"><img class="card-img-top"
-													th:src="@{/img/file-text.svg}" alt="docs" width="16"
-													height="16"></a>
+													class="btn btn-success w-100 mt-5">Gerar</a>
 												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
 											</div>
 										</div>
 										<div
-											class="card bg-light text-secondary m-2 border border-dark"
-											style="width: 16rem">
+											class="card bg-light text-success m-2 border border-success"
+											style="width: 13rem">
 
 											<div class="card-body">
 												<h5 class="card-title" style="color: #229678">Pagamentos</h5>
-
-												<p class="card-text" style="color: #229678">Gerenciar os
-													pagamentos.</p>
 												<a th:href="@{/sigec/cliente/pagamentos(id =${cliente.id})}"
-													class="btn w-100" style="background-color: #229678"><img
-													class="card-img-top" th:src="@{/img/file-text.svg}"
-													alt="docs" width="16" height="16"></a>
+													class="btn w-100 text-light mt-5" style="background-color: #229678">Gerenciar</a>
 												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
 											</div>
 										</div>
 										<div
 											class="card bg-light text-danger m-2 border border-danger"
-											style="width: 16rem">
+											style="width: 13rem">
 
 											<div class="card-body">
 												<h5 class="card-title">Deletar</h5>
