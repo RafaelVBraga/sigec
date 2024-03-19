@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
 <head>
-
+	<link th:href="@{/css/pagamentos/pagamentos.css}" rel="stylesheet">
 </head>
 <body>
 	<main>
@@ -20,7 +20,7 @@
 				th:href="@{/sigec/cliente/pagamento/novo(id =${cliente.id})}">
 				Adicionar </a>
 		</div>
-		<div th:if="${cliente.pagamentos.size() > 0}">
+		<div class="tabela"th:if="${cliente.pagamentos.size() > 0}">
 			<table class="table table-light table-striped mt-4">
 				<thead>
 					<tr>
@@ -52,15 +52,14 @@
 						<td>
 							<div class="btn btn-info" >
 								<a th:href="@{/sigec/cliente/pagamento/parcelas(id=${pagamento.id},cliente_id=${cliente.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Parcelas"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Parcelas" data-bs-custom-class="custom-tooltip"
+									>
 									<img th:src="@{/img/cash-coin.svg}" alt="cash" width="16" height="16">
 								</a>								
 							</div>
 							<div class="btn btn-success" >
 								<a th:href="@{/sigec/cliente/pagamento/parcela/adicionar(id=${pagamento.id},cliente_id=${cliente.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Adicionar"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Adicionar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/cash-coin.svg}" alt="cash" width="16" height="16">
 								</a>								
 							</div>
@@ -76,7 +75,7 @@
 			</table>
 			<hr>
 		</div>
-		<div class="container"th:unless="${pagamentos.size()>0}">
+		<div class="d-flex align-items-center justify-content-center tabela ms-5"th:unless="${pagamentos.size()>0}">
 			<p>Não existem pagamentos cadastrados para esse cliente!</p>
 			
 		</div>

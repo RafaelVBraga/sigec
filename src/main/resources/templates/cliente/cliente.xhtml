@@ -3,7 +3,7 @@
 	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
 <head>
 <link th:href="@{/css/cliente/cliente.css}" rel="stylesheet">
-<script th:src="@{/js/cliente/clientes.js}"></script>
+<script th:src="@{/js/cliente/clientes.js}" defer></script>
 
 </head>
 <body>
@@ -13,22 +13,21 @@
 				class="alert alert-dismissible alert-danger fade show" role="alert"
 				id="cnt_msg">
 				<p th:text="${feedback.mensagem}"></p>
-<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
-<!-- 					aria-label="Close"></button> -->
+
 			</div>
 			<div th:case="'SUCESSO'"
 				class="alert alert-dismissible alert-success fade show" role="alert"
 				id="cnt_msg">
 				<p th:text="${feedback.mensagem}"></p>
-<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
-<!-- 					aria-label="Close"></button> -->
+				<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
+				<!-- 					aria-label="Close"></button> -->
 			</div>
 			<div th:case="'INFO'"
 				class="alert alert-dismissible fade show text-bg-light" role="alert"
 				id="cnt_msg">
 				<p th:text="${feedback.mensagem}"></p>
-<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
-<!-- 					aria-label="Close"></button> -->
+				<!-- 				<button type="button" class="btn-close" data-bs-dismiss="alert" -->
+				<!-- 					aria-label="Close"></button> -->
 			</div>
 		</div>
 
@@ -67,8 +66,10 @@
 				</form>
 			</div>
 		</div>
-		
-		<div id="accordion" class="container-fluid p-2" th:if="${lista_clientes.size() > 0}">
+
+
+		<div id="accordion" class="container-fluid p-2"
+			th:if="${lista_clientes.size() > 0}">
 			<table class="table table-light table-striped rouded-top shadow ">
 				<thead>
 					<tr>
@@ -95,124 +96,72 @@
 						<td th:text="${cliente.rg}">rg</td>
 
 						<td>
-							<!-- 							<div class="invisible"> --> <!-- 								<a class="btn btn-primary" data-bs-toggle="tooltip"	data-bs-title="Visualizar" -->
-							<!-- 									data-bs-custom-class="custom-tooltip" th:href="@{/sigec/cliente/editar(id =${cliente.id})}"> -->
-							<!-- 									<span><img th:src="@{/img/pencil-square.svg}" alt="docs" width="16"	height="16"></span></a>  -->
-							<!-- 								<a class="btn btn-warning" data-bs-toggle="tooltip" data-bs-title="Documentos" -->
-							<!-- 									data-bs-custom-class="custom-tooltip" th:href="@{/sigec/cliente/docs(id =${cliente.id})}"> -->
-							<!-- 									<img th:src="@{/img/file-text.svg}" alt="docs" width="16" height="16"></a>  -->
-							<!-- 								<a class="btn btn-info" data-bs-toggle="tooltip" data-bs-title="Procuração" -->
-							<!-- 									data-bs-custom-class="custom-tooltip" th:href="@{/sigec/cliente/proc(id =${cliente.id})}"> -->
-							<!-- 									<img th:src="@{/img/file-text.svg}" alt="docs" width="16" height="16"></a>  -->
-							<!-- 								<a class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-title="Decl. Hiposuficiência" -->
-							<!-- 									data-bs-custom-class="custom-tooltip" th:href="@{/sigec/cliente/hipo(id =${cliente.id})}"> -->
-							<!-- 									<img th:src="@{/img/file-text.svg}" alt="docs" width="16" height="16"></a>  -->
-							<!-- 								<a class="btn" style="background-color:#229678" data-bs-toggle="tooltip" data-bs-title="Pagamento" -->
-							<!-- 									data-bs-custom-class="custom-tooltip" th:href="@{/sigec/cliente/pagamentos(id =${cliente.id})}"> -->
-							<!-- 									<img th:src="@{/img/cash-coin.svg}" alt="docs" width="16" height="16"></a>  -->
-							<!-- 								<a class="btn btn-danger" data-bs-toggle="tooltip" data-bs-title="Deletar" -->
-							<!-- 									data-bs-custom-class="custom-tooltip" th:href="@{/sigec/cliente/delete(id =${cliente.id})}"> -->
-							<!-- 									<img th:src="@{/img/trash.svg}" alt="docs" width="16" height="16"></a> -->
+							<div>
+								<a class="btn btn-primary" data-bs-custom-tooltip="tooltip"
+									title="Editar" data-bs-custom-class="custom-tooltip"
+									th:href="@{/sigec/cliente/editar(id =${cliente.id})}"> <span><img
+										th:src="@{/img/pencil-square.svg}" alt="docs" width="16"
+										height="16"></span></a> <a class="btn btn-warning"
+									data-bs-tooltip="tooltip" title="Documentos"
+									th:href="@{/sigec/cliente/docs(id =${cliente.id})}"> <img
+									th:src="@{/img/file-text.svg}" alt="docs" width="16"
+									height="16"></a>
+								<button id="showModalProc" class="btn btn-info"
+									data-bs-toggle="modal" data-bs-target="#modalProc"
+									data-bs-tooltip="tooltip" title="Procuração"
+									th:href="@{/sigec/cliente/proc(id =${cliente.id})}">
+									<img th:src="@{/img/file-text.svg}" alt="docs" width="16"
+										height="16">
+								</button>
+								<div class="modal fade" id="modalProc" tabindex="-1"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5" id="exampleModalLabel">Procuração</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form th:action="@{/sigec/cliente/proc}">
+													<input type="text" class="form-control" th:name="id"
+														th:value=${cliente.id} hidden><input type="text"
+														class="form-control mt-1 mb-1" th:name="tipo"
+														placeholder="Tipo de ação..."><input type="submit"
+														class="btn btn-success w-100 mt-2 text-light"
+														value="Gerar">
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Fechar</button>
 
-							<!-- 							</div> -->
-							<div id="test">
-								<button id="btn1" type="button" class="btn btn-success "
-									data-bs-toggle="collapse" data-parent="#accordion"
-									data-bs-target="#clientOptions"
-									th:attr="data-bs-target='#'+'clientOption'+${iStat.count},aria-controls='clientOption'+${iStat.count}"
-									aria-expanded="false" aria-controls="clientOptions">Visualizar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<a class="btn btn-secondary" data-bs-tooltip="tooltip"
+									title="Declaração Hiposuficiência"
+									th:href="@{/sigec/cliente/hipo(id =${cliente.id})}"> <img
+									th:src="@{/img/file-text.svg}" alt="docs" width="16"
+									height="16"></a> <a class="btn"
+									style="background-color: #229678" data-bs-tooltip="tooltip"
+									title="Pagamentos"
+									th:href="@{/sigec/cliente/pagamentos(id =${cliente.id})}">
+									<img th:src="@{/img/cash-coin.svg}" alt="docs" width="16"
+									height="16">
+								</a> <a class="btn btn-danger" data-bs-tooltip="tooltip"
+									title="Deletar"
+									th:href="@{/sigec/cliente/delete(id =${cliente.id})}"> <img
+									th:src="@{/img/trash.svg}" alt="docs" width="16" height="16"></a>
 
 							</div>
 						</td>
 					</tr>
 				</tbody>
-				<tfoot >
-					<tr>
-						<td colspan="5">
-							<div th:each="cliente, iStat : ${lista_clientes}">
-								<div id="" th:attr="id='clientOption'+${iStat.count}"
-									class="collapse clientOptions">
-									<div class="d-flex">
-										<div class="card bg-light text-success m-2 border border-success"
-											style="width: 13rem">
-
-											<div class="card-body">
-												<h5 class="card-title">Dados Pessoais</h5>
-												<a th:href="@{/sigec/cliente/editar(id =${cliente.id})}"
-													class="btn btn-success w-100 mt-5">Editar</a>
-												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
-											</div>
-										</div>
-										<div
-											class="card bg-light text-success m-2 border border-success"
-											style="width: 13rem">
-
-											<div class="card-body">
-												<h5 class="card-title">Documentos</h5>												
-												<a th:href="@{/sigec/cliente/docs(id =${cliente.id})}"
-													class="btn btn-success w-100 mt-5">Gerenciar</a>
-<!-- 													<img class="card-img-top" -->
-<!-- 													th:src="@{/img/file-text.svg}" alt="docs" width="16" -->
-<!-- 													height="16"> -->
-												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
-											</div>
-										</div>
-										<div class="card bg-light text-success m-2 border border-success"
-											style="width: 13rem">
-
-											<div class="card-body">
-												<h5 class="card-title">Procuração</h5>
-												<form th:action="@{/sigec/cliente/proc}">
-													<input type="text" class="form-control" th:name="id" th:value=${cliente.id} hidden>
-													<input type="text" class="form-control mt-1 mb-1" th:name="tipo" placeholder="Tipo de ação...">
-													<input type="submit" class="btn btn-success w-100 mt-2 text-light" value="Gerar">
-												</form>
-												
-											</div>
-										</div>
-										<div
-											class="card bg-light text-success m-2 border border-success"
-											style="width: 13rem">
-
-											<div class="card-body">
-												<h5 class="card-title">Hiposuficiência</h5>
-												<a th:href="@{/sigec/cliente/hipo(id =${cliente.id})}"
-													class="btn btn-success w-100 mt-5">Gerar</a>
-												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
-											</div>
-										</div>
-										<div
-											class="card bg-light text-success m-2 border border-success"
-											style="width: 13rem">
-
-											<div class="card-body">
-												<h5 class="card-title" style="color: #229678">Pagamentos</h5>
-												<a th:href="@{/sigec/cliente/pagamentos(id =${cliente.id})}"
-													class="btn w-100 text-light mt-5" style="background-color: #229678">Gerenciar</a>
-												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
-											</div>
-										</div>
-										<div
-											class="card bg-light text-danger m-2 border border-danger"
-											style="width: 13rem">
-
-											<div class="card-body">
-												<h5 class="card-title">Deletar</h5>
-
-												<p class="card-text">Deletar todos os dados.</p>
-												<a th:href="@{/sigec/cliente/delete(id =${cliente.id})}"
-													class="btn btn-danger w-100"><img class="card-img-top"
-													th:src="@{/img/file-text.svg}" alt="docs" width="16"
-													height="16"></a>
-												<!-- 											<a class="btn btn-success"th:href="@{/sigec/cliente/editar(id =${cliente.id})}">Editar</a> -->
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</tfoot>
+				
 			</table>
 
 			<div class="d-flex justify-content-center" th:if="${totalPages > 1}">
@@ -240,10 +189,9 @@
 
 		</div>
 
-		<div class="tabela" th:else="${lista_clientes.size() > 0}">
+		<div class="tabela d-flex align-items-center justify-content-center" th:else="${lista_clientes.size() > 0}">
 			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
 		</div>
-
 	</main>
 
 

@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
 <head>
-
+	<link th:href="@{/css/documentos/documentos.css}" rel="stylesheet">
 </head>
 <body>
 	<main class="vh-100">
@@ -18,7 +18,7 @@
 				th:href="@{/sigec/cliente/doc/novo(id =${cliente.id})}">
 				Adicionar </a>
 		</div>
-		<div th:if="${cliente.documentos.size() > 0}">
+		<div class="tabela" th:if="${cliente.documentos.size() > 0}">
 			<table class="table table-light table-striped mt-4">
 				<thead>
 					<tr>						
@@ -43,15 +43,13 @@
 						<td>
 							<div class="btn btn-info" >
 								<a th:href="@{/sigec/cliente/doc/editar(id=${documento.id},cliente_id=${cliente.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Editar"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Editar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/pencil-square.svg}" alt="docs" width="16" height="16">
 								</a>
 							</div>
 							<div class="btn btn-danger" >
 								<a th:href="@{/sigec/cliente/doc/delete(id=${documento.id},cliente_id=${cliente.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Deletar"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Deletar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/trash.svg}" alt="docs" width="16" height="16">
 								</a>
 							</div>
@@ -60,11 +58,11 @@
 			</table>
 			<hr>
 		</div>
-		<div th:unless="${cliente.documentos.size()>0}">
+		<div class="d-flex align-items-center justify-content-center tabela ms-5" th:unless="${cliente.documentos.size()>0}">
 			<p>Não existem documentos cadastrados para esse cliente!</p>
-			<hr>
+			
 		</div>
-
+<hr>
 
 		<div class="container-fluid">
 			<a class="btn btn-secondary w-100"

@@ -38,15 +38,13 @@
 							
 							<div class="btn btn-success" th:if="${parcela.dataPagamento==null}" >
 								<a th:href="@{/sigec/cliente/pagamento/parcela/pagar(id=${parcela.id},pagamento_id=${pagamento.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Pagar"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Pagar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/cash-coin.svg}" alt="cash" width="16" height="16">
 								</a>								
 							</div>
 							<div class="btn btn-warning" th:if="${parcela.dataPagamento==null}" >
 								<a th:href="@{/sigec/cliente/pagamento/parcela/edicao(id=${parcela.id},pagamento_id=${pagamento.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Editar"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Editar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/pencil-square.svg}" alt="cash" width="16" height="16">
 								</a>								
 							</div>
@@ -54,8 +52,7 @@
 							<div class="btn btn-danger" th:unless="${parcela.dataPagamento==null}">
 								
 								<a th:href="@{/sigec/cliente/pagamento/parcela/extornar(id=${parcela.id},pagamento_id=${pagamento.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Extornar"
-									data-bs-custom-class="custom-tooltip">
+								data-bs-custom-tooltip="tooltip" title="Estornar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/arrow-clockwise.svg}" alt="cash" width="16" height="16">
 								</a>
 							</div>

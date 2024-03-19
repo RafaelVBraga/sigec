@@ -10,3 +10,10 @@ thead tr.clt {
 		top: -9999px;
 		left: -9999px;
 	}
+.custom-tooltip{
+	background-color: black;
+	color:white;
+}
+.tabela{
+	min-height: 40%;
+}
