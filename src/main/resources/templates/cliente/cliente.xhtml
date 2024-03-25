@@ -56,10 +56,10 @@
 						</select>
 					</div>
 					<div class="d-flex">
-						<input class="btn btn-primary mt-4" type="submit"
+						<input class="btn btn-dark mt-4" type="submit"
 							value="Pesquisar">
 						<div>
-							<a class="btn btn-success mx-5 mt-4"
+							<a class="btn btn-dark mx-5 mt-4"
 								th:href="@{/sigec/cliente/adicionar}">Cadastrar</a>
 						</div>
 					</div>
@@ -97,21 +97,48 @@
 
 						<td>
 							<div>
-								<a class="btn btn-primary" data-bs-custom-tooltip="tooltip"
+								<a class="btn btn-dark" data-bs-custom-tooltip="tooltip"
 									title="Editar" data-bs-custom-class="custom-tooltip"
-									th:href="@{/sigec/cliente/editar(id =${cliente.id})}"> <span><img
-										th:src="@{/img/pencil-square.svg}" alt="docs" width="16"
-										height="16"></span></a> <a class="btn btn-warning"
+									th:href="@{/sigec/cliente/editar(id =${cliente.id})}"> 
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-pencil-square" viewBox="0 0 16 16">
+									<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+ 								    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>									
+									</svg>
+									
+<!-- 									<span><img class="text-light" -->
+<!-- 										th:src="@{/img/pencil-square.svg}" alt="docs" width="16" -->
+<!-- 										height="16"></span> -->
+										
+									</a> <a class="btn btn-dark"
 									data-bs-tooltip="tooltip" title="Documentos"
-									th:href="@{/sigec/cliente/docs(id =${cliente.id})}"> <img
-									th:src="@{/img/file-text.svg}" alt="docs" width="16"
-									height="16"></a>
-								<button id="showModalProc" class="btn btn-info"
+									th:href="@{/sigec/cliente/docs(id =${cliente.id})}"> 
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-file-text" viewBox="0 0 16 16">
+									 <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+  									 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+																		
+									</svg>
+									
+<!-- 									<img -->
+<!-- 									th:src="@{/img/file-text.svg}" alt="docs" width="16" -->
+<!-- 									height="16"> -->
+									
+									</a>
+								<button id="showModalProc" class="btn btn-dark"
 									data-bs-toggle="modal" data-bs-target="#modalProc"
 									data-bs-tooltip="tooltip" title="Procuração"
 									th:href="@{/sigec/cliente/proc(id =${cliente.id})}">
-									<img th:src="@{/img/file-text.svg}" alt="docs" width="16"
-										height="16">
+									
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-file-text" viewBox="0 0 16 16">
+									 <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+  									 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+																		
+									</svg>	
+									
+<!-- 									<img th:src="@{/img/file-text.svg}" alt="docs" width="16" -->
+<!-- 										height="16"> -->
+										
+										
+										
 								</button>
 								<div class="modal fade" id="modalProc" tabindex="-1"
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,20 +169,49 @@
 								</div>
 
 
-								<a class="btn btn-secondary" data-bs-tooltip="tooltip"
+								<a class="btn btn-dark" data-bs-tooltip="tooltip"
 									title="Declaração Hiposuficiência"
-									th:href="@{/sigec/cliente/hipo(id =${cliente.id})}"> <img
-									th:src="@{/img/file-text.svg}" alt="docs" width="16"
-									height="16"></a> <a class="btn"
-									style="background-color: #229678" data-bs-tooltip="tooltip"
+									th:href="@{/sigec/cliente/hipo(id =${cliente.id})}"> 
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-file-text" viewBox="0 0 16 16">
+									 <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z"/>
+  									 <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+																		
+									</svg>
+									
+<!-- 									<img  -->
+<!-- 									th:src="@{/img/file-text.svg}" alt="docs" width="16" -->
+<!-- 									height="16"> -->
+									
+									</a> 
+									
+									<a class="btn btn-dark"
+									data-bs-tooltip="tooltip"
 									title="Pagamentos"
 									th:href="@{/sigec/cliente/pagamentos(id =${cliente.id})}">
-									<img th:src="@{/img/cash-coin.svg}" alt="docs" width="16"
-									height="16">
-								</a> <a class="btn btn-danger" data-bs-tooltip="tooltip"
+									
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-cash-coin" viewBox="0 0 16 16">
+									 <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"/>
+  									 <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z"/>
+  									 <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"/>
+  									 <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567"/>
+									 									
+									</svg>
+<!-- 									<img th:src="@{/img/cash-coin.svg}" alt="docs" width="16" -->
+<!-- 									height="16"> -->
+									
+									
+								</a> <a sec:authorize="hasRole('ADMIN')" class="btn btn-danger" data-bs-tooltip="tooltip"
 									title="Deletar"
-									th:href="@{/sigec/cliente/delete(id =${cliente.id})}"> <img
-									th:src="@{/img/trash.svg}" alt="docs" width="16" height="16"></a>
+									th:href="@{/sigec/cliente/delete(id =${cliente.id})}"> 
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-trash" viewBox="0 0 16 16">
+									  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+  									  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+									 									
+									</svg>
+<!-- 									<img -->
+<!-- 									th:src="@{/img/trash.svg}" alt="docs" width="16" height="16"> -->
+									
+									</a>
 
 							</div>
 						</td>
@@ -188,7 +244,8 @@
 			</div>
 
 		</div>
-
+		
+		
 		<div class="tabela d-flex align-items-center justify-content-center" th:else="${lista_clientes.size() > 0}">
 			<h2 th:text="${mensagem_tabela}">Sem retorno para sua pesquisa!</h2>
 		</div>
