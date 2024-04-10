@@ -49,19 +49,28 @@
 								</a>								
 							</div>
 							
-							<div class="btn btn-danger" th:unless="${parcela.dataPagamento==null}">
+							<div class="btn btn-primary" th:unless="${parcela.dataPagamento==null}">
 								
 								<a th:href="@{/sigec/cliente/pagamento/parcela/extornar(id=${parcela.id},pagamento_id=${pagamento.id})}" 
 								data-bs-custom-tooltip="tooltip" title="Estornar" data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/arrow-clockwise.svg}" alt="cash" width="16" height="16">
 								</a>
 							</div>
+							
 							<div class="btn btn-info" th:unless="${parcela.dataPagamento==null}">
 								
 								<a th:href="@{/sigec/cliente/pagamento/parcela/recibo(id=${parcela.id},pagamento_id=${pagamento.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Recibo"
+								data-bs-toggle="tooltip" title="Recibo" 
 									data-bs-custom-class="custom-tooltip">
 									<img th:src="@{/img/file-text.svg}" alt="cash" width="16" height="16">
+								</a>
+							</div>
+							
+							<div class="btn btn-danger" >
+								
+								<a th:href="@{/sigec/cliente/pagamento/parcela/deletar(id=${parcela.id},pagamento_id=${pagamento.id})}" 
+								data-bs-custom-tooltip="tooltip" title="Deletar" data-bs-custom-class="custom-tooltip">
+									<img th:src="@{/img/trash.svg}" alt="cash" width="16" height="16">
 								</a>
 							</div>
 							

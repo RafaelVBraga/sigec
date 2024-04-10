@@ -93,7 +93,7 @@
 				<div class="container_dia" th:each="dia, iStats : ${mes}">
 					<div class="dia" th:classappend="${hoje==dia}?'container_dia_hoje':''">	
 						<div class="header" ><p th:text="${dia}"></p> </div>
-						<div class="data"><a href="#"><span><img th:src="@{/img/calendar-plus.svg}" alt="docs" width="16" height="16"></span></a></div>						
+						<div class="data"><a data-bs-tooltip="tooltip" title="Documentos" href="#"><span><img th:src="@{/img/calendar-plus.svg}" alt="docs" width="16" height="16"></span></a></div>						
 						<div class="data tooltip"><i class="fa-regular fa-handshake"><span class="tooltiptext">Reuniões</span></i></div>
 						<div class="data tooltip"><i class="fa-regular fa-gavel"><span class="tooltiptext">Audiências</span></i></div>
 						<div class="data tooltip"><i class="fa-regular fa-cake-candles"><span class="tooltiptext">Aniversários</span></i></div>

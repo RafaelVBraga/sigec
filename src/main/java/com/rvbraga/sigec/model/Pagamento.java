@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -41,6 +42,7 @@ public class Pagamento implements Serializable{/**
 	@ManyToOne
     @JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	@Valid
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Parcela> parcelas;
 

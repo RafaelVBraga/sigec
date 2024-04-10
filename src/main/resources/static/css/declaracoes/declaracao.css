@@ -1,8 +1,14 @@
 @charset "UTF-8";
 
+@font-face{
+	font-family: MyFont;
+	src: url("../fonts/monotype-corsiva-bold.otf")
+}
 
 html {
-	font-size: 12pt;
+	font-family:"Times New Roman", Times, serif;
+	font-size: 14pt;
+	
 }
 
 .folha {
@@ -23,7 +29,7 @@ html {
 .conteudo {
 	display: flex;
 	flex-direction: column;
-	margin: 15px;
+	margin: 0px;
 	padding: 5px;
 }
 
@@ -82,14 +88,37 @@ h2 {
 .data {
 	margin: 0 auto;
 }
-
-@media print {
-	body * {
-		visibility: hidden;
-/*		font-family: "Arial", sans-serif;*/
-		font-family:"Times New Roman", Times, serif;
+.titulo{
+		font-family:MyFont;
+		font-size: 72px;
+		margin:0;
+		font-style: italic;
+	}
+	.subtitulo{
+		font-family:MyFont;
+		margin-left:5px;
+		font-size: 36px;;
+	}
+	.header {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		
+	}
+	span *{
+		font-size: 14pt;
 	}
 
+@media print {
+	body *{
+		visibility: hidden;
+		font-family:"Times New Roman", Times, serif;
+		font-size: 12pt;
+	}
+	span *{
+		font-size: 14pt;
+	}
 	.printable,
 	.printable * {
 		visibility: visible;
@@ -97,12 +126,28 @@ h2 {
 	}
 
 	.header {
-		font-style:italic;
+		display: flex;
+		margin-top:5px;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		
 	}
 
 	.paragrafo,.rodape{
 		font-size: 12px;
 	}	
+	.titulo{
+		font-family:MyFont;
+		font-size: 72pt;
+		margin:0;
+		font-style: italic;
+	}
+	.subtitulo{
+		font-family:MyFont;
+		margin-left:5px;
+		font-size: 36pt;;
+	}
 	
 
 }

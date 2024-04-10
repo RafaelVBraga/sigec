@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{padrao/template :: layout (~{:: main},~{:: head})}">
 <head>
-
+<script th:src="@{/js/pagamento/parcela.js}"></script>
 </head>
 <body>
 	<main class="vh-100">
@@ -29,7 +29,7 @@
 					</label>
 					<div class="d-flex flex-row">
 						<label class="form-label">Valor: 
-							<input class="form-control" th:classappend="${#fields.hasErrors('valor')}?border-danger:nda" type="text" th:field="*{valor}">
+							<input id="valorParcela"  th:classappend="${#fields.hasErrors('valor')}?border-danger:nda" type="text" th:field="*{valor}" th:value="${#numbers.formatCurrency(parcela.valor)}" class="form-control">
 							<span class="text-danger" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></span>
 						</label> 				
 						
