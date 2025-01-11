@@ -13,9 +13,9 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 	<div class="printable header">
 		<h1 class="titulo">JM </h1><span class="subtitulo">Barreto Advocacia</span>
 	</div>
-	<div class=" d-flex conteudo printable com_borda folha borda_top_curva ">
-		<h2>PROCURAÇÃO “AD JUDICIA” e “ET EXTRA”</h2>
-		<br>		
+	<div class=" printable d-flex conteudo com_borda folha borda_top_curva ">
+		<texto class="header titulo2">PROCURAÇÃO “AD JUDICIA” e “ET EXTRA”</texto>
+				
 		<p class="paragrafo">
 			<strong>OUTORGADO(S): <span th:text="${#strings.toUpperCase(cliente.nome)}"></span></strong>,
 			brasileiro(a), portador(a) da cédula de identidade RG nº <span
@@ -25,7 +25,8 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 				th:text="${endereco.numero}"></span>, <span
 				th:text="${endereco.bairro}"></span>, CEP <span
 				th:text="${endereco.cep}"></span> - <span
-				th:text="${endereco.bairro}"></span>
+				th:text="${endereco.cidade}"></span>,
+				<span th:text="${endereco.estado}"></span>
 		</p>
 		<p class="paragrafo">
 			<strong>OUTORGADA: Dra. JEANE MICHELE MOURA BARRETO</strong>,
@@ -56,7 +57,7 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 			seja(m) autores(as) ou reclamante(s) e ou réus defendendo-os(as),e bem
 			como substabelecer a presente com ou sem reserva de poderes, se assim
 			lhe convier, dando tudo por bom, firme e valioso, especialmente para:
-			ajuizar a competente ação <span th:text="${#strings.toUpperCase(tipo)}">PREVIDENCIARIA</span>, inclusive para assinar
+			ajuizar a competente AÇÃO <span th:text="${#strings.toUpperCase(tipo)}">PREVIDENCIARIA</span>, inclusive para assinar
 			declaração de isento de imposto de renda.</p>		
 		
 		<p class="data printable">
@@ -71,7 +72,7 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 	</div>
 
 
-	<div class=" rodape conteudo printable com_borda borda_bottom_curva font-10">
+	<div class=" rodape pt-2 printable com_borda borda_bottom_curva font-10">
 		<p>JM Barreto Advocacia</p>
 		<p>Matriz: Avenida Doutor Themberge, nº 2360 ,Álvaro Weyne
 			Fortaleza/CE -Cep: 60.355-000</p>

@@ -30,7 +30,7 @@ html {
 	display: flex;
 	flex-direction: column;
 	margin: 0px;
-	padding: 5px;
+	padding: 4px;
 }
 
 .com_borda {
@@ -62,7 +62,7 @@ h2 {
 
 .rodape {
 	bottom: 0px;
-	line-height: 2px;
+	line-height:0.5pt;
 }
 
 .font-8 {
@@ -120,11 +120,13 @@ span * {
 	body * {
 		visibility: hidden;
 		font-family: "Times New Roman", Times, serif;
-		font-size: 14px;
-	}
-
-	span * {
 		font-size: 16px;
+		
+	}
+	h1{
+	margin-top:0;}
+	span * {
+		font-size: 18px;
 	}
 
 	.printable,
@@ -134,21 +136,22 @@ span * {
 	}
 
 	.header {
-		display: flex;
-		margin-top: 5px;
-		flex-direction: row;
+		display: flex;				
 		justify-content: center;
-		align-items: center;
-
+	}
+	.titulo2{
+	font-size: 28px;
 	}
 
 	.paragrafo {
-		font-size: 14px;
+	    margin-top:0;
+		font-size: 16px;
 		text-align: justify;
 	}
 	.rodape {
-		margin-top: 5px;
+		margin-top: 10px;
 		font-size: 12px;
+		padding: 0px 3px;
 	}
 
 	.titulo {
@@ -156,6 +159,7 @@ span * {
 		font-size: 72px;
 		margin: 0;
 		font-style: italic;
+		line-height:0.5pt;
 	}
 
 	.subtitulo {

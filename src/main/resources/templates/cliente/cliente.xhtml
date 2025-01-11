@@ -79,7 +79,7 @@
 			<table class="table table-light table-striped rouded-top shadow ">
 				<thead>
 					<tr>
-						<!-- 						<th>Id</th> -->
+												<th>Id</th>
 						<th class="table-light">Nome</th>
 						<th class="table-light">Telefone</th>
 						<th class="table-light">CPF</th>
@@ -92,7 +92,7 @@
 				<tbody>
 					<tr th:each="cliente, iStat : ${lista_clientes}"
 						th:style="${iStat.odd}? 'font-weight:bold;'">
-						<!-- 						<td th:text="${cliente.id}">id</td> -->
+						<td th:text="${cliente.id}">id</td>
 
 						<td th:text="${cliente.nome}">nome</td>
 						<td><span class="m-2"
@@ -129,10 +129,10 @@
 									<!-- 									height="16"> -->
 
 								</a>
-								<a id="showModalProc" class="btn btn-dark"
-									data-bs-toggle="modal" data-bs-target="#modalProc"
-									data-bs-tooltip="tooltip" title="Procuração"
-									th:href="@{/sigec/cliente/proc(id =${cliente.id})}">
+								<button  class="btn btn-dark" type="button"
+									data-bs-toggle="modal" th:attr="data-bs-target='#modal__${iStat.index}__',id='showModalProc__${iStat.index}__'"
+									data-bs-tooltip="tooltip" title="Procuração">
+<!-- 									th:href="@{/sigec/cliente/proc(id =${cliente.id})}"> -->
 
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 										fill="#ffffff" class="bi bi-file-text" viewBox="0 0 16 16">
@@ -145,11 +145,9 @@
 
 									<!-- 									<img th:src="@{/img/file-text.svg}" alt="docs" width="16" -->
 									<!-- 										height="16"> -->
-
-
-
-								</a>
-								<div class="modal fade" id="modalProc" tabindex="-1"
+								</button>
+								
+								<div class="modal fade" th:attr="id='modal__${iStat.index}__'" 
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -159,13 +157,13 @@
 													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
-												<form th:action="@{/sigec/cliente/proc}">
+												<form th:action="@{/sigec/cliente/proc(id =${cliente.id})}">
 													<input type="text" class="form-control" th:name="id"
-														th:value=${cliente.id} hidden><input type="text"
+														th:value=${cliente.id} /><input type="text"
 														class="form-control mt-1 mb-1" th:name="tipo"
-														placeholder="Tipo de ação..."><input type="submit"
+														placeholder="Tipo de ação..."/><input type="submit"
 														class="btn btn-success w-100 mt-2 text-light"
-														value="Gerar">
+														value="Gerar"/>
 												</form>
 											</div>
 											<div class="modal-footer">
@@ -225,7 +223,7 @@
 								</a>
 
 							</div>
-						</td>
+		<!-- t -->			</td>
 					</tr>
 				</tbody>
 
