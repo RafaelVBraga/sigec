@@ -96,6 +96,7 @@ public class ClienteService {
 	public void deleteCliente(UUID id) {
 		clienteRepository.deleteById(id);
 	}
+	
 /*
 	public JasperPrint gerarRelatorio(String tipoRelatorio, UUID idCliente) throws IOException, JRException {
 		Map<String, Object> params = new HashMap<>();

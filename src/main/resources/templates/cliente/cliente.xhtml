@@ -79,7 +79,7 @@
 			<table class="table table-light table-striped rouded-top shadow ">
 				<thead>
 					<tr>
-												<th>Id</th>
+<!-- 												<th>Id</th> -->
 						<th class="table-light">Nome</th>
 						<th class="table-light">Telefone</th>
 						<th class="table-light">CPF</th>
@@ -92,7 +92,7 @@
 				<tbody>
 					<tr th:each="cliente, iStat : ${lista_clientes}"
 						th:style="${iStat.odd}? 'font-weight:bold;'">
-						<td th:text="${cliente.id}">id</td>
+<!-- 						<td th:text="${cliente.id}">id</td> -->
 
 						<td th:text="${cliente.nome}">nome</td>
 						<td><span class="m-2"

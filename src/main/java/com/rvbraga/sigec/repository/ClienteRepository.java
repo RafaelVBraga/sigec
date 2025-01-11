@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID>{
 	public Cliente findByCpf(String cpf);
 	public List<Cliente> findByRgContaining(String rg);
 	public Cliente findByRg(String rg);
+	List<Cliente> findAll(Sort sort);
 	
 
 }
