@@ -19,6 +19,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -31,7 +32,7 @@ public class Pagamento implements Serializable{/**
 	@Id
 	@GeneratedValue(strategy =GenerationType.UUID )
 	private UUID id;
-	@DateTimeFormat (pattern="yyyy-MM-dd")
+	@DateTimeFormat (pattern="yyyy-MM-dd")@NotNull
 	private LocalDate dataCadastro;	
 	@Min(value=1)@NotNull
 	private Float valor;

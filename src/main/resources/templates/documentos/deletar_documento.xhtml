@@ -8,24 +8,24 @@
 <body>
 	<main class="vh-100">
 
-		<form class="add_edit_form" th:object="${documento}"
+		<form class="d-flex flex-column justify-content-center" th:object="${documento}"
 			th:action="@{/sigec/cliente/doc/delete}" method="POST">
 			<input hidden th:name ="cliente_id" th:value="${cliente_id}">
 			<input type="hidden" th:field="*{id}">
-			<h2>Deleção de documento</h2>
+			<h3 class="m-auto">Deleção de documento</h3>
 			<hr>
 			
-			<div class="container_alerta">
-				<h2> Atenção!</h2>
+			<div class="m-auto d-flex flex-column justify-content-between">
+				<h2 class="m-auto mb-4 text-bg-danger rounded p-4"> Atenção!</h2>
 				<div>
 					
 					<p>A deleção de documento é uma ação impossível de ser desfeita!</p>
 					<p>Deseja continuar com a operação?</p>
 				
 				</div>
-				<div class="container_botoes">					
-					<input class="del_button" type="submit" value="Deletar"></input>
-					<a class="del_link" th:href="@{/sigec/cliente/docs(id=${cliente_id})}">Voltar</a>
+				<div class="d-flex justify-content-between">					
+					<input class="btn btn-danger w-25" type="submit" value="Deletar"></input>
+					<a class="btn btn-secondary w-25" th:href="@{/sigec/cliente/docs(id=${cliente_id})}">Voltar</a>
 				</div>
 			</div>
 		</form>

@@ -46,9 +46,7 @@ public class ProcessoService {
 		return processoRepo.findAll(page);
 		
 	}
-	public Page<Processo> findProcessosByNomeCliente(String cliente, Pageable paging){
-		return processoRepo.findByNomeCliente(cliente, paging);
-	}
+	
 	public Page<Processo> findByNomeCliente(String cliente, Pageable paging){
 		List<Cliente> clientes = clienteService.findByNome(cliente, paging).getContent();
 		return processoRepo.findByClienteIn(clientes, paging);

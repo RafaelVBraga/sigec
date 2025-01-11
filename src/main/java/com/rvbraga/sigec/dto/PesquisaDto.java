@@ -17,5 +17,5 @@ public class PesquisaDto implements Serializable{
 	private String pesquisaCpf; 
 	@Min(value = 1)
 	private Integer paginas;
-
+ 
 }

@@ -40,14 +40,14 @@
 	margin-bottom:5px;
 	transition: 0.5s;
 	
+	
 }  
 .container_dia:hover{
 	background-color: #154878;
 	color:rgb(255,255,128);
 	font-weight: 600;
 }
-.container_dia_hoje{
-	
+.container_dia_hoje{	
 	color:rgb(255,0,128)
 }
 .container_dia_hoje:hover{	

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 
@@ -28,9 +29,12 @@ public class Endereco implements Serializable{
 	private String logradouro;
 	private String numero;
 	private String complemento;
+	@NotBlank
 	private String cep;
 	private String bairro;
 	private String digitalizacao;
+	private String cidade;
+	private String estado;
 	@JsonIgnore
 	@OneToOne(mappedBy="endereco")
     @JoinColumn(name = "cliente_id") 

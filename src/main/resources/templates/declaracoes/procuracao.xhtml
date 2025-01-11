@@ -5,7 +5,7 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/declaracoes/declaracao.css}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Procuração "AD JUDICIA" e "ED EXTRA"</title>
+
 </head>
 <body>
 <main>
@@ -24,7 +24,8 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 				th:text="${endereco.logradouro}"></span>, <span
 				th:text="${endereco.numero}"></span>, <span
 				th:text="${endereco.bairro}"></span>, CEP <span
-				th:text="${endereco.cep}"></span> - Fortaleza-CE.
+				th:text="${endereco.cep}"></span> - <span
+				th:text="${endereco.bairro}"></span>
 		</p>
 		<p class="paragrafo">
 			<strong>OUTORGADA: Dra. JEANE MICHELE MOURA BARRETO</strong>,
@@ -34,33 +35,30 @@ th:replace="~{padrao/template :: layout (~{:: main},~{::head})}"	>
 			Fortaleza/CE onde recebe notificações e intimações.
 		</p>
 		
-		<p class="paragrafo"><strong>PODERES:</strong>CONFERE(EM) AMPLO, GERAL E ILIMITADOS PODERES PARA FORO
-			EM GERAL, COM A CLÁUSULA “AD JUDICIA” E “ET EXTRA”, A FIM DE QUE, EM
-			CONJUNTO OU SEPARADAMENTE, POSSA(M) REALIZAR TODOS OS ATOS QUE SE
-			FIZEREM NECESSÁRIOS AO BOM E FIEL CUMPRIMENTO DESTE MANDATO, PROPOR
-			QUAISQUER AÇÕES ADMINISTRATIVAS OU EXTRAJUDICIAIS, APRESENTAR DEFESA
-			NAS AÇÕES QUE FOREM PROPOSTAS, COM NATUREZA CÍVEIS OU PENAIS,
-			RECONVIR, PROMOVER QUAISQUER MEDIDAS CAUTELARES, RECORRER EM QUALQUER
-			INSTÂNCIA OU TRIBUNAL, ARROLAR TESTEMUNHAS, CONTRADITAR OU RECUSAR,
-			PRODUZIR PROVAS, ARRAZOAR PROCESSOS, REQUER VISTAS DO MESMO,
-			CONCORDAR COM CÁLCULOS, CUSTAS E CONTAS PROCESSUAIS, PODENDO AINDA,
-			FAZER DEFESAS PRÉVIAS, ALEGAÇÕES FINAIS, FIRMAR OS DOCUMENTOS
-			NECESSÁRIOS, EFETUAR LEVANTAMENTO, REQUER LAUDOS, AVALIAÇÕES E
-			PERÍCIAS, BEM COMO ARGÜIR SUSPEIÇÃO, FALSIDADE, EXCEÇÃO, TRANSIGIR,
-			FAZER ACORDO, CONFESSAR, RENUNCIAR, DESISTIR, IMPUGNAR, RECEBER
-			ALVARÁ, DAR QUITAÇÃO, PERANTE QUALQUER JUÍZO, INSTÂNCIA OU TRIBUNAL,
-			REPARTIÇÃO PUBLICA E ÓRGÃO DA ADMINISTRAÇÃO PÚBLICA DIRETA OU
-			INDIRETA, FEDERAL, ESTADUAL E MUNICIPAL, AUTARQUIA OU ENTIDADE
-			PARAESTATAL, PROPONDO AÇÃO COMPETENTE EM QUE OS(AS) OUTORGANTES(S)
-			SEJA(M) AUTORES(AS) OU RECLAMANTE(S) E OU RÉUS DEFENDENDO-OS(AS),E BEM
-			COMO SUBSTABELECER A PRESENTE COM OU SEM RESERVA DE PODERES, SE ASSIM
-			LHE CONVIER, DANDO TUDO POR BOM, FIRME E VALIOSO, ESPECIALMENTE PARA:
-			AJUIZAR A COMPETENTE AÇÃO <span th:text="${#strings.toUpperCase(tipo)}">PREVIDENCIARIA</span>, INCLUSIVE PARA ASSINAR
-			DECLARAÇÃO DE ISENTO DE IMPOSTO DE RENDA.</p>
+		<p class="paragrafo"><strong>PODERES:</strong>confere(em) amplo, geral e ilimitados poderes para foro
+			em geral, com a cláusula “ad judicia” e “et extra”, a fim de que, em
+			conjunto ou separadamente, possa(m) realizar todos os atos que se
+			fizerem necessários ao bom e fiel cumprimento deste mandato, propor
+			quaisquer ações administrativas ou extrajudiciais, apresentar defesa
+			nas ações que forem propostas, com natureza cíveis ou penais,
+			reconvir, promover quaisquer medidas cautelares, recorrer em qualquer
+			instância ou tribunal, arrolar testemunhas, contraditar ou recusar,
+			produzir provas, arrazoar processos, requer vistas do mesmo,
+			concordar com cálculos, custas e contas processuais, podendo ainda,
+			fazer defesas prévias, alegações finais, firmar os documentos
+			necessários, efetuar levantamento, requer laudos, avaliações e
+			perícias, bem como argüir suspeição, falsidade, exceção, transigir,
+			fazer acordo, confessar, renunciar, desistir, impugnar, receber
+			alvará, dar quitação, perante qualquer juízo, instância ou tribunal,
+			repartição publica e órgão da administração pública direta ou
+			indireta, federal, estadual e municipal, autarquia ou entidade
+			paraestatal, propondo ação competente em que os(as) outorgantes(s)
+			seja(m) autores(as) ou reclamante(s) e ou réus defendendo-os(as),e bem
+			como substabelecer a presente com ou sem reserva de poderes, se assim
+			lhe convier, dando tudo por bom, firme e valioso, especialmente para:
+			ajuizar a competente ação <span th:text="${#strings.toUpperCase(tipo)}">PREVIDENCIARIA</span>, inclusive para assinar
+			declaração de isento de imposto de renda.</p>		
 		
-		
-		
-		<br>
 		<p class="data printable">
 			Fortaleza, <span th:text="${dia}"></span> de <span th:text="${mes}"></span>
 			de <span th:text="${ano}"></span>.

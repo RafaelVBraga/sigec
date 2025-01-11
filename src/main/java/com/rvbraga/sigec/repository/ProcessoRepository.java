@@ -21,10 +21,7 @@ public interface ProcessoRepository extends JpaRepository<Processo, UUID>{
 	
 	Optional<Processo> findById(UUID id);
 	Processo findByNumero(String numero);
-	@Query(value = "SELECT * FROM processo p WHERE p.cliente IN (SELECT * cliente c WHERE nome LIKE '%:nome%')",
-			countQuery = "SELECT count(*) FROM processo p WHERE p.cliente IN (SELECT * cliente c WHERE nome LIKE '%:nome%')",
-			nativeQuery = true)
-	Page<Processo> findByNomeCliente(@Param("nome") String cliente, Pageable paging);
+	
 	
 	Page<Processo> findByClienteIn(List<Cliente> cliente, Pageable paging);
 	

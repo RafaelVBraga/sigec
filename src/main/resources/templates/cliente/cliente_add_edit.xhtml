@@ -1,10 +1,14 @@
-t
+
 
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{padrao/template :: layout (~{:: main},~{::head})}">
+	th:insert="~{padrao/template :: layout (~{:: main},~{::head})}">
 <head>
 <script th:src="@{/js/cliente/cad_cliente.js}"></script>
 <script th:src="@{/js/cliente/maskinput.js}"></script>
+<script th:inline="javascript" defer>
+	
+	}
+</script>
 </head>
 <body>
 	<main>
@@ -25,15 +29,15 @@ t
 				enctype="multipart/form-data" method="POST">
 
 				<div class="row">
-					<label hidden>Id: </label> <input hidden class="input_id"
-						type="text" th:field="*{id}" readonly="readonly">
+					<label hidden="hidden">Id: </label> <input hidden="hidden"
+						class="input_id" type="text" th:field="*{id}" readonly="readonly">
 				</div>
 
 				<div class="row">
 					<div class="col w-75">
 						<label class="form-label ">Nome: <span class="text-danger"
-							th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Campo necessário</span></label> <input
-							class="form-control" type="text"
+							th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Campo
+								necessário</span></label> <input class="form-control" type="text"
 							th:classappend="${#fields.hasErrors('nome')}?'border border-danger':''"
 							th:field="*{nome}">
 					</div>
@@ -44,11 +48,11 @@ t
 							th:errors="*{dataNascimento}"></span></label>
 						<div class="d-flex row px-1">
 							<input id="dn_select" class="form-control col mx-2" type="date"
-								th:value="${cliente.dataNascimento}" th:field="*{dataNascimento}">
-			
-					</div>
-					
+								th:value="${cliente.dataNascimento}"
+								th:field="*{dataNascimento}">
 						</div>
+
+					</div>
 				</div>
 
 				<div class="row">
@@ -74,7 +78,8 @@ t
 				<div class="row">
 					<div class="col">
 						<label class="form-label">CPF:<span class="text-danger"
-							th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">Campo necessário</span>
+							th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">Campo
+								necessário</span>
 						</label> <input class="form-control" type="text"
 							th:oninput="mascara(this)"
 							th:classappend="${#fields.hasErrors('cpf')}?'border border-danger':''"
@@ -82,7 +87,8 @@ t
 					</div>
 					<div class="col">
 						<label class="form-label">RG:<span class="text-danger"
-							th:if="${#fields.hasErrors('rg')}" th:errors="*{rg}">Campo necessário</span>
+							th:if="${#fields.hasErrors('rg')}" th:errors="*{rg}">Campo
+								necessário</span>
 						</label> <input class="form-control" type="text"
 							th:classappend="${#fields.hasErrors('rg')}?'border border-danger':''"
 							maxlength="15" th:field="*{rg}">
@@ -96,9 +102,9 @@ t
 					</div>
 					<div th:if="${cliente.representante!=null}" class="border p-4">
 						<div class="row">
-							<label th:if="*{representante.id!=null}" hidden>Id: </label> <input hidden class="input_id"
-								type="text" th:field="*{representante.id}"
-								readonly="readonly">
+							<label th:if="*{representante.id!=null}" hidden="hidden">Id:
+							</label> <input hidden="hidden" class="input_id" type="text"
+								th:field="*{representante.id}" readonly="readonly">
 						</div>
 
 						<div class="row">
@@ -122,8 +128,7 @@ t
 							<div class="col">
 								<label class="form-label">Profissão: </label> <input
 									class="form-control" id="input_prof_rep"
-									th:field="*{representante.profissao}"
-									th:value="${prof}">
+									th:field="*{representante.profissao}" th:value="${prof}">
 							</div>
 							<div class="col">
 								<label class="form-label">Lista de profissões: </label> <select
@@ -139,26 +144,27 @@ t
 						<div class="row">
 							<div class="col">
 								<label class="form-label">CPF: <span class="text-danger"
-									th:if="${#fields.hasErrors('representante.cpf')}" th:errors="*{representante.cpf}">Campo
-										necessário</span>
+									th:if="${#fields.hasErrors('representante.cpf')}"
+									th:errors="*{representante.cpf}">Campo necessário</span>
 								</label> <input class="form-control" type="text"
 									th:classappend="${#fields.hasErrors('representante.cpf')}?'border border-danger':''"
-									th:oninput="mascara(this)"
-									th:field="*{representante.cpf}">
+									th:oninput="mascara(this)" th:field="*{representante.cpf}">
 							</div>
 							<div class="col">
 								<label class="form-label">RG: <span class="text-danger"
-									th:if="${#fields.hasErrors('representante.rg')}" th:errors="*{representante.rg}">Campo
-										necessário</span>
+									th:if="${#fields.hasErrors('representante.rg')}"
+									th:errors="*{representante.rg}">Campo necessário</span>
 								</label> <input class="form-control" type="text"
 									th:classappend="${#fields.hasErrors('representante.rg')}?'border border-danger':''"
 									maxlength="15" th:field="*{representante.rg}">
 							</div>
 							<div class="col">
-								<label class="form-label">Relação: </label> <span class="text-danger"
-									th:if="${#fields.hasErrors('representante.relacaoCliente')}" th:errors="*{representante.relacaoCliente}">Campo
-										necessário</span> <input
-								th:classappend="${#fields.hasErrors('representante.relacaoCliente')}?'border border-danger':''"
+								<label class="form-label">Relação: </label> <span
+									class="text-danger"
+									th:if="${#fields.hasErrors('representante.relacaoCliente')}"
+									th:errors="*{representante.relacaoCliente}">Campo
+									necessário</span> <input
+									th:classappend="${#fields.hasErrors('representante.relacaoCliente')}?'border border-danger':''"
 									class="form-control" type="text"
 									th:field="*{representante.relacaoCliente}">
 							</div>
@@ -178,7 +184,7 @@ t
 						<Label class="form-label"><button
 								class="btn btn-primary  mw-25" type="submit" th:name="addTel">Adicionar</button></Label>
 						<div th:each="telefone, iStat:${cliente.telefones}" class="row">
-							<input hidden
+							<input hidden="hidden"
 								th:field="${cliente.telefones[__${iStat.index}__].id}"><label
 								class="form-label col">Telefone <span
 								th:text="${iStat.count}"></span>: <input class="form-control"
@@ -204,7 +210,7 @@ t
 				</div>
 				<div class="row mt-4">
 					<h3>Endereço</h3>
-					<input hidden th:field="*{endereco.id}">
+					<input hidden="hidden" th:field="*{endereco.id}">
 				</div>
 				<div class="row">
 					<div class="col">
@@ -218,11 +224,19 @@ t
 							class="form-control" type="text" maxlength="5"
 							th:field="*{endereco.numero}">
 					</div>
+					<div class="col">
+						<label class="form-label">Cidade: </label> <input
+							class="form-control" type="text" th:field="*{endereco.cidade}">
+					</div>
+					<div class="col">
+						<label class="form-label">Estado: </label> <input
+							class="form-control" type="text" th:field="*{endereco.estado}">
+					</div>
 				</div>
 				<div class="row">
 
 					<div class="col">
-						<label class="form-label">Complemento: </label> <input
+						<label id ="comp"class="form-label">Complemento: </label> <input
 							class="form-control" type="text"
 							th:field="*{endereco.complemento}">
 					</div>
@@ -233,9 +247,18 @@ t
 					</div>
 
 					<div class="col">
-						<label class="form-label">CEP: </label> <input
+						<label class="form-label">CEP: </label> <input id="cep"
 							class="form-control" type="text" th:field="*{endereco.cep}">
 					</div>
+					<div class="col mt-auto">
+						<!-- 						<a class="btn btn-dark text-light border col w-75" -->
+						<!-- 						th:href="@{/sigec/clientes}">Buscar CEP </a> -->
+						<button class="btn btn-dark text-light border col w-75"
+							type="submit" th:name="buscarCEP"
+							th:attr="value = ${cliente.endereco.cep}"
+							>Buscar CEP</button>
+					</div>
+
 				</div>
 				<div class="container row mt-4">
 					<input class="btn btn-success border col w-25" type="submit"
@@ -247,6 +270,7 @@ t
 			</form>
 		</div>
 	</main>
+
 
 </body>
 </html>

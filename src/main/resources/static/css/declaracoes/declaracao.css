@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
-@font-face{
+@font-face {
 	font-family: MyFont;
 	src: url("../fonts/monotype-corsiva-bold.otf")
 }
 
 html {
-	font-family:"Times New Roman", Times, serif;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 14pt;
-	
+
 }
 
 .folha {
@@ -88,66 +88,82 @@ h2 {
 .data {
 	margin: 0 auto;
 }
-.titulo{
-		font-family:MyFont;
-		font-size: 72px;
-		margin:0;
-		font-style: italic;
-	}
-	.subtitulo{
-		font-family:MyFont;
-		margin-left:5px;
-		font-size: 36px;;
-	}
-	.header {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		
-	}
-	span *{
-		font-size: 14pt;
-	}
+
+.titulo {
+	font-family: MyFont;
+	font-size: 72px;
+	margin: 0;
+	font-style: italic;
+}
+
+.subtitulo {
+	font-family: MyFont;
+	margin-left: 5px;
+	font-size: 36px;
+	;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-top: 0;
+
+}
+
+span * {
+	font-size: 14pt;
+}
 
 @media print {
-	body *{
+	body * {
 		visibility: hidden;
-		font-family:"Times New Roman", Times, serif;
-		font-size: 12pt;
+		font-family: "Times New Roman", Times, serif;
+		font-size: 14px;
 	}
-	span *{
-		font-size: 14pt;
+
+	span * {
+		font-size: 16px;
 	}
+
 	.printable,
 	.printable * {
 		visibility: visible;
-/*		ont-family: "Recursive", sans-serif;*/
+		/*		ont-family: "Recursive", sans-serif;*/
 	}
 
 	.header {
 		display: flex;
-		margin-top:5px;
+		margin-top: 5px;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		
+
 	}
 
-	.paragrafo,.rodape{
+	.paragrafo {
+		font-size: 14px;
+		text-align: justify;
+	}
+	.rodape {
+		margin-top: 5px;
 		font-size: 12px;
-	}	
-	.titulo{
-		font-family:MyFont;
-		font-size: 72pt;
-		margin:0;
+	}
+
+	.titulo {
+		font-family: MyFont;
+		font-size: 72px;
+		margin: 0;
 		font-style: italic;
 	}
-	.subtitulo{
-		font-family:MyFont;
-		margin-left:5px;
-		font-size: 36pt;;
+
+	.subtitulo {
+		font-family: MyFont;
+		margin-left: 5px;
+		font-size: 36pt;
+		;
 	}
-	
+
 
 }

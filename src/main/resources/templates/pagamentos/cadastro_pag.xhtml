@@ -7,6 +7,14 @@
 </head>
 <body>
 	<main class="vh-100">
+	
+			<div th:if="${feedback}!=null"
+				class="alert alert-dismissible fade show"
+				th:classappend="${feedback.status}=='FALHA'?'text-bg-danger':'text-bg-success'">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
 
 		<form class="d-flex flex-column m-auto justify-content-center"
 			th:object="${pagamento}" th:action="@{/sigec/cliente/pagamento/novo}"
@@ -22,7 +30,8 @@
 						<textarea class="form-control" th:field="*{descricao}"></textarea>
 					</label> 
 					<label class="form-label">Data Primeira Parcela:
-						 <input	class="form-control" type="date" th:field="*{dataCadastro}">
+						 <input	class="form-control"th:classappend="${#fields.hasErrors('dataCadastro')}?border-danger:nda"  type="date" th:field="*{dataCadastro}">
+						 <span class="text-danger" th:if="${#fields.hasErrors('dataCadastro')}" th:errors="*{dataCadastro}"></span>
 					</label>
 					<div class="d-flex flex-row">
 						<label class="form-label">Valor: 

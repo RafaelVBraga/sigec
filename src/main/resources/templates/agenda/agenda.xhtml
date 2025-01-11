@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org"
-	th:replace="~{padrao/template :: layout (~{:: main}, ~{::head})}">
+	th:insert="~{padrao/template :: layout (~{:: main}, ~{::head})}">
 <head>
 <link th:href="@{/css/agenda/agenda.css}" rel="stylesheet">
 </head>
 <body>
 	<main>
 	<div class="tela_principal d-flex vh-100 mb-5">
-	<div class="menu_lateral">
-		<p  class="titulo_menu">Eventos</p>
-			<a class=" btn btn-success ms-3  add-evento">Adicionar</a>
-	</div>
+<!-- 	<div class="menu_lateral"> -->
+<!-- 		<p  class="titulo_menu">Eventos</p> -->
+<!-- 			<a class=" btn btn-success ms-3  add-evento">Adicionar</a> -->
+<!-- 	</div> -->
 	<div class="container mb-5 ">
 		<h2>Agenda</h2>
 		<hr>

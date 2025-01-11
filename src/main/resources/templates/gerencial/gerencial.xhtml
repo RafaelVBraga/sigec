@@ -2,63 +2,76 @@
 <html xmlns:th="www.thymeleaf.org"
 	th:replace="~{padrao/template :: layout (~{:: main}, ~{::head})}">
 <head>
- 	<link th:href="@{/css/template.css}"rel="stylesheet"> 
+<link th:href="@{/css/template.css}" rel="stylesheet">
 </head>
 <body>
 	<main class="vh-100">
-		
-		
-		<div class="d-flex flex-column mb-4" >		
+
+
+		<div class="d-flex flex-column mb-4">
 			<h2 class="mx-auto">Usuários</h2>
 			<hr>
-			<a class="btn btn-success mx-auto" th:href="@{/sigec/gerencial/usuario/novo}" style="width: 100px">Adicionar</a>	
+			<a class="btn btn-success mx-auto"
+				th:href="@{/sigec/gerencial/usuario/novo}" style="width: 100px">Adicionar</a>
 		</div>
-		
+
 		<div class="p-2" th:if="${usuarios.size() > 0}">
 			<table class="table table-light table-striped mt-4  shadow border">
 				<thead>
 					<tr>
 
 						<th>Nome</th>
-						<th>Permissões</th>						
+						<th>Permissões</th>
 						<th>Ações</th>
 				</thead>
 				<tbody>
-					<tr th:unless="${usuario.authorities.^[authority=='ROLE_DEVELOPER']}" th:each="usuario, rowStat : ${usuarios}" >
+					<tr
+						th:unless="${usuario.authorities.^[authority=='ROLE_DEVELOPER']}"
+						th:each="usuario, rowStat : ${usuarios}">
 
 						<td th:text="${usuario.username}"></td>
-						<td> <span class="mx-2" th:each="auth, iStat : ${usuario.authorities}" th:text="${#strings.equals(auth.authority,'ROLE_USER')}?'Usuário':'Admin'"></span></td>		
-						<td>
-							<input hidden th:name="usuario_id" th:value="${usuario.id}">
-							
-							<div class="btn btn-info">
-								<a th:href="@{/sigec/gerencial/usuario/editar(id=${usuario.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Editar"
-									data-bs-custom-class="custom-tooltip">
-									<img th:src="@{/img/pencil-square.svg}" alt="cash" width="16" height="16">
-								</a>								
-							</div>						
-							<div class="btn btn-danger">								
-								<a th:href="@{/sigec/gerencial/usuario/delete(id=${usuario.id})}" 
-								data-bs-toggle="tooltip" data-bs-title="Delete"
-									data-bs-custom-class="custom-tooltip">
-									<img th:src="@{/img/ban.svg}" alt="cash" width="16" height="16">
-								</a>
+						<td><span class="mx-2"
+							th:each="auth, iStat : ${usuario.authorities}"
+							th:text="${#strings.equals(auth.authority,'ROLE_USER')}?'Usuário':'Admin'"></span></td>
+						<td><input hidden th:name="usuario_id"
+							th:value="${usuario.id}">
+						<div class="btn btn-info">
+								<a
+									th:href="@{/sigec/gerencial/usuario/editar(id=${usuario.id})}"
+									data-bs-toggle="tooltip" data-bs-title="Editar"
+									data-bs-custom-class="custom-tooltip"> <img
+									th:src="@{/img/pencil-square.svg}" alt="cash" width="16"
+									height="16"></a>
 							</div>
-							
-						</td>
+							<div class="btn btn-danger">
+								<a
+									th:href="@{/sigec/gerencial/usuario/delete(id=${usuario.id})}"
+									data-bs-toggle="tooltip" data-bs-title="Delete"
+									data-bs-custom-class="custom-tooltip"> <img
+									th:src="@{/img/ban.svg}" alt="cash" width="16" height="16"></a>
+							</div></td>
 					</tr>
 				</tbody>
 			</table>
-			
-		</div>
-		<div class="container"th:unless="${usuarios.size()>0}">
-			<p>Não existem usuários cadastrados!</p>
-			
-		</div>
-		
 
-		
+		</div>
+		<div class="d-flex flex-column justify-content-center align-items-center">
+			<h3>Operações</h3>
+			<div class="d-flex">
+				<a sec:authorize="hasRole('DEVELOPER')" class="m-2 btn btn-danger"
+					th:href="@{/sigec/usuario/fix}">Inserir Cidade BD</a>
+				<a sec:authorize="hasRole('DEVELOPER')" class="m-2 btn btn-success"
+					href="#">Teste</a>
+			</div>
+
+		</div>
+		<div class="container" th:unless="${usuarios.size()>0}">
+			<p>Não existem usuários cadastrados!</p>
+
+		</div>
+
+
+
 	</main>
 </body>
 </html>
