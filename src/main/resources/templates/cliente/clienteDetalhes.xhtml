@@ -1,0 +1,42 @@
+
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:insert="~{padrao/template :: layout (~{:: main},~{::head})}">
+<head>
+<script th:src="@{/js/cliente/cad_cliente.js}"></script>
+<script th:src="@{/js/cliente/maskinput.js}"></script>
+<script th:inline="javascript" defer>
+
+</script>
+</head>
+<body>
+	<main>
+		<div class="d-flex flex-column vh-100 justify-content-center align-items-center">
+			<div class="w-50 h-50">
+			<h3 class="mx-auto mt-4" th:text="${cliente.nome}">Nome do
+				Cliente</h3>
+			<hr>			
+			<div th:if="${feedback}!=null"
+				class="alert alert-dismissible fade show"
+				th:classappend="${feedback.status}=='FALHA'?'text-bg-danger':'text-bg-success'">
+				<p th:text="${feedback.mensagem}"></p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+			<div class="d-flex flex-row justify-content-center align-items-end m-5" >
+								<h4> Deseja adicionar documentos para esse cliente?</h4>
+			</div>
+			<div class="d-flex justify-content-between mt-5" >
+				<a class="btn btn-success  w-25" title="Documentos"
+						th:href="@{/sigec/cliente/docs(id =${cliente.id})}"> Sim					
+				</a>	
+				<a class="btn btn-danger   w-25"
+					th:href="@{/sigec/clientes}">Não</a>					
+			</div>
+			</div>
+		</div>
+	</main>
+
+
+</body>
+</html>
